@@ -1,10 +1,9 @@
 import { Router } from "express"
 
-import { usersRoutes } from "./user.routes"
-import { channelsRoutes } from "./channels.routes"
+import { usersRoutes } from './users.routes';
+import { channelsRoutes } from "./group.routes"
 
 export const router = Router()
 
 router.use(usersRoutes)
-
 router.use(channelsRoutes)
