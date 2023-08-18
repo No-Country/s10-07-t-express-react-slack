@@ -5,7 +5,7 @@ import { IUser } from '../../../interface/IUser';
 
 const userSchema = new Schema<IUser>(
   {
-    name: {
+    fullName: {
       type: String,
       require: true
     },
