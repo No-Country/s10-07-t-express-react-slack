@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { IUser } from "../../../interface/IUser";
-import { Usermodel } from "../models/Users";
-import { hashedPassword } from '../helper/bcrypts';
-import { validateRegister } from "../validations/register";
+import { IUser } from "../../../../interface/IUser";
+import { Usermodel } from "../../models/Users";
+import { hashedPassword } from '../../helper/bcrypts';
+import { validateRegister } from "../../validations/register";
 
 
 export const createUser = async (req: Request, res: Response) => {
