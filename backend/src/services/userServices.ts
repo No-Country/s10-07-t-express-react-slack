@@ -1,7 +1,8 @@
-// import { Request, Response } from "express";
 import { Request, Response } from "express";
 import { IUser } from "../../../interface/IUser";
 import { Usermodel } from "../models/Users";
+import { hashedPassword } from '../helper/bcrypts';
+import { validateRegister } from "../validations/register";
 
 
 export const createUser = async (req: Request, res: Response) => {
@@ -11,26 +12,26 @@ export const createUser = async (req: Request, res: Response) => {
 
   try {
 
-    if (!user.email || !user.password) {
-      return res.status(400).json({ msg: "Both fields are required" })
-    }
+    const validations = validateRegister(user);
 
-    const existUser = await Usermodel.find(
+
+    const existUser = await Usermodel.findOne(
       {
-        email: user.email
+        email: validations.email
       }
     )
 
-    if (!existUser) {
+    if (existUser) {
       return res.status(400).json({ error: " User already exists", existUser })
     }
 
+    const encrypted = await hashedPassword(validations.password);
 
     const newUser = new Usermodel(
       {
-        name: user.name,
-        email: user.email,
-        password: user.password
+        fullName: validations.fullName,
+        email: validations.email,
+        password: encrypted
       }
     )
 
