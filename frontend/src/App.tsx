@@ -1,14 +1,16 @@
 import './App.css'
+import { Route, Routes } from 'react-router-dom'
 import io from 'socket.io-client'
+import Register from './pages/Register.tsx'
 
 const socket = io("/");
 function App() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline text-red-600">
-        HOLA MUNDO
-      </h1>
+      <Routes>
+        <Route path='/register' element={<Register/>}/>
+      </Routes>
     </>
   )
 }
