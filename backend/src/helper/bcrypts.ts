@@ -6,6 +6,6 @@ export const hashedPassword = async (password: string): Promise<string> => {
 }
 
 
-export const passwordCorrecto = async (password: string, passwordHashado: string): Promise<boolean> => {
+export const passwordCorrect = async (password: string, passwordHashado: string): Promise<boolean> => {
   return await compare(password, passwordHashado)
 }
