@@ -3,21 +3,21 @@ import { validationEmail } from "./items/gmail";
 import { validationPassword } from "./items/password";
 import { Usermodel } from "../models/Users";
 
-export const validateLogin = async (admin: IUser): Promise<IUser> => {
+export const validateLogin = async (user: IUser): Promise<IUser> => {
 
-  if (!admin.email && !admin.password) {
-    throw new Error("Todos los campos son requeridos")// OK
+  if (!user.email && !user.password) {
+    throw new Error("All fields are required")
   }
 
-  validationEmail(admin.email);
+  validationEmail(user.email);
 
-  const allUsers = await Usermodel.find({ email: admin.email })
+  const allUsers = await Usermodel.find({ email: user.email })
 
   if (!allUsers.length) {
-    throw new Error('Esta cuenta no está registrada');
+    throw new Error('This account is not registered');
   }
 
-  validationPassword(admin.password);
+  validationPassword(user.password);
 
-  return admin;
+  return user;
 }
