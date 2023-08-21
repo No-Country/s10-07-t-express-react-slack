@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode";
 import { Register, Errors } from './interfaces';
 import { validationErrors } from './utils';
 import io from 'socket.io-client'
+import axios from 'axios';
 
 const register = {
   fullName: "",
@@ -27,7 +28,7 @@ const Form: React.FC = () => {
     socket.on("message", (message: string) => {
       console.log(message);
     })
-  }, []);
+  }, [message]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>)  => {
     setRegisterTemplate({ ...registerTemplate, [e.target.name]: e.target.value });
@@ -41,12 +42,17 @@ const Form: React.FC = () => {
     e.preventDefault()
     try {
       if (!Object.entries(errors).length){
+
+        const response = await axios.post("http://localhost:3001/user", registerTemplate)
+        console.log(response)
+
         setRegisterTemplate(register)
-        return redirect("/")
+        window.location.href = "/"
       }else{
         throw new Error("")
       }
     } catch (error) {
+      console.log(error)
       alert("error")
     }
   }
@@ -54,13 +60,13 @@ const Form: React.FC = () => {
   return(
     <>
       <form onSubmit={handleSubmit} className='flex flex-col '>
-        <input className='border' name='fullName'  value={registerTemplate.fullName} onChange={handleChange} type='text'/>
+        <input className='border' name='fullName'  placeholder='Nombre' value={registerTemplate.fullName} onChange={handleChange} type='text'/>
         {errors && <span className="text-red-600 font-semibold">{errors?.fullName}</span>}
-        <input className='border' name='email'  value={registerTemplate.email} onChange={handleChange} type='email'/>
+        <input className='border' name='email'  placeholder='Email' value={registerTemplate.email} onChange={handleChange} type='email'/>
         {errors && <span className="text-red-600 font-semibold">{errors?.email}</span>}
-        <input className='border' name='password'  value={registerTemplate.password} onChange={handleChange} type='password'/>
+        <input className='border' name='password'  placeholder='Contraseña' value={registerTemplate.password} onChange={handleChange} type='password'/>
         {errors && <span className="text-red-600 font-semibold">{errors?.password}</span>}
-        <input className='border' name='confirmPassword'  value={registerTemplate.confirmPassword} onChange={handleChange} type='password'/>
+        <input className='border' name='confirmPassword'  placeholder='Confirmar contraseña' value={registerTemplate.confirmPassword} onChange={handleChange} type='password'/>
         {errors && <span className="text-red-600 font-semibold">{errors?.confirmPassword}</span>}
         <button type='submit'>Registrarse</button>
 
