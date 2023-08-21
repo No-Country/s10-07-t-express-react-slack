@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { redirect } from 'react-router-dom';
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 
