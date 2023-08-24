@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
 import jwt_decode from 'jwt-decode'
 
-import { Register, Errors } from './interfaces'
+import { Register, Errors, MyAxiosError } from './interfaces'
 import { validationErrors } from './utils'
 // import io from 'socket.io-client'
 import axios from 'axios'
 import logo from "../../assets/logo.png"
 import rocket from "../../assets/logo-rocket.png"
 
-const register = {
+export const register = {
   fullName: '',
   email: '',
   password: '',
@@ -54,13 +54,18 @@ const Form: React.FC = () => {
         )
 
         setRegisterTemplate(register)
+        // localStorage.setItem("", response)
         window.location.href = '/workflows'
       } else {
         throw new Error('')
       }
     } catch (error) {
-      console.log(error)
-      alert('error')
+      const axiosError = error as MyAxiosError;
+
+      if (axiosError.response) {
+        // Manejar el error de respuesta HTTP
+        alert(axiosError.response.data.data.error)
+      }
     }
   }
 

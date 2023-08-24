@@ -1,3 +1,4 @@
+require('dotenv').config();
 import Jwt from "jsonwebtoken"
 const { TOKEN } = process.env;
 
