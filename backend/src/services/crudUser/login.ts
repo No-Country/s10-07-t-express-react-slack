@@ -25,7 +25,7 @@ export const loginUser = async (req: Request, res: Response) => {
       const token = await generateToken(existUser.email)
 
       const data = {
-        user: existUser,
+        existUser,
         token,
       }
 
