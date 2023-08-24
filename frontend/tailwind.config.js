@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        "bg-navbar":"#181F6D",
+        "secundary-color": "#4A154B", 
+        "bg-navbar":"#391544",
         "button-orange": "#F39F5A",
         "bg": "#1D1A39"
       },
