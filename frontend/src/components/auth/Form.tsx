@@ -6,6 +6,8 @@ import { Register, Errors } from './interfaces'
 import { validationErrors } from './utils'
 // import io from 'socket.io-client'
 import axios from 'axios'
+import logo from "../../assets/logo.png"
+import rocket from "../../assets/logo-rocket.png"
 
 const register = {
   fullName: '',
@@ -63,10 +65,13 @@ const Form: React.FC = () => {
   }
 
   return (
-    <section className='w-full flex items-center justify-center mx-auto h-screen'>
-      <div className='w-1/3 flex flex-col gap-y-8 border border-stone-500 py-10 px-6 rounded-lg'>
-        <h3 className='text-2xl'>CONNECTA</h3>
-        <p className='-mt-4'>Registrate en la plataforma lider en comunicacion.</p>
+    <section className='w-full flex items-center justify-center mx-auto h-screen bg-bg'>
+      <div className='w-1/3 flex flex-col gap-y-8 border border-stone-500 py-10 px-6 rounded-lg '>
+        <div className="flex items-center">
+          <img className="h-10" src={logo} alt="" />
+          <img className="h-10" src={rocket} alt="" />
+        </div>
+        <p className='-mt-4 text-white'>Registrate en la plataforma líder en comunicación.</p>
         <form onSubmit={handleSubmit} className='flex flex-col gap-y-2 '>
           <input
             className='border rounded-md text-stone-600 px-3 py-2 placeholder:text-stone-500'
@@ -115,12 +120,13 @@ const Form: React.FC = () => {
             </span>
           )}
           <div className='flex items-center gap-x-4 mt-4'>
-            <button type='submit' className='border border-stone-500 rounded-md w-[200px] px-4 py-2 text-center'>Registrarse</button>
-            <GoogleLogin
+            <button type='submit' className="bg-button-orange rounded-3xl text-white px-5 h-12">Registrarse</button>
+            <GoogleLogin 
               onSuccess={(credentialResponse: CredentialResponse): void => {
                 if (credentialResponse.credential) {
                   const decoded = jwt_decode(credentialResponse.credential)
                   console.log(decoded)
+                  window.location.href = '/workflows'
                 }
               }}
               onError={() => {

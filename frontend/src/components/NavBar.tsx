@@ -11,6 +11,7 @@ function NavBar() {
             <img className="h-12" src={rocket} alt="" />
           </div>
             <div className="flex space-x-3">
+            <button  className="bg-button-orange rounded-3xl text-white px-5 h-12">¿Quiénes somos?</button>
             <button  className="bg-button-orange rounded-3xl text-white px-5 h-12">Empresas</button>
             <Link to='/register' className="bg-button-orange rounded-3xl text-white pt-3 px-5 h-12">Registrarse</Link>
             </div>  

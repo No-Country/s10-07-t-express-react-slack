@@ -5,9 +5,7 @@ const PrincipalPage = () => {
     return(
         <>
             <NavBar />
-        <section className="flex items-center justify-center">
             <Landing/>
-        </section>
         </>
     )
 }
