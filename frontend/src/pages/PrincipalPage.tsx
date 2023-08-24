@@ -4,7 +4,7 @@ import NavBar from "../components/NavBar";
 const PrincipalPage = () => {
     return(
         <>
-            <NavBar />
+            <NavBar isUserLoggedIn={false} />
             <Landing/>
         </>
     )
