@@ -1,10 +1,12 @@
 import Landing from "../components/PrincipalPage/Landing";
+import NavBar from "../components/NavBar";
 
 const PrincipalPage = () => {
     return(
-        <section className="flex items-center justify-center">
+        <>
+            <NavBar isUserLoggedIn={false} />
             <Landing/>
-        </section>
+        </>
     )
 }
 export default PrincipalPage;
