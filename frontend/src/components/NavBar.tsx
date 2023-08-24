@@ -2,7 +2,11 @@ import logo from "../assets/logo.png"
 import rocket from "../assets/logo-rocket.png"
 import { Link } from 'react-router-dom';
 
-function NavBar({isUserLoggedIn}) {
+interface NavBarProps {
+    isUserLoggedIn: boolean;
+  }
+  
+function NavBar({isUserLoggedIn}: NavBarProps) {
   
     return (
       <nav className="bg-bg-navbar h-28 w-full px-10 flex items-center justify-between">
