@@ -1,4 +1,3 @@
-import bg from "../../assets/bg-image-landing1.png"
 import logo from "../../assets/logo.png"
 import rocket from "../../assets/logo-rocket.png"
 const Landing = () => {
