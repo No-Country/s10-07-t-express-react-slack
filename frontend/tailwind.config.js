@@ -17,6 +17,7 @@ export default {
       },
       backgroundImage: {
         'bg-landing': "url('/src/assets/bg-image-landing1.png')",
+        'bg-register': "url('./src/assets/aurotas.png')"
     },
     
     "navbar-btn": "bg-button-orange rounded-3xl text-white pt-3 px-5 h-12"
