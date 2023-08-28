@@ -4,7 +4,7 @@ export const validationPassword = (password: string): string => {
 
   if (!regexPassword.test(password)) {
 
-    throw new Error('Password must contain at least 8 characters including: Uppercase, Lowercase, numbers and special characters(@, $, !, %, *, ?, _ , -, &)');
+    throw new Error('Debe ingresar una contraseña que contenta 8 caracteres incluyendo: Mayuscula, minuscula, numero y un caracter especial(@, $, !, %, *, ?, _ , -, &)');
   }
 
   return password;
