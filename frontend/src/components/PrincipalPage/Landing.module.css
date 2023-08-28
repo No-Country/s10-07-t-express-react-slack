@@ -1,0 +1,11 @@
+.landingBG {
+  background-image: url('../../assets/LANDING.png');
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100vw 100%;
+  /* width: 100vw; */
+}
+
+.landingAstro {
+  background-image: url('../../assets/astronauta-cohete2.png');
+}
