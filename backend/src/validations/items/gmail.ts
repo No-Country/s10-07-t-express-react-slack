@@ -3,11 +3,11 @@ import { dominiosPermitidosRegex, emailRegex } from "../../helper/regex";
 export const validationEmail = (gmail: string): string => {
 
   if (!gmail) {
-    throw new Error('You must enter an email');
+    throw new Error('Debe ingresar un correo');
   }
 
   if (!emailRegex.test(gmail) || !dominiosPermitidosRegex.test(gmail)) {
-    throw new Error('Email is invalid');
+    throw new Error('Correo invalido vuelva a intentarlo');
   }
 
   return gmail;
