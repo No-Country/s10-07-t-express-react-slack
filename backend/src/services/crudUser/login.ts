@@ -29,7 +29,7 @@ export const loginUser = async (req: Request, res: Response) => {
         token,
       }
 
-      return res.status(200).json({ msg: "Session y token invalido", data })
+      return res.status(200).json({ msg: "Sesión y token válido", data })
     } else {
       return res.status(403).json({ error: "Contraseña invalida" })
     }

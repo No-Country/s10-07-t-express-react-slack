@@ -9,11 +9,11 @@ export const resetPassword = async(req:Request, res: Response) => {
         //const existUser = await Usermodel.findOne({email : req.body?.email});
         const existUser = await Usermodel.findById(id);
         if(!existUser){
-            res.status(404).json({ error: "This email is not registered" })
+            res.status(404).json({ error: "El correo no está registrado." })
         }
         const encrypted = await hashedPassword(password);
         await Usermodel.findByIdAndUpdate({_id: id},{password: encrypted})
-        return res.status(201).send({ msg : "Password updated...!"})
+        return res.status(201).send({ msg : "Contraseña actualizada exitosamente ...!"})
     }catch(error){
         if(error instanceof Error){
             return res.status(400).json({ error: error.message });
