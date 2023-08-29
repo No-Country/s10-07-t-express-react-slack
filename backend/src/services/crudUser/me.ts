@@ -11,7 +11,7 @@ export const me = async(req: Request, res: Response) => {
           const payload = Jwt.verify(token, TOKEN as string) as IPayload
           const userData = await Usermodel.findOne({
            email: payload.id
-          })
+          }).select('-password')
           const data = {
             userData
           }
