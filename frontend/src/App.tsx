@@ -4,6 +4,8 @@ import Register from './pages/Register.tsx'
 import PrincipalPage from './pages/PrincipalPage.tsx'
 import WorkFlows from './pages/WorkFlows.tsx'
 import Login from './pages/Login.tsx'
+import WorkspaceFirstStep from './pages/WorkspaceFirstStep.tsx'
+import WorkspaceSecondStep from './pages/WorkspaceSecondStep.tsx'
 
 function App() {
 
@@ -13,7 +15,9 @@ function App() {
         <Route path='/' element={<PrincipalPage/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
-        <Route path='/workflows' element={<WorkFlows/>}/>
+        <Route path='/workspaces' element={<WorkFlows/>}/>
+        <Route path='/workspaces/firststep' element={<WorkspaceFirstStep/>}/>
+        <Route path='/workspaces/secondstep' element={<WorkspaceSecondStep/>}/>
       </Routes>
     </>
   )
