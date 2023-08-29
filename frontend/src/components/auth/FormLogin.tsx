@@ -46,7 +46,7 @@ const FormLogin = () => {
 
   return(
     <section className='w-1/3 px-8 py-12 flex flex-col items-center justify-center m-auto bg-white/5 rounded-xl gap-y-8'>
-      <h3 className="text-button-orange font-semibold text-xl">Inicio de sesion</h3>
+      <h3 className="text-button-orange font-semibold text-xl">Inicio de sesión</h3>
       <form onSubmit={handleSubmit} className='w-full flex flex-col gap-y-2 '>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
@@ -78,6 +78,9 @@ const FormLogin = () => {
         </div>
         <button type='submit' className="bg-button-orange rounded-xl text-white px-4 py-2">Iniciar sesion</button>
       </form>
+      <div className="flex items-center gap-x-2">
+        <Link to={"/recover"} className='text-button-orange underline'>¿Olvidaste tu constraseña?</Link>
+      </div>
       <div className='w-full flex items-center text-button-orange gap-x-4'>
         <div className='bg-button-orange/50 h-[1px] w-1/2'></div>
         <span>o</span>
