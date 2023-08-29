@@ -1,12 +1,12 @@
 import NavBar from "../components/NavBar";
+import InitialPage from "../components/workflows/InitialPage";
 
 const WorkFlows = () => {
-    return(
-        <section>
-        <NavBar isUserLoggedIn={true} />
-           <h2 className=""> Estos son sus espacios de trabajo</h2>
-           <button className="border px-4 py-2 rounded-md">Crear espacio de trabajo</button>
-        </section>
-    )
+  return (
+    <section>
+      <NavBar isUserLoggedIn={true} />
+      <InitialPage/>
+    </section>
+  )
 }
 export default WorkFlows;
