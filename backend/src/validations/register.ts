@@ -6,7 +6,7 @@ import { validationFullName } from "./items/name";
 export const validateRegister = (user: IUser): IUser => {
 
   if (!user.fullName && !user.password && !user.email) {
-    throw new Error("All fields are required")
+    throw new Error("Todos los campos son requeridos")
   }
 
   validationFullName(user.fullName);
@@ -16,7 +16,7 @@ export const validateRegister = (user: IUser): IUser => {
   validationPassword(user.password);
 
   if (validationPassword(user.password) !== user.confirmPassword) {
-    throw new Error("The password does not match")
+    throw new Error("Las contraseñas no coinciden")
   }
 
   return user;

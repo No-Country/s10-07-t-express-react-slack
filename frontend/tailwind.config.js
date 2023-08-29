@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        "bg-navbar":"#181F6D",
+        "secundary-color": "#4A154B", 
+        "bg-navbar":"#391544",
         "button-orange": "#F39F5A",
         "bg": "#1D1A39"
       },
@@ -16,6 +17,7 @@ export default {
       },
       backgroundImage: {
         'bg-landing': "url('/src/assets/bg-image-landing1.png')",
+        'bg-register': "url('./src/assets/aurotas.png')"
     },
     
     "navbar-btn": "bg-button-orange rounded-3xl text-white pt-3 px-5 h-12"

@@ -14,7 +14,7 @@ export const loginUser = async (req: Request, res: Response) => {
     const existUser = await Usermodel.findOne({ email: validation.email });
 
     if (!existUser) {
-      return res.status(401).json({ error: "This account is not registered" })
+      return res.status(401).json({ error: "Esta cuenta no esta registrada" })
     }
 
     const passwordEncrypted = existUser.password
@@ -25,13 +25,13 @@ export const loginUser = async (req: Request, res: Response) => {
       const token = await generateToken(existUser.email)
 
       const data = {
-        user: existUser,
+        existUser,
         token,
       }
 
-      return res.status(200).json({ msg: "Session and valid token", data })
+      return res.status(200).json({ msg: "Session y token invalido", data })
     } else {
-      return res.status(403).json({ error: "invalid password" })
+      return res.status(403).json({ error: "Contraseña invalida" })
     }
   } catch (error) {
     if (error instanceof Error) {

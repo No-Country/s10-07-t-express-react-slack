@@ -4,6 +4,9 @@ export const dominiosPermitidosRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@(${dominio
 export const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A-Za-z\d@$!%*?&_-]{8,}$/;
 // export const fullName = /^[a-zA-Z]{3,}\s[a-zA-Z]{3,}$/;
 export const fullName = /^[a-zA-ZáéíóúÁÉÍÓÚüÜ]{3,}(?:\s|-)[a-zA-ZáéíóúÁÉÍÓÚüÜ]{3,}$/;
+
+export const NameChannel = /^[a-zA-ZáéíóúÁÉÍÓÚüÜ]{3,}$/;
+
 export const nameClass = /^[a-zA-Z]{3,}(\s|-)[a-zA-Z]{3,}$/
 
 // *                            30min | 40-99min | 100-190min|120        min | 1|2     h

@@ -1,9 +1,19 @@
-import { fullName } from '../../helper/regex';
+import { fullName, NameChannel } from '../../helper/regex';
 
 export const validationFullName = (name: string): string => {
 
   if (!name.match(fullName)) {
-    throw new Error("You must enter a valid first and last name")
+    throw new Error("Debes ingresar un nombre completo")
+  }
+
+  return name;
+}
+
+
+export const validationWorkSpace = (name: string): string => {
+
+  if (!name.match(NameChannel)) {
+    throw new Error("Debes ingresar un nombre para el Canal")
   }
 
   return name;

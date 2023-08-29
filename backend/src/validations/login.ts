@@ -6,7 +6,7 @@ import { Usermodel } from "../models/Users";
 export const validateLogin = async (user: IUser): Promise<IUser> => {
 
   if (!user.email && !user.password) {
-    throw new Error("All fields are required")
+    throw new Error("Todos los campos son requeridos")
   }
 
   validationEmail(user.email);
@@ -14,7 +14,7 @@ export const validateLogin = async (user: IUser): Promise<IUser> => {
   const allUsers = await Usermodel.find({ email: user.email })
 
   if (!allUsers.length) {
-    throw new Error('This account is not registered');
+    throw new Error('Esta cuenta no esta registrada');
   }
 
   validationPassword(user.password);
