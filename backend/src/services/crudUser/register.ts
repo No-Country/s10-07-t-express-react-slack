@@ -22,7 +22,7 @@ export const createUser = async (req: Request, res: Response) => {
     )
 
     if (existUser) {
-      return res.status(400).json({ error: " User already exists", existUser })
+      return res.status(400).json({ error: "El usuario ya existe", existUser })
     }
 
     const encrypted = await hashedPassword(validations.password);
@@ -38,7 +38,7 @@ export const createUser = async (req: Request, res: Response) => {
     await newUser.save()
 
     if (newUser) {
-      return res.status(201).json({ message: "User created successfully" })
+      return res.status(201).json({ message: "Usuario creado con exito" })
     }
 
   } catch (error) {
