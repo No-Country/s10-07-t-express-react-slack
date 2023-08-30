@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import jwt_decode from 'jwt-decode'
 // import io from 'socket.io-client'
 
-import { Register, Errors, MyAxiosError } from './interfaces'
+import { Register, Errors, MyAxiosError, ResponseAxios } from './interfaces'
 import { validationErrors } from './utils'
 import astronauta from "../../assets/astronauta-cohete2.png"
 import {FaUserCircle, FaLock} from 'react-icons/fa'
@@ -49,13 +49,12 @@ const Form: React.FC = () => {
     e.preventDefault()
     try {
       if (!Object.entries(errors).length) {
-        await axios.post(
+        const response = await axios.post(
           'http://localhost:3001/user',
-          registerTemplate,
-        )
-
+          registerTemplate
+        ) as AxiosResponse<ResponseAxios>
         setRegisterTemplate(register)
-        // localStorage.setItem("", response)
+        localStorage.setItem("userToken", response.data.data.token)
         window.location.href = '/workflows'
       } else {
         throw new Error('')

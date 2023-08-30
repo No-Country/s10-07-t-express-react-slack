@@ -14,13 +14,13 @@ export const authToken = async (req: Request, res: Response, next: NextFunction)
       const payload = Jwt.verify(token, TOKEN as string) as IPayload
 
       await Usermodel.findOne({
-        where: { email: payload.id },
+        email: payload.id
       })
 
       return next()
 
     } catch (error) {
-      return res.status(400).json({ message: "Session or token invalidated" })
+      return res.status(400).json({ msg: "Sesion y token invalido" })
     }
   }
   return next()
