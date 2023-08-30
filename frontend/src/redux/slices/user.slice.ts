@@ -1,21 +1,43 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { IUser } from '../../interfaces/user'
+import axios, { AxiosResponse } from 'axios'
 
-interface CounterState {
-  value: number
+interface ResponseAxios {
+  data: IUser
 }
 
-const initialState: CounterState = {
-  value: 0,
+const initialState: IUser = {
+  fullName: "",
+  email: "",
+  password: "",
+  confirmPassword: ""
 }
 
-export const counterSlice = createSlice({
+export const validateUser = createAsyncThunk('user/validate', async () => {
+  const token = localStorage.getItem("userToken")
+  const response = await axios("http://localhost:3001/me", {
+    headers: {
+      Authorization: token
+    }
+  }) as AxiosResponse<ResponseAxios>
+console.log(response.data.data)
+  return response.data.data
+})
+
+export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1
-    }
+    
   },
+  extraReducers(builder) {
+    builder
+      .addCase(validateUser.fulfilled, (state, action) => {
+        console.log(state.email)
+        return action.payload;
+      })
+  }
 })
 
-export const { increment } = counterSlice.actions
+export const {  } = userSlice.actions
+export default userSlice.reducer;

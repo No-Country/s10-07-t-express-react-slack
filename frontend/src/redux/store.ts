@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { counterSlice } from './index'
+import { userSlice, workspaceSlice } from './index'
 
 export const store = configureStore({
   reducer: {
-    user: counterSlice.reducer
+    user: userSlice.reducer,
+    workspace: workspaceSlice.reducer
   }
 })
 

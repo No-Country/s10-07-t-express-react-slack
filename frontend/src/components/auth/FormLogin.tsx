@@ -32,7 +32,7 @@ const FormLogin = () => {
       ) as AxiosResponse<ResponseAxios>
       setLoginTemplate(login)
       localStorage.setItem("userToken", response.data.data.token)
-      window.location.href = '/workflows'
+      window.location.href = '/workspaces'
     } catch (error) {
       const axiosError = error as MyAxiosError;
       if (axiosError.response) {
