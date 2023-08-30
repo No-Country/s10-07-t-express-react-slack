@@ -7,13 +7,18 @@ const channelSchema = new Schema<IChannel>(
       type: Schema.Types.ObjectId,
       ref: "WorkSpace",
     },
-    nameChannel: {
-      type: String,
+    channel: {
+      type: Object,
       require: true,
     },
-    count: {
-      type: Number,
-    },
+    // nameChannel: {
+    //   type: Object,
+    //   require: true,
+    // },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    }
   },
   {
     timestamps: false,

@@ -20,8 +20,9 @@ export const workSpace = async (req: Request, res: Response) => {
     // }
 
     const newWorkSpace = new WorkSpaceModel({
-      user: workSpace.user,
+      userId: workSpace.userId,
       nameWorkSpace: validations.nameWorkSpace,
+      channels: workSpace.channels
     });
 
     await newWorkSpace.save();
