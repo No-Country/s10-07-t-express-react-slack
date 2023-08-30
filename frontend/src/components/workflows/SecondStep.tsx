@@ -1,7 +1,31 @@
-const emailPrueba = ["fabian@gmail.com", "hola@gmail.com", "fabian@gmail.com", "hola@gmail.com", "fabian@gmail.com", "hola@gmail.com", "fabian@gmail.com"]
+import React, { useState } from 'react'
+
 import {AiOutlineClose, AiOutlineEnter} from "react-icons/ai"
 import { Link } from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import { addMember, deleteMember } from '../../redux/slices/workspace.slice'
+
 const SecondStepWorkspace = () => {
+
+  const [member, setMember] = useState<string>("")
+
+  const dispatch = useAppDispatch()
+  const members = useAppSelector(state => state.workspace.members)
+  const state = useAppSelector(state => state)
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMember(e.target.value)
+  }
+
+  const handleAddMembers = () => {
+    dispatch(addMember(member))
+    console.log(state)
+  }
+
+  const handleDeleteMember = (email: string)=> {
+    dispatch(deleteMember(email))
+    console.log(state)
+  }
+
   return (
     <section className="h-screen w-full flex items-center justify-center bg-background">
       <div className="w-2/5 flex flex-col gap-y-8">
@@ -14,16 +38,22 @@ const SecondStepWorkspace = () => {
         <div className="flex flex-col gap-y-8">
           <div className="max-h-64 overflow-auto rounded-lg p-6 h-fit flex items-center flex-wrap gap-2 bg-white ">
             <div className="flex items-center gap-x-2">
-              <input className="focus:border px-3 py-1 rounded-lg bg-white border-2 text-text-workspace" type="text" />
-              <button className="rounded-lg px-2 py-2 border-2 hover:bg-slate-100">
+              <input 
+                onChange={handleChange} 
+                value={member} 
+                className="focus:border px-3 py-1 rounded-lg bg-white border-2 text-text-workspace" 
+                type="text" />
+              <button onClick={handleAddMembers} className="rounded-lg px-2 py-2 border-2 hover:bg-slate-100">
                 <AiOutlineEnter></AiOutlineEnter>
               </button>
             </div>
             {
-              emailPrueba.map((email) => {
+              members.map((email, index) => {
                 return(
-                  <div className="relative px-2 pr-8 py-1 rounded-md border-2 text-sm text-secundary-color">
-                    <button className="absolute top-1 right-1 border rounded-md bg-red-600 p-[0.15rem] text-white flex items-center justify-center h-4 w-4 hover:scale-[1.1]">
+                  <div key={`${email}${index}`} className="relative px-2 pr-8 py-1 rounded-md border-2 text-sm text-secundary-color">
+                    <button 
+                    onClick={() => handleDeleteMember(email)}
+                    className="absolute top-1 right-1 border rounded-md bg-red-600 p-[0.15rem] text-white flex items-center justify-center h-4 w-4 hover:scale-[1.1]">
                       <AiOutlineClose ></AiOutlineClose>
                     </button>
                     <span>{email}</span>
