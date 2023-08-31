@@ -2,20 +2,24 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import axios, { AxiosResponse } from 'axios';
 
+// userId: workSpace.userId,
+//       nameWorkSpace: validations.nameWorkSpace,
+//       channels: workSpace.channels
+
 interface Workspace {
   nameWorkspace: string;
-  emailWorkspace: string;
+  userId: string;
   // members: string[]
 }
 
 const initialState: Workspace = {
   nameWorkspace: "",
-  emailWorkspace: "",
+  userId: "",
   // members: [],
 }
 
 export const createWorkspace = createAsyncThunk('workspace/create', async (body: Workspace) => {
-  const response = await axios.post("http://localhost:3001/workspace", body) as AxiosResponse<Workspace>
+  const response = await axios.post("http://localhost:3001/workSpaces", body) as AxiosResponse<Workspace>
   return response.data
 })
 
@@ -34,10 +38,15 @@ export const workspaceSlice = createSlice({
     }
   },
   extraReducers(builder){
-    builder.addCase(createWorkspace.fulfilled, (state, action) => {
-      state = action.payload
-      return action.payload;
-    })
+    builder
+      .addCase(createWorkspace.fulfilled, (state, action) => {
+        state = action.payload
+        return action.payload;
+      })
+      .addCase(createWorkspace.rejected, (state, action) => {
+        console.log(state)
+        console.log(action.error, action.payload);
+      })
   }
 })
 

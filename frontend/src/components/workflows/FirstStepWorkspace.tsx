@@ -6,7 +6,7 @@ import { validateUser } from '../../redux/slices/user.slice'
 const FirstStepWorkspace = () => {
 
   const dispatch = useAppDispatch()
-  const { email } = useAppSelector((state) => state.user)
+  const { _id } = useAppSelector((state) => state.user)
   const { nameWorkspace } = useAppSelector((state) => state.workspace)
 
   useEffect(() => {
@@ -21,11 +21,11 @@ const FirstStepWorkspace = () => {
     e.preventDefault()
     let body = {
       nameWorkspace,
-      emailWorkspace: email
+      userId: _id
     }
     if (nameWorkspace.length > 3 && nameWorkspace.length < 40) {
       dispatch(createWorkspace(body))
-      window.location.href = "./secondstep"
+      // window.location.href = "./secondstep"
     }
   }
 
