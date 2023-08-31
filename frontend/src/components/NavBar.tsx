@@ -55,7 +55,7 @@ function NavBar({ isUserLoggedIn }: NavBarProps) {
             ) : (
               <div className='md:flex md:items-center justify-between'>
                 <NavLink
-                  to='/register'
+                  to='/login'
                   className='uppercase  text-white md:px-3 py-2 md:ml-8'>
                   Iniciar Sesión
                 </NavLink>
