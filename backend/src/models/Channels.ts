@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { IChannel } from "../../../interface/IChannel"
+import { IChannel } from "../../../interface/IMessage"
 
 const channelSchema = new Schema<IChannel>(
   {

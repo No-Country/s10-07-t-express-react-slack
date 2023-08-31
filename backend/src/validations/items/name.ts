@@ -1,4 +1,4 @@
-import { IChannel } from '../../../../interface/IChannel';
+import { IChannel } from '../../../../interface/IMessage';
 import { fullName, NameChannel } from '../../helper/regex';
 
 export const validationFullName = (name: string): string => {

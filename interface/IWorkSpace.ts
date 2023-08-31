@@ -1,6 +1,6 @@
 import { SchemaDefinitionProperty } from "mongoose"
 import { IUser } from "./IUser"
-import { IChannel } from "./IChannel"
+import { IChannel } from "./IMessage"
 
 export interface IWorkSpace {
   userId: SchemaDefinitionProperty<IUser>

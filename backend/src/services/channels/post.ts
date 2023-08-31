@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IChannel } from "../../../../interface/IChannel";
+import { IChannel } from "../../../../interface/IMessage";
 import { validationChannel } from "../../validations/items/name";
 import { ChannelModel } from "../../models/Channels";
 
