@@ -1,12 +1,12 @@
-import Landing from "../components/PrincipalPage/Landing";
-import NavBar from "../components/NavBar";
+import Landing from '../components/PrincipalPage/Landing'
+import NavBar from '../components/NavBar'
 
 const PrincipalPage = () => {
-    return(
-        <>
-            <NavBar isUserLoggedIn={false} />
-            <Landing/>
-        </>
-    )
+  return (
+    <>
+      <NavBar isUserLoggedIn={false} />
+      <Landing />
+    </>
+  )
 }
-export default PrincipalPage;
+export default PrincipalPage

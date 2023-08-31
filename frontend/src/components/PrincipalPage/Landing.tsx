@@ -54,7 +54,7 @@ const Landing = () => {
           </>
         )}
       </section>
-      <section className='md:flex md:flex-row md:justify-between flex flex-col-reverse items-center md:w-4/5 pt-40'>
+      <section className='md:flex md:flex-row md:justify-between flex flex-col items-center md:w-4/5 pt-40 gap-4'>
         <div>
           <p className='text-3xl text-button-orange leading-10 font-semibold'>
             CREA UN NUEVO ESPACIO <br />
@@ -74,7 +74,7 @@ const Landing = () => {
           <img src={fondoGris} alt='diseño de pagina' />
         </div>
       </section>
-      <section className='md:flex md:flex-row md:justify-between flex flex-col items-center md:w-4/5 pt-40 gap-20'>
+      <section className='md:flex md:flex-row md:justify-between flex flex-col items-center md:w-4/5 pt-40 gap-4 px-8'>
         <img src={astroPriv} alt='astronauto privacidad' />
         <div>
           <p className='text-3xl text-button-orange leading-10 font-semibold'>
