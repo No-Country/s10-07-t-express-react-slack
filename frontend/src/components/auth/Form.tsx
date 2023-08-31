@@ -55,7 +55,7 @@ const Form: React.FC = () => {
         ) as AxiosResponse<ResponseAxios>
         setRegisterTemplate(register)
         localStorage.setItem("userToken", response.data.data.token)
-        window.location.href = '/workflows'
+        window.location.href = '/workspaces'
       } else {
         throw new Error('')
       }
