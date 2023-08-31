@@ -1,17 +1,13 @@
 import { Schema, model } from "mongoose";
-import { IChannel } from "../../../interface/IMessage"
+import { IMessage } from "../../../interface/IMessage"
 
-const channelSchema = new Schema<IChannel>(
+const messageSchema = new Schema<IMessage>(
   {
-    workSpace: {
+    workSpaceId: {
       type: Schema.Types.ObjectId,
       ref: "WorkSpace",
     },
-    // channel: {
-    //   type: String,
-    //   require: true,
-    // },
-    nameChannel: {
+    message: {
       type: String,
       require: true,
     },
@@ -26,4 +22,4 @@ const channelSchema = new Schema<IChannel>(
   }
 );
 
-export const ChannelModel = model<IChannel>("Channel", channelSchema);
+export const MessageModel = model<IMessage>("Message", messageSchema);

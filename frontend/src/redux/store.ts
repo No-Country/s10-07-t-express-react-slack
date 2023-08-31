@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { userSlice, workspaceSlice } from './index'
-import { channelSlice } from './slices/channel.slice'
+import { messagesSlice } from './slices/message.slice'
 
 export const store = configureStore({
   reducer: {
     user: userSlice.reducer,
     workspace: workspaceSlice.reducer,
-    channel: channelSlice.reducer
+    messages: messagesSlice.reducer
   }
 })
 

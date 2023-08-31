@@ -1,11 +1,11 @@
 import { Router } from "express"
-import { createChannel } from "../services/channels/post";
-import { allChannels } from "../services/channels/get";
+import { createMessage } from "../services/messages/post";
+import { allMessages } from "../services/messages/get";
 
-export const channelsRoutes = Router()
+export const messagesRoutes = Router()
 
-const CHANNEL = "/channel";
-const CHANNELS = "/channels";
+const MESSAGE = "/message";
+const MESSAGES = "/messages";
 
-channelsRoutes.post(`${CHANNEL}`, createChannel)
-channelsRoutes.get(`${CHANNELS}`, allChannels)
+messagesRoutes.post(`${MESSAGE}`, createMessage)
+messagesRoutes.get(`${MESSAGES}`, allMessages)

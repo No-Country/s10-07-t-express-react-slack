@@ -64,7 +64,7 @@ const SecondStepWorkspace = () => {
           </div>
           <div className="flex items-center gap-x-3">
             <button className="w-fit px-8 py-2 bg-secundary-color text-white rounded-md">Siguiente</button>
-            <Link to={"."} className="w-fit px-8 py-2 text-secundary-color bg-white rounded-md">Omitir este paso</Link>
+            <Link to={"/workspaces/thirdstep"} className="w-fit px-8 py-2 text-secundary-color bg-white rounded-md">Omitir este paso</Link>
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ import WorkFlows from './pages/WorkFlows.tsx'
 import Login from './pages/Login.tsx'
 import WorkspaceFirstStep from './pages/WorkspaceFirstStep.tsx'
 import WorkspaceSecondStep from './pages/WorkspaceSecondStep.tsx'
+import { WorkspaceThridStep } from './pages/WorkspaceThirdStep.tsx'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Route path='/workspaces' element={<WorkFlows/>}/>
         <Route path='/workspaces/firststep' element={<WorkspaceFirstStep/>}/>
         <Route path='/workspaces/secondstep' element={<WorkspaceSecondStep/>}/>
+        <Route path='/workspaces/thirdstep' element={<WorkspaceThridStep/>}/>
       </Routes>
     </>
   )
