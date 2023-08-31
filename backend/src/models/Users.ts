@@ -1,33 +1,31 @@
 import { Schema, model } from "mongoose";
-import { IUser } from '../../../interface/IUser';
-
-
+import { IUser } from "../../../interface/IUser";
 
 const userSchema = new Schema<IUser>(
   {
     fullName: {
       type: String,
-      require: true
+      require: true,
     },
     email: {
       type: String,
       require: true,
-      unique: true
+      unique: true,
     },
     password: {
       type: String,
       require: true,
       trim: true,
     },
-
+    workSpace: {
+      type: Schema.Types.Array,
+      ref: "WorkSpace",
+    },
   },
   {
     timestamps: false,
-    versionKey: false
-  })
+    versionKey: false,
+  }
+);
 
-
-
-
-
-export const Usermodel = model<IUser>("User", userSchema)
+export const Usermodel = model<IUser>("User", userSchema);

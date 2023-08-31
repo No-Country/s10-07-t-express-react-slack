@@ -1,16 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { IUser } from '../../interfaces/user'
+import { IUserAux } from '../../interfaces/user'
 import axios, { AxiosResponse } from 'axios'
 
 interface ResponseAxios {
-  data: IUser
+  data: IUserAux
 }
 
-const initialState: IUser = {
+const initialState: IUserAux = {
   fullName: "",
   email: "",
-  password: "",
-  confirmPassword: ""
+  _id: ""
 }
 
 export const validateUser = createAsyncThunk('user/validate', async () => {
@@ -20,7 +19,7 @@ export const validateUser = createAsyncThunk('user/validate', async () => {
       Authorization: token
     }
   }) as AxiosResponse<ResponseAxios>
-console.log(response.data.data)
+
   return response.data.data
 })
 
@@ -33,7 +32,7 @@ export const userSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(validateUser.fulfilled, (state, action) => {
-        console.log(state.email)
+        state = action.payload
         return action.payload;
       })
   }

@@ -1,36 +1,25 @@
 import { Schema, model } from "mongoose";
-import { IWorkSpace } from '../../../interface/IWorkSpace';
-
-
+import { IWorkSpace } from "../../../interface/IWorkSpace";
 
 const workSpaceSchema = new Schema<IWorkSpace>(
   {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
     nameWorkSpace: {
       type: String,
-      require: true
-    },
-    count: {
-      type: Number,
-    },
-    emailWorkSpace: {
-      type: String,
-      require: true
+      require: true,
     },
     channels: {
-      type: String,
-      require: true
-    },
-    user: {
       type: Schema.Types.Array,
-      ref: "User"
-    }
-
+      ref: "Channel",
+    },
   },
   {
-    timestamps: true,
-    versionKey: false
-  })
+    timestamps: false,
+    versionKey: false,
+  }
+);
 
-
-
-export const WorkSpaceModel = model<IWorkSpace>("WorkSpace", workSpaceSchema)
+export const WorkSpaceModel = model<IWorkSpace>("WorkSpace", workSpaceSchema);

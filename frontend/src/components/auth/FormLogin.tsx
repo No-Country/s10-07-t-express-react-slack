@@ -6,6 +6,8 @@ import jwt_decode from 'jwt-decode'
 
 import { Login, MyAxiosError, ResponseAxios } from './interfaces'
 import { FaLock } from 'react-icons/fa'
+import { useAppDispatch } from '../../redux/hooks'
+import { validateUser } from '../../redux/slices/user.slice'
 
 export const login = {
   email: '',
@@ -15,6 +17,7 @@ export const login = {
 const FormLogin = () => {
 
   const [loginTemplate, setLoginTemplate] = useState<Login>(login)
+  const dispatch = useAppDispatch()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginTemplate({
@@ -25,21 +28,26 @@ const FormLogin = () => {
 
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
-    try {
-      const response = await axios.post(
-        'http://localhost:3001/auth',
-        loginTemplate,
-      ) as AxiosResponse<ResponseAxios>
+    if (loginTemplate.email && loginTemplate.password) {
+      dispatch(validateUser())
       setLoginTemplate(login)
-      localStorage.setItem("userToken", response.data.data.token)
       window.location.href = '/workspaces'
-    } catch (error) {
-      const axiosError = error as MyAxiosError;
-      if (axiosError.response) {
-        // Manejar el error de respuesta HTTP
-        alert(axiosError.response.data.data.error)
-      }
     }
+    // try {
+    //   const response = await axios.post(
+    //     'http://localhost:3001/auth',
+    //     loginTemplate,
+    //   ) as AxiosResponse<ResponseAxios>
+    //   setLoginTemplate(login)
+    //   localStorage.setItem("userToken", response.data.data.token)
+    //   window.location.href = '/workspaces'
+    // } catch (error) {
+    //   const axiosError = error as MyAxiosError;
+    //   if (axiosError.response) {
+    //     // Manejar el error de respuesta HTTP
+    //     alert(axiosError.response.data.data.error)
+    //   }
+    // }
   }
 
   return(
@@ -84,7 +92,7 @@ const FormLogin = () => {
         <span>o</span>
         <div className='bg-button-orange/50 h-[1px] w-1/2'></div>
       </div>
-      <GoogleLogin 
+      {/* <GoogleLogin
         onSuccess={(credentialResponse: CredentialResponse): void => {
           if (credentialResponse.credential) {
             const decoded = jwt_decode(credentialResponse.credential)
@@ -96,7 +104,7 @@ const FormLogin = () => {
           console.log('Login Failed')
         }}
         width={200}
-      />
+      /> */}
       <div className="flex items-center gap-x-2">
         <span className='text-white'>¿No tienes una cuenta?</span>
         <Link to={"/register"} className='text-button-orange underline'>Registrate</Link>
