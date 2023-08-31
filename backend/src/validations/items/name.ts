@@ -1,3 +1,4 @@
+import { IChannel } from '../../../../interface/IMessage';
 import { fullName, NameChannel } from '../../helper/regex';
 
 export const validationFullName = (name: string): string => {
@@ -10,11 +11,21 @@ export const validationFullName = (name: string): string => {
 }
 
 
-export const validationWorkSpace = (name: string): string => {
+export const validationName = (name: string): string => {
 
   if (!name.match(NameChannel)) {
-    throw new Error("Debes ingresar un nombre para el Canal")
+    throw new Error("Debes ingresar un nombre valido")
   }
 
   return name;
+}
+
+export const validationChannel = (channel: IChannel): IChannel => {
+
+  // if (!channel.nameChannel.match(NameChannel)) {
+  if (!channel.nameChannel.match(NameChannel)) {
+    throw new Error("Debes ingresar un nombre valido")
+  }
+
+  return channel;
 }
