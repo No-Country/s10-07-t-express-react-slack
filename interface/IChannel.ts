@@ -8,7 +8,7 @@ export type TChannel = {
 
 export interface IChannel {
   workSpace: SchemaDefinitionProperty<IWorkSpace>
-  channel: TChannel,
-  // nameChannel: TChannel,
+  // channel: string,
+  nameChannel: string,
   userId: SchemaDefinitionProperty<IUser>
 }

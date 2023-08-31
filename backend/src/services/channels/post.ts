@@ -12,8 +12,7 @@ export const createChannel = async (req: Request, res: Response) => {
     const validations = validationChannel(channel);
 
     const newChannel = await ChannelModel.create({
-      // nameChannel: validations.nameChannel,
-      channel: validations.channel,
+      nameChannel: validations.nameChannel,
       workSpace: channel.workSpace,
       userId: channel.userId
     })

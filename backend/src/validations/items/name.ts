@@ -23,7 +23,7 @@ export const validationName = (name: string): string => {
 export const validationChannel = (channel: IChannel): IChannel => {
 
   // if (!channel.nameChannel.match(NameChannel)) {
-  if (!channel.channel.name.match(NameChannel)) {
+  if (!channel.nameChannel.match(NameChannel)) {
     throw new Error("Debes ingresar un nombre valido")
   }
 

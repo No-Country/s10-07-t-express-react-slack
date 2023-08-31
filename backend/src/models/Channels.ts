@@ -7,14 +7,14 @@ const channelSchema = new Schema<IChannel>(
       type: Schema.Types.ObjectId,
       ref: "WorkSpace",
     },
-    channel: {
-      type: Object,
-      require: true,
-    },
-    // nameChannel: {
-    //   type: Object,
+    // channel: {
+    //   type: String,
     //   require: true,
     // },
+    nameChannel: {
+      type: String,
+      require: true,
+    },
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
