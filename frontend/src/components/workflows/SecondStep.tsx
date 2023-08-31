@@ -1,30 +1,28 @@
 import React, { useState } from 'react'
 
-import {AiOutlineClose, AiOutlineEnter} from "react-icons/ai"
+import {AiOutlineEnter} from "react-icons/ai"
+// import {AiOutlineClose, AiOutlineEnter} from "react-icons/ai"
 import { Link } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import { addMember, deleteMember } from '../../redux/slices/workspace.slice'
+// import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+// import { addMember, deleteMember } from '../../redux/slices/workspace.slice'
 
 const SecondStepWorkspace = () => {
 
   const [member, setMember] = useState<string>("")
 
-  const dispatch = useAppDispatch()
-  const members = useAppSelector(state => state.workspace.members)
-  const state = useAppSelector(state => state)
+  // const dispatch = useAppDispatch()
+  // const {members} = useAppSelector(state => state.workspace)
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMember(e.target.value)
   }
 
   const handleAddMembers = () => {
-    dispatch(addMember(member))
-    console.log(state)
+    // dispatch(addMember(member))
   }
 
-  const handleDeleteMember = (email: string)=> {
-    dispatch(deleteMember(email))
-    console.log(state)
-  }
+  // const handleDeleteMember = (email: string)=> {
+  //   dispatch(deleteMember(email))
+  // }
 
   return (
     <section className="h-screen w-full flex items-center justify-center bg-background">
@@ -43,11 +41,13 @@ const SecondStepWorkspace = () => {
                 value={member} 
                 className="focus:border px-3 py-1 rounded-lg bg-white border-2 text-text-workspace" 
                 type="text" />
-              <button onClick={handleAddMembers} className="rounded-lg px-2 py-2 border-2 hover:bg-slate-100">
+              <button 
+              onClick={handleAddMembers} 
+              className="rounded-lg px-2 py-2 border-2 hover:bg-slate-100">
                 <AiOutlineEnter></AiOutlineEnter>
               </button>
             </div>
-            {
+            {/* {
               members.map((email, index) => {
                 return(
                   <div key={`${email}${index}`} className="relative px-2 pr-8 py-1 rounded-md border-2 text-sm text-secundary-color">
@@ -60,7 +60,7 @@ const SecondStepWorkspace = () => {
                   </div>
                 )
               })
-            }
+            } */}
           </div>
           <div className="flex items-center gap-x-3">
             <button className="w-fit px-8 py-2 bg-secundary-color text-white rounded-md">Siguiente</button>
