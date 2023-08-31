@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { ChannelModel } from "../../models/Channels";
+import { MessageModel } from "../../models/Message";
 
-export const allChannels = async (_req: Request, res: Response) => {
+export const allMessages = async (_req: Request, res: Response) => {
 
   try {
-    const channels = await ChannelModel.find()
-    if (channels.length) {
-      return res.json(channels)
+    const messages = await MessageModel.find()
+    if (messages.length) {
+      return res.json(messages)
     }
     return res.json({ message: "No hay info" })
   } catch (error) {
