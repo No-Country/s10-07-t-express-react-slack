@@ -5,6 +5,7 @@ import { recoverPassword } from "../services/crudUser/recoverPassword"
 import { resetPassword } from "../services/crudUser/resetPassword"
 import { me } from "../services/crudUser/me"
 import { authToken } from "../middlewares/authToken"
+import { allUsers } from "../services/crudUser/get"
 
 export const usersRoutes = Router()
 const USERS = "/users"
@@ -24,5 +25,6 @@ usersRoutes.post(`${RECOVER_PASSWORD}`, recoverPassword)
 usersRoutes.post(`${RESET_PASSWORD}`, resetPassword)
 
 usersRoutes.get(`${ME}`, me)
+usersRoutes.get(`${USERS}`, allUsers)
 
 usersRoutes.get(`${AUTH_TOKEN}`, authToken)
