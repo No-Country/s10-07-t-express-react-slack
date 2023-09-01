@@ -1,5 +1,4 @@
 import logo from '../assets/logo.png'
-import rocket from '../assets/logo-rocket.png'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
