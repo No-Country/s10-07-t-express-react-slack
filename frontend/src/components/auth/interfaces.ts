@@ -27,6 +27,24 @@ interface DataResponse {
   token?: string;
 }
 
+export interface Decoded {
+  aud: string,
+  azp: string,
+  email: string,
+  email_verified: boolean,
+  exp: number,
+  family_name: string,
+  given_name: string,
+  iat: number,
+  iss: string,
+  jti: string,
+  locale: string,
+  name: string,
+  nbf: number,
+  picture: string,
+  sub: string
+}
+
 // {msg: 'Session y token invalido', data: {existUser : {}, token: ""}}
 // data: existUser
 // : 
