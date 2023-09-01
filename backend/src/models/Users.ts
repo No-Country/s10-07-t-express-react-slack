@@ -17,6 +17,15 @@ const userSchema = new Schema<IUser>(
       require: true,
       trim: true,
     },
+    loginGoogle: {
+      type: Boolean,
+      default: false,
+      require: true
+    },
+    profileImage: {
+      type: String,
+      default: ""
+    },
     workSpace: {
       type: Schema.Types.Array,
       ref: "WorkSpace",
