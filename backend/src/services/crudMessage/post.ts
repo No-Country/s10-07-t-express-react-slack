@@ -4,14 +4,18 @@ import { MessageModel } from "../../models/Message";
 
 export const createMessage = async (req: Request, res: Response) => {
 
-  const message = req.body as IMessage;
+  const params = req.body as IMessage;
+  const message = new MessageModel()
+  message.message = params.message
+  message.from = params.from
 
   try {
 
     const newMessage = await MessageModel.create({
       message: message.message,
-      workSpaceId: message.workSpaceId,
-      userId: message.userId
+
+      // workSpaceId: message.workSpaceId,
+      // userId: message.userId
     })
 
     if (newMessage) {

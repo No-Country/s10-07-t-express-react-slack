@@ -3,16 +3,17 @@ import { IWorkSpace } from "../../../interface/IWorkSpace";
 
 const workSpaceSchema = new Schema<IWorkSpace>(
   {
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
     nameWorkSpace: {
       type: String,
       require: true,
     },
-    channels: {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    channelsId: {
       type: Schema.Types.Array,
+      // type: Schema.Types.ObjectId,
       ref: "Channel",
     },
   },
