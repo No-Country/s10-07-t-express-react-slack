@@ -7,10 +7,11 @@ const messageSchema = new Schema<IMessage>(
       type: Schema.Types.ObjectId,
       ref: "WorkSpace",
     },
-    message: {
-      type: String,
-      require: true,
-    },
+    // message: {
+    //   type: String,
+    //   from: String,
+    //   // require: true,
+    // },
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
