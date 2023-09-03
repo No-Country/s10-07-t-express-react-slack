@@ -5,7 +5,7 @@ import { validateWorkSpace } from "../../validations/workSpace";
 
 export const workSpace = async (req: Request, res: Response) => {
   const workSpace = req.body as IWorkSpace;
-
+console.log(workSpace)
   try {
     const validations = await validateWorkSpace(workSpace);
 
@@ -24,13 +24,13 @@ export const workSpace = async (req: Request, res: Response) => {
       nameWorkSpace: validations.nameWorkSpace,
       // channels: workSpace.channels
     });
-
+console.log(newWorkSpace)
     await newWorkSpace.save();
 
     if (newWorkSpace) {
       return res.status(201).json({
         message: "Se creo con exito el espacio de trabajo",
-        newWorkSpace
+        data: newWorkSpace
       });
     }
   } catch (error) {
