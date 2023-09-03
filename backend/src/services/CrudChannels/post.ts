@@ -20,7 +20,7 @@ export const channels = async (req: Request, res: Response) => {
     //   });
     // }
 
-    const newChannel = new ChannelsModel({
+    const data = new ChannelsModel({
       userId: channel.userId,
       nameWorkSpaceId: channel.nameWorkSpaceId,
       channels: channel.channels,
@@ -28,12 +28,12 @@ export const channels = async (req: Request, res: Response) => {
       // newChannel: validations.channels,
     });
 
-    await newChannel.save();
+    await data.save();
 
-    if (newChannel) {
+    if (data) {
       return res.status(201).json({
         message: "Se creo con exito el Canal",
-        newChannel
+        data: data
       });
     }
   } catch (error) {
