@@ -3,19 +3,22 @@ import { IMessage } from "../../../interface/IMessage"
 
 const messageSchema = new Schema<IMessage>(
   {
-    workSpaceId: {
-      type: Schema.Types.ObjectId,
-      ref: "WorkSpace",
+    message: {
+      type: String,
+      require: true,
     },
-    // message: {
-    //   type: String,
-    //   from: String,
-    //   // require: true,
+    from: {
+      type: String,
+      require: true,
+    },
+    // workSpaceId: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "WorkSpace",
     // },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    }
+    // userId: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "User",
+    // }
   },
   {
     timestamps: false,

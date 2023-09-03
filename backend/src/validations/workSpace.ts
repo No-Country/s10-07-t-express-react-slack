@@ -1,6 +1,5 @@
 import { IWorkSpace } from "../../../interface/IWorkSpace";
-import { validationEmail } from "./items/gmail";
-import { validationFullName, validationName } from "./items/name";
+import { validationName } from "./items/name";
 
 
 export const validateWorkSpace = async (workSpace: IWorkSpace) => {
