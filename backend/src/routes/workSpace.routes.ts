@@ -3,7 +3,7 @@ import { workSpace } from "../services/crudWorkSpace/post"
 import { joinToWorkspace } from "../services/crudWorkSpace/joinWorkspace"
 import { leaveFromWorkspace } from "../services/crudWorkSpace/leftWorkspace"
 import { joinListToWorkspace } from "../services/crudWorkSpace/joinListToWorkspace"
-import { getMyWorkSpaces } from "../services/crudWorkSpace/get"
+import { getMyWorkSpaces } from "../services/crudWorkSpace/getMyWorkspaces"
 import { putWorkSpace } from "../services/crudWorkSpace/put"
 
 
