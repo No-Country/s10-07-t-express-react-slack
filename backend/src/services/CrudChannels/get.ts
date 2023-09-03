@@ -5,7 +5,7 @@ export const allChannels = async (_req: Request, res: Response) => {
 
   try {
     const messages = await ChannelsModel.find()
-    if (messages.length) {
+    if (messages) {
       return res.json(messages)
     }
     return res.json({ message: "No hay canales" })

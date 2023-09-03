@@ -6,9 +6,12 @@ import { channels } from "../services/CrudChannels/post";
 
 export const messagesRoutes = Router()
 
-const MESSAGE = "/message";
-const MESSAGES = "/messages";
 
+// ─── Canales ─────────────────────────────────────────────────────────────────
+
+const MESSAGE = "/message";
 messagesRoutes.post(`${MESSAGE}`, channels)
+
+const MESSAGES = "/messages";
 messagesRoutes.get(`${MESSAGES}`, allChannels)
-// messagesRoutes.post(`${MESSAGE}`, createMessage)
+

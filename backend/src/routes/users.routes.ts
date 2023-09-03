@@ -9,25 +9,42 @@ import { authToken } from "../middlewares/authToken"
 import { allUsers } from "../services/crudUser/get"
 
 export const usersRoutes = Router()
-const USERS = "/users"
-const USER = "/user"
 
-const LOGIN = "/auth"
-const LOGINGOOGLE = "/authgoogle"
-const RECOVER_PASSWORD = "/recover-password"
-const RESET_PASSWORD = "/reset-password/:id/:token"
-const ME = "/me"
-const AUTH_TOKEN = "/authToken"
+// ───Registrar Usuarios ────────────────────────────────────────────────────────────────
+
+const USER = "/user"
 usersRoutes.post(`${USER}`, createUser)
 
-usersRoutes.post(`${LOGIN}`, loginUser)
-usersRoutes.post(`${LOGINGOOGLE}`, loginGoogle)
-
-usersRoutes.post(`${RECOVER_PASSWORD}`, recoverPassword)
-
-usersRoutes.post(`${RESET_PASSWORD}`, resetPassword)
-
-usersRoutes.get(`${ME}`, me)
+const USERS = "/users"
 usersRoutes.get(`${USERS}`, allUsers)
 
+// ─── Loguear Usuario ─────────────────────────────────────────────────────────
+
+const LOGIN = "/auth"
+usersRoutes.post(`${LOGIN}`, loginUser)
+
+// ─── Loguear Usuario Con Google ──────────────────────────────────────────────
+
+const LOGINGOOGLE = "/authgoogle"
+usersRoutes.post(`${LOGINGOOGLE}`, loginGoogle)
+
+// ─── Recuperar Y Resetear Contraseña ─────────────────────────────────────────
+
+const RECOVER_PASSWORD = "/recover-password"
+usersRoutes.post(`${RECOVER_PASSWORD}`, recoverPassword)
+
+const RESET_PASSWORD = "/reset-password/:id/:token"
+usersRoutes.post(`${RESET_PASSWORD}`, resetPassword)
+
+
+// ─── Middelware De Autenticacion ─────────────────────────────────────────────
+
+const AUTH_TOKEN = "/authToken"
 usersRoutes.get(`${AUTH_TOKEN}`, authToken)
+
+
+const ME = "/me"
+usersRoutes.get(`${ME}`, me)
+
+
+
