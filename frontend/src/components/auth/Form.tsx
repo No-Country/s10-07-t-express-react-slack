@@ -5,7 +5,7 @@ import axios, { AxiosResponse } from 'axios'
 import jwt_decode from 'jwt-decode'
 // import io from 'socket.io-client'
 
-import { Register, Errors, MyAxiosError, ResponseAxios } from './interfaces'
+import { Register, Errors, MyAxiosError, ResponseAxios, Decoded } from './interfaces'
 import { validationErrors } from './utils'
 import astronauta from "../../assets/astronauta-cohete2.png"
 import {FaUserCircle, FaLock} from 'react-icons/fa'
@@ -55,7 +55,7 @@ const Form: React.FC = () => {
         ) as AxiosResponse<ResponseAxios>
         setRegisterTemplate(register)
         localStorage.setItem("userToken", response.data.data.token)
-        window.location.href = '/workflows'
+        window.location.href = '/workspaces'
       } else {
         throw new Error('')
       }
@@ -160,11 +160,22 @@ const Form: React.FC = () => {
           <div className='bg-button-orange/50 h-[1px] w-1/2'></div>
         </div>
         <GoogleLogin 
-          onSuccess={(credentialResponse: CredentialResponse): void => {
+          onSuccess={async (credentialResponse: CredentialResponse): Promise<void> => {
             if (credentialResponse.credential) {
-              const decoded = jwt_decode(credentialResponse.credential)
-              console.log(decoded)
-              window.location.href = '/workflows'
+              const decoded = jwt_decode(credentialResponse.credential) as Decoded
+              // console.log(decoded)
+              const response = await axios.post(
+                'http://localhost:3001/authgoogle',
+                {
+                  email: decoded.email,
+                  fullName: decoded.email,
+                  profileImage: decoded.picture,
+                  loginGoogle: true
+                }
+              ) as AxiosResponse<ResponseAxios>
+              console.log(response)
+              localStorage.setItem("userToken", response.data.data.token)
+              window.location.href = '/workspaces'
             }
           }}
           onError={() => {

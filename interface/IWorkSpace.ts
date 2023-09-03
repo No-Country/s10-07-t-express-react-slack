@@ -1,11 +1,16 @@
 import { SchemaDefinitionProperty } from "mongoose"
 import { IUser } from "./IUser"
+import { IChannels } from "./IChannels"
+// import { IMessages } from "./IMessage"
 
 export interface IWorkSpace {
+
+  userId: SchemaDefinitionProperty<IUser>
+  // channels: string
   nameWorkSpace: string,
-  emailWorkSpace: string,
   count?: Number
-  user: SchemaDefinitionProperty<IUser[]>
-  channels: string
+  channelsId: SchemaDefinitionProperty<IChannels[]>
+
+  // channels: SchemaDefinitionProperty<IMessages[]>
 
 }
