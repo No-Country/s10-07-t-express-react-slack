@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { IMessage } from "../../../../interface/IMessage";
 import { MessageModel } from "../../models/Message";
-import { validateChat } from "../../validations/items/longitudChat";
 
 export const createMessage = async (req: Request, res: Response) => {
 
@@ -10,11 +9,11 @@ export const createMessage = async (req: Request, res: Response) => {
 
   try {
 
-    const validations = await validateChat(message)
+    // const validations = await validateChat(message)
 
     const data = await MessageModel.create({
-      message: validations.message,
-      from: validations.from
+      message: message.message,
+      from: message.from
 
       // workSpaceId: message.workSpaceId,
       // userId: message.userId
