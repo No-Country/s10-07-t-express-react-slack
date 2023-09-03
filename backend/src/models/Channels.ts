@@ -1,7 +1,6 @@
 import { Schema, model } from "mongoose";
 import { IChannels } from '../../../interface/IChannels';
 // import { IMessage } from "../../../interface/IMessage"
-// import { channels } from '../services/CrudChannels/post';
 
 const channelsSchema = new Schema<IChannels>(
   {

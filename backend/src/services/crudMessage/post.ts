@@ -1,27 +1,29 @@
 import { Request, Response } from "express";
 import { IMessage } from "../../../../interface/IMessage";
 import { MessageModel } from "../../models/Message";
+import { validateChat } from "../../validations/items/longitudChat";
 
 export const createMessage = async (req: Request, res: Response) => {
 
-  const params = req.body as IMessage;
-  const message = new MessageModel()
-  message.message = params.message
-  message.from = params.from
+
+  const message = req.body as IMessage;
 
   try {
 
-    const newMessage = await MessageModel.create({
-      message: message.message,
+    const validations = await validateChat(message)
+
+    const data = await MessageModel.create({
+      message: validations.message,
+      from: validations.from
 
       // workSpaceId: message.workSpaceId,
       // userId: message.userId
     })
 
-    if (newMessage) {
+    if (data) {
       return res.status(201).json({
-        message: "Se ah creado con exito un message",
-        newMessage
+        message: "Se Creo con exito el mensaje",
+        data: data
       })
     }
 
@@ -30,3 +32,4 @@ export const createMessage = async (req: Request, res: Response) => {
       return res.status(400).json({ error: error.message })
   }
 }
+
