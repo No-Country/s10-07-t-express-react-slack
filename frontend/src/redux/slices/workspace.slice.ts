@@ -7,19 +7,20 @@ import axios, { AxiosResponse } from 'axios';
 //       channels: workSpace.channels
 
 interface Workspace {
-  nameWorkspace: string;
+  nameWorkSpace: string;
   userId: string;
   // members: string[]
 }
 
 const initialState: Workspace = {
-  nameWorkspace: "",
+  nameWorkSpace: "",
   userId: "",
   // members: [],
 }
 
 export const createWorkspace = createAsyncThunk('workspace/create', async (body: Workspace) => {
-  const response = await axios.post("http://localhost:3001/workSpaces", body) as AxiosResponse<Workspace>
+  console.log(body)
+  const response = await axios.post("http://localhost:3001/workSpace", body) as AxiosResponse<Workspace>
   return response.data
 })
 
@@ -34,18 +35,21 @@ export const workspaceSlice = createSlice({
     //   state.members = state.members.filter(member => member !== action.payload)
     // },
     setName: (state, action: PayloadAction<string>) => {
-      state.nameWorkspace = action.payload
+      state.nameWorkSpace = action.payload
     }
   },
   extraReducers(builder){
     builder
       .addCase(createWorkspace.fulfilled, (state, action) => {
-        state = action.payload
-        return action.payload;
+        const workspace = {
+          userId: action.payload.userId,
+          nameWorkSpace: action.payload.nameWorkSpace
+        }
+        return workspace;
       })
       .addCase(createWorkspace.rejected, (state, action) => {
         console.log(state)
-        console.log(action.error, action.payload);
+        console.log(action.error, action.payload, action);
       })
   }
 })

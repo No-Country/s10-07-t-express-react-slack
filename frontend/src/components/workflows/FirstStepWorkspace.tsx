@@ -7,7 +7,7 @@ const FirstStepWorkspace = () => {
 
   const dispatch = useAppDispatch()
   const { _id } = useAppSelector((state) => state.user)
-  const { nameWorkspace } = useAppSelector((state) => state.workspace)
+  const { nameWorkSpace } = useAppSelector((state) => state.workspace)
 
   useEffect(() => {
     dispatch(validateUser())
@@ -20,12 +20,12 @@ const FirstStepWorkspace = () => {
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
     let body = {
-      nameWorkspace,
+      nameWorkSpace,
       userId: _id
     }
-    if (nameWorkspace.length > 3 && nameWorkspace.length < 40) {
+    if (nameWorkSpace.length > 3 && nameWorkSpace.length < 40) {
       dispatch(createWorkspace(body))
-      // window.location.href = "./secondstep"
+      window.location.href = "./secondstep"
     }
   }
 
@@ -44,11 +44,11 @@ const FirstStepWorkspace = () => {
           <div className='relative w-3/4 flex items-center justify-between'>
             <input
               onChange={handleChange}
-              value={nameWorkspace}
+              value={nameWorkSpace}
               className="w-full px-3 py-1 rounded-lg bg-[#F1F0EA] border-2 border-[#BECCFF] text-text-workspace"
               type="text" 
             />
-            <span className={`${nameWorkspace.length < 3 || nameWorkspace.length >= 40 ? "text-red-600" : "text-[#B7B7B7]"}  absolute right-4 font-semibold`}>{nameWorkspace.length}</span>
+            <span className={`${nameWorkSpace.length < 3 || nameWorkSpace.length >= 40 ? "text-red-600" : "text-[#B7B7B7]"}  absolute right-4 font-semibold`}>{nameWorkSpace?.length}</span>
           </div>
           <button  className="w-fit px-8 py-2 bg-secundary-color text-white rounded-md mt-6" type="submit">Siguiente</button>
         </form>
