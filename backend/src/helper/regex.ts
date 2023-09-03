@@ -5,7 +5,7 @@ export const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A
 // export const fullName = /^[a-zA-Z]{3,}\s[a-zA-Z]{3,}$/;
 export const fullName = /^[a-zA-ZáéíóúÁÉÍÓÚüÜ]{3,}(?:\s|-)[a-zA-ZáéíóúÁÉÍÓÚüÜ]{3,}$/;
 
-export const NameChannel = /^[a-zA-ZáéíóúÁÉÍÓÚüÜ]{3,}$/;
+export const NameChannel = /^[a-zA-ZáéíóúÁÉÍÓÚüÜ]{2,}$/;
 
 export const nameClass = /^[a-zA-Z]{3,}(\s|-)[a-zA-Z]{3,}$/
 

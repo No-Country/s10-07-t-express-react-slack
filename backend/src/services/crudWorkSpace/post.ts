@@ -9,16 +9,6 @@ export const workSpace = async (req: Request, res: Response) => {
   try {
     const validations = await validateWorkSpace(workSpace);
 
-    // const allSpace = await WorkSpaceModel.findOne({
-    //   nameWorkSpace: validations.nameWorkSpace,
-    // });
-
-    // if (!allSpace) {
-    //   return res.status(400).json({
-    //     error: " No hay ningun espacio de trabajo",
-    //   });
-    // }
-
     const newWorkSpace = new WorkSpaceModel({
       userId: workSpace.userId,
       nameWorkSpace: validations.nameWorkSpace,

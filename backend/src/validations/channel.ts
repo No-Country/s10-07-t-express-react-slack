@@ -1,23 +1,14 @@
 import { IChannels } from "../../../interface/IChannels";
-import { IWorkSpace } from "../../../interface/IWorkSpace";
-// import { validationEmail } from "./items/gmail";
 import { validationName } from "./items/name";
-
-
 
 
 export const validateChannel = async (channel: IChannels) => {
 
-  if (!channel.channels) {
+  if (!channel.name) {
     throw new Error("Todos los campos son requeridos")
   }
 
-
-  validationName(channel.channels)
-
-  // validationEmail(workSpace.emailWorkSpace)
-
-
+  validationName(channel.name)
 
   return channel
 }

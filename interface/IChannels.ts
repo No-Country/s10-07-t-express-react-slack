@@ -7,7 +7,7 @@ export interface IChannels {
 
   userId: SchemaDefinitionProperty<IUser>,
   nameWorkSpaceId: SchemaDefinitionProperty<IWorkSpace>,
-  channels: string
+  name: string
   // channelsId: SchemaDefinitionProperty<IChannels[]>
   // nameWorkSpace: string,
   // count?: Number

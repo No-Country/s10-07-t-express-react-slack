@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { IChannels } from "../../../../interface/IChannels";
 import { validateChannel } from "../../validations/channel";
 import { ChannelsModel } from "../../models/Channels";
-// import { validateChannel } from "../../validations/channel";
+
 
 export const channels = async (req: Request, res: Response) => {
   const channel = req.body as IChannels;
@@ -10,22 +10,21 @@ export const channels = async (req: Request, res: Response) => {
   try {
     const validations = await validateChannel(channel);
 
-    // const allSpace = await WorkSpaceModel.findOne({
-    //   nameWorkSpace: validations.nameWorkSpace,
-    // });
 
-    // if (!allSpace) {
-    //   return res.status(400).json({
-    //     error: " No hay ningun espacio de trabajo",
-    //   });
-    // }
+    const existChannel = await ChannelsModel.findOne({
+      name: validations.name,
+    });
+
+    if (existChannel) {
+      return res.status(400).json({ error: "El canal ya existe para el espacio de trabajo", existChannel });
+    }
+
 
     const data = new ChannelsModel({
       userId: channel.userId,
       nameWorkSpaceId: channel.nameWorkSpaceId,
-      channels: channel.channels,
+      name: channel.name,
 
-      // newChannel: validations.channels,
     });
 
     await data.save();

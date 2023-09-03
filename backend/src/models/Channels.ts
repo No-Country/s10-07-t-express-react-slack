@@ -5,7 +5,7 @@ import { IChannels } from '../../../interface/IChannels';
 
 const channelsSchema = new Schema<IChannels>(
   {
-    channels: {
+    name: {
       type: String,
       require: true,
     },
