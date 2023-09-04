@@ -16,6 +16,10 @@ const workSpaceSchema = new Schema<IWorkSpace>(
       // type: Schema.Types.ObjectId,
       ref: "Channel",
     },
+    members: {
+      type: Schema.Types.Array,
+      ref: "User"
+    }
   },
   {
     timestamps: false,

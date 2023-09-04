@@ -13,13 +13,12 @@ export const workSpace = async (req: Request, res: Response) => {
       userId: workSpace.userId,
       nameWorkSpace: validations.nameWorkSpace,
     });
-
     await newWorkSpace.save();
 
     if (newWorkSpace) {
       return res.status(201).json({
-        message: "Se creo con exito el espacio de trabajo",
-        newWorkSpace
+        msg: "Se creo con exito el espacio de trabajo",
+        data: newWorkSpace
       });
     }
   } catch (error) {
