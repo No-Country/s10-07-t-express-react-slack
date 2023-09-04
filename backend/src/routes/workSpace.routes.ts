@@ -10,13 +10,15 @@ import { allWorkSpace } from "../services/crudWorkSpace/get"
 
 export const workSpacesRoutes = Router()
 
+// ─── Espacio De Trabajo ──────────────────────────────────────────────────────
+
 const WORKSPACES = "/workSpaces"
 const WORKSPACE = "/workSpace"
 const UP_WORKSPACE = "/workSpace/:id"
-const JOIN_WORKSPACE = "/joinWorkSpace/:idWorkspace/:email"
+const JOIN_WORKSPACE = "/joinWorkSpace/:idWorkspace/:idUser"
 const JOIN_LIST_WORKSPACE = "/joinWorkSpace/:idWorkspace"
 const MY_WORKSPACES = "/workSpaces"
-const LEAVE_WORKSPACE = "/leaveWorkSpace/:idWorkspace/:email"
+const LEAVE_WORKSPACE = "/leaveWorkSpace/:idWorkspace/:idUser"
 
 workSpacesRoutes.post(`${WORKSPACE}`, workSpace)
 workSpacesRoutes.get(`${WORKSPACES}`, allWorkSpace)

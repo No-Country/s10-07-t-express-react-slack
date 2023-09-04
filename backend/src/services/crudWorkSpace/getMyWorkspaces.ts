@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import Jwt from "jsonwebtoken";
-import { IWorkSpace } from "../../../../interface/IWorkSpace";
 import { WorkSpaceModel } from "../../models/WorkSpace";
 import { IPayload } from "../../../../interface/IPayload";
 import { Usermodel } from "../../models/Users";
@@ -24,7 +23,7 @@ export const getMyWorkSpaces = async (req: Request, res: Response) => {
             return res.status(400).json({ error: "No hay espacios de trabajo"})
             }
         
-            return res.status(200).json({ message: "Espacios de trabajo ",workspaces})
+            return res.status(200).json({ msg: "Espacios de trabajo ",workspaces})
         }
 
     } catch (error) {

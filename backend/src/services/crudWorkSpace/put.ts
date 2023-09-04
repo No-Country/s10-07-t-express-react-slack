@@ -9,11 +9,10 @@ export const putWorkSpace = async (req: Request, res: Response) => {
   const idWorkSpace = req.params.id;
 
   try {
-
     const validations = await validateWorkSpace(dataWorkSpace);
     console.log(validations)
     await WorkSpaceModel.findByIdAndUpdate(idWorkSpace, validations);
-    return res.status(201).json({ message: "Actualizado con éxito" })
+    return res.status(201).json({ msg: "Actualizado con éxito" })
 
   } catch (error) {
     if (error instanceof Error)

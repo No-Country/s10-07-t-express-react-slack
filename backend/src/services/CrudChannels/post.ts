@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { IChannels } from "../../../../interface/IChannels";
 import { validateChannel } from "../../validations/channel";
 import { ChannelsModel } from "../../models/Channels";
-// import { validateChannel } from "../../validations/channel";
+
 
 export const channels = async (req: Request, res: Response) => {
   const channel = req.body as IChannels;
@@ -10,30 +10,29 @@ export const channels = async (req: Request, res: Response) => {
   try {
     const validations = await validateChannel(channel);
 
-    // const allSpace = await WorkSpaceModel.findOne({
-    //   nameWorkSpace: validations.nameWorkSpace,
-    // });
 
-    // if (!allSpace) {
-    //   return res.status(400).json({
-    //     error: " No hay ningun espacio de trabajo",
-    //   });
-    // }
-
-    const newChannel = new ChannelsModel({
-      userId: channel.userId,
-      nameWorkSpaceId: channel.nameWorkSpaceId,
-      channels: channel.channels,
-
-      // newChannel: validations.channels,
+    const existChannel = await ChannelsModel.findOne({
+      name: validations.name,
     });
 
-    await newChannel.save();
+    if (existChannel) {
+      return res.status(400).json({ error: "El canal ya existe para el espacio de trabajo", existChannel });
+    }
 
-    if (newChannel) {
+
+    const data = new ChannelsModel({
+      userId: channel.userId,
+      nameWorkSpaceId: channel.nameWorkSpaceId,
+      name: channel.name,
+
+    });
+
+    await data.save();
+
+    if (data) {
       return res.status(201).json({
         message: "Se creo con exito el Canal",
-        newChannel
+        data: data
       });
     }
   } catch (error) {

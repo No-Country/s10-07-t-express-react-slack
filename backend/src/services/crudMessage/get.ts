@@ -8,9 +8,9 @@ export const allMessages = async (_req: Request, res: Response) => {
     if (messages.length) {
       return res.json(messages)
     }
-    return res.json({ message: "No hay info" })
+    return res.json({ message: "No hay mensaje" })
   } catch (error) {
-    if (error instanceof Error){
+    if (error instanceof Error) {
       return res.status(400).json({ error: error.message })
     }
   }

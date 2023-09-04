@@ -5,9 +5,11 @@ export const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A
 // export const fullName = /^[a-zA-Z]{3,}\s[a-zA-Z]{3,}$/;
 export const fullName = /^[a-zA-ZáéíóúÁÉÍÓÚüÜ]{3,}(?:\s|-)[a-zA-ZáéíóúÁÉÍÓÚüÜ]{3,}$/;
 
-export const NameChannel = /^[a-zA-ZáéíóúÁÉÍÓÚüÜ]{3,}$/;
+export const NameChannel = /^[a-zA-ZáéíóúÁÉÍÓÚüÜ]{2,}$/;
 
 export const nameClass = /^[a-zA-Z]{3,}(\s|-)[a-zA-Z]{3,}$/
+
+export const longitudMessage = /^.{1,3}$/;
 
 // *                            30min | 40-99min | 100-190min|120        min | 1|2     h
 // export const regexDuration = /^(3[0-9]|[4-9][0-9]|1[0-1][0-9]|120)\s*(min)|(1|2)\s*(h)$/;

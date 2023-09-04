@@ -5,31 +5,19 @@ import { validateWorkSpace } from "../../validations/workSpace";
 
 export const workSpace = async (req: Request, res: Response) => {
   const workSpace = req.body as IWorkSpace;
-console.log(workSpace)
+
   try {
     const validations = await validateWorkSpace(workSpace);
-
-    // const allSpace = await WorkSpaceModel.findOne({
-    //   nameWorkSpace: validations.nameWorkSpace,
-    // });
-
-    // if (!allSpace) {
-    //   return res.status(400).json({
-    //     error: " No hay ningun espacio de trabajo",
-    //   });
-    // }
 
     const newWorkSpace = new WorkSpaceModel({
       userId: workSpace.userId,
       nameWorkSpace: validations.nameWorkSpace,
-      // channels: workSpace.channels
     });
-console.log(newWorkSpace)
     await newWorkSpace.save();
 
     if (newWorkSpace) {
       return res.status(201).json({
-        message: "Se creo con exito el espacio de trabajo",
+        msg: "Se creo con exito el espacio de trabajo",
         data: newWorkSpace
       });
     }

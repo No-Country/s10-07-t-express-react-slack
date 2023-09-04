@@ -1,16 +1,16 @@
 import { Schema, model } from "mongoose";
 import { IChannels } from '../../../interface/IChannels';
 // import { IMessage } from "../../../interface/IMessage"
-// import { channels } from '../services/CrudChannels/post';
 
 const channelsSchema = new Schema<IChannels>(
   {
-    channels: {
+    name: {
       type: String,
       require: true,
     },
     nameWorkSpaceId: {
-      type: Schema.Types.Array,
+      // type: Schema.Types.Array,
+      type: Schema.Types.ObjectId,
       ref: "WorkSpace",
     },
     userId: {

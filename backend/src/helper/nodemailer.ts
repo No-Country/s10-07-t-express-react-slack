@@ -17,9 +17,9 @@ export const sendMail = async (email: string, link: string): Promise<void> => {
         logger: true
       });
     const info = await transporter.sendMail({
-        from: '"Connecta - Invitación a unirse a un grupo de Trabajo " <spimentelm1201@gmail.com>',
+        from: '"Connecta" <spimentelm1201@gmail.com>',
         to: validEmail,
-        subject: "Invitación a Unirse a un grupo de trabajo",
+        subject: "Invitación para unirse a un espacio de trabajo",
         html: `Hola, se te ha invitado a unirte a un grupo de trabajo, para hacerlo debes hacer click en el siguiente enlace o pegarlo en tu navegador para completar el proceso: 
         <a href="${link}">${link}</a>`
       });
