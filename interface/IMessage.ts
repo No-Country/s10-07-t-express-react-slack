@@ -1,9 +1,13 @@
 import { SchemaDefinitionProperty } from "mongoose";
 import { IWorkSpace } from "./IWorkSpace";
 import { IUser } from "./IUser";
+import { IChannels } from "./IChannels";
 
 export interface IMessage {
-  workSpaceId: SchemaDefinitionProperty<IWorkSpace>
-  message: string,
+  message: SchemaDefinitionProperty<IChannels>
   userId: SchemaDefinitionProperty<IUser>
+  // from: string
+  channelsId: SchemaDefinitionProperty<IChannels>
+  workSpaceId: SchemaDefinitionProperty<IWorkSpace>
+
 }

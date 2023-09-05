@@ -9,6 +9,7 @@ import WorkspaceSecondStep from './pages/WorkspaceSecondStep.tsx'
 import Recovery from './pages/Recovery.tsx'
 import Reset from "./pages/Reset.tsx"
 import { WorkspaceThridStep } from './pages/WorkspaceThirdStep.tsx'
+import WorkSpace from './pages/WorkSpace.tsx'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Route path='/workspaces/firststep' element={<WorkspaceFirstStep/>}/>
         <Route path='/workspaces/secondstep' element={<WorkspaceSecondStep/>}/>
         <Route path='/workspaces/thirdstep' element={<WorkspaceThridStep/>}/>
+        <Route path='/workspace/:id' element={<WorkSpace/>}/>
       </Routes>
     </>
   )

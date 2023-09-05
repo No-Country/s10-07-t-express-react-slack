@@ -7,9 +7,9 @@ export const allWorkSpace = async (_req: Request, res: Response) => {
     if (workSpace.length) {
       return res.json(workSpace)
     }
-    return res.json({ message: "No hay info" })
+    return res.json({ msg: "No hay espacios de trabajo" })
   } catch (error) {
-    if (error instanceof Error){
+    if (error instanceof Error) {
       return res.status(400).json({ error: error.message })
     }
   }

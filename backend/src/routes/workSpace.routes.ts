@@ -1,58 +1,30 @@
 import { Router } from "express"
 import { workSpace } from "../services/crudWorkSpace/post"
+import { joinToWorkspace } from "../services/crudWorkSpace/joinWorkspace"
+import { leaveFromWorkspace } from "../services/crudWorkSpace/leftWorkspace"
+import { joinListToWorkspace } from "../services/crudWorkSpace/joinListToWorkspace"
+import { getMyWorkSpaces } from "../services/crudWorkSpace/getMyWorkspaces"
+import { putWorkSpace } from "../services/crudWorkSpace/put"
 import { allWorkSpace } from "../services/crudWorkSpace/get"
 
 
 export const workSpacesRoutes = Router()
 
+// ─── Espacio De Trabajo ──────────────────────────────────────────────────────
+
 const WORKSPACES = "/workSpaces"
 const WORKSPACE = "/workSpace"
+const UP_WORKSPACE = "/workSpace/:id"
+const JOIN_WORKSPACE = "/joinWorkSpace/:idWorkspace/:idUser"
+const JOIN_LIST_WORKSPACE = "/joinWorkSpace/:idWorkspace"
+const MY_WORKSPACES = "/myWorkSpaces"
+const LEAVE_WORKSPACE = "/leaveWorkSpace/:idWorkspace/:idUser"
 
 workSpacesRoutes.post(`${WORKSPACE}`, workSpace)
 workSpacesRoutes.get(`${WORKSPACES}`, allWorkSpace)
-
-// import axios from "axios"
-// import qs from "querystring"
-// import "dotenv/config"
-// const { CLIENT_ID, SECRECT_CLIENT, REDIRECT_URL } = process.env
-
-// const clientId = CLIENT_ID;
-// const clientSecret = SECRECT_CLIENT;
-// const redirectUri = REDIRECT_URL;
-// const scopes = 'app_mentions:read,channels:read'; // Los alcances que tu aplicación necesita
-
-// workSpacesRoutes.get('/', (req, res) => {
-//   // Genera el enlace de autorización
-//   const authUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes}`;
-
-//   // Renderiza un enlace en la página para que el usuario lo haga clic
-//   res.send(`<a href="${authUrl}">Autorizar la aplicación en tu espacio de trabajo</a>`);
-// });
-
-// workSpacesRoutes.get('/auth/callback', async (req, res) => {
-//   const code: any = req.query.code;
-
-//   // Intercambio del código por un token de acceso
-//   try {
-//     const response = await axios.post('https://slack.com/api/oauth.v2.access', qs.stringify({
-//       code,
-//       client_id: clientId,
-//       client_secret: clientSecret,
-//       redirect_uri: redirectUri,
-//     }));
-
-//     const accessToken = response.data.access_token;
-
-//     // Usa el token de acceso para interactuar con Slack (por ejemplo, enviar un mensaje)
-//     const messageResponse = await axios.post('https://slack.com/api/chat.postMessage', qs.stringify({
-//       token: accessToken,
-//       channel: 'canal_id',
-//       text: '¡Hola desde la aplicación personalizada de Slack!',
-//     }));
-
-//     res.send('Mensaje enviado con éxito');
-//   } catch (error) {
-//     console.error('Error:', error);
-//     res.status(500).send('Hubo un error durante el proceso');
-//   }
-// });
+workSpacesRoutes.put(`${UP_WORKSPACE}`, putWorkSpace)
+workSpacesRoutes.get(`${MY_WORKSPACES}`, getMyWorkSpaces)
+workSpacesRoutes.put(`${JOIN_WORKSPACE}`, joinToWorkspace)
+workSpacesRoutes.get(`${JOIN_WORKSPACE}`, joinToWorkspace)
+workSpacesRoutes.post(`${JOIN_LIST_WORKSPACE}`, joinListToWorkspace)
+workSpacesRoutes.put(`${LEAVE_WORKSPACE}`, leaveFromWorkspace)

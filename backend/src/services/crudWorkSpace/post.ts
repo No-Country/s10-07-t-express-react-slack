@@ -9,28 +9,24 @@ export const workSpace = async (req: Request, res: Response) => {
   try {
     const validations = await validateWorkSpace(workSpace);
 
-    // const allSpace = await WorkSpaceModel.findOne({
-    //   nameWorkSpace: validations.nameWorkSpace,
-    // });
 
-    // if (!allSpace) {
-    //   return res.status(400).json({
-    //     error: " No hay ningun espacio de trabajo",
-    //   });
-    // }
+    const existWorkSpace = await WorkSpaceModel.findOne({ nameWorkSpace: validations.nameWorkSpace });
+
+    if (existWorkSpace) {
+      return res.status(401).json({ error: "Este espacio de trabajo ya existe" })
+    }
 
     const newWorkSpace = new WorkSpaceModel({
       userId: workSpace.userId,
       nameWorkSpace: validations.nameWorkSpace,
-      channels: workSpace.channels
+      // fullName: workSpace.fullName
     });
-
     await newWorkSpace.save();
 
     if (newWorkSpace) {
       return res.status(201).json({
-        message: "Se creo con exito el espacio de trabajo",
-        newWorkSpace
+        msg: "Se creo con exito el espacio de trabajo",
+        data: newWorkSpace
       });
     }
   } catch (error) {
