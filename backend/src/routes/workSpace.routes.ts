@@ -17,7 +17,7 @@ const WORKSPACE = "/workSpace"
 const UP_WORKSPACE = "/workSpace/:id"
 const JOIN_WORKSPACE = "/joinWorkSpace/:idWorkspace/:idUser"
 const JOIN_LIST_WORKSPACE = "/joinWorkSpace/:idWorkspace"
-const MY_WORKSPACES = "/workSpaces"
+const MY_WORKSPACES = "/myWorkSpaces"
 const LEAVE_WORKSPACE = "/leaveWorkSpace/:idWorkspace/:idUser"
 
 workSpacesRoutes.post(`${WORKSPACE}`, workSpace)

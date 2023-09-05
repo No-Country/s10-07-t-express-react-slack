@@ -7,6 +7,7 @@ import { loginGoogle } from "../services/crudUser/loginGoogle"
 import { me } from "../services/crudUser/me"
 import { authToken } from "../middlewares/authToken"
 import { allUsers } from "../services/crudUser/get"
+import { updateUser } from "../services/crudUser/put"
 
 export const usersRoutes = Router()
 
@@ -17,6 +18,11 @@ usersRoutes.post(`${USER}`, createUser)
 
 const USERS = "/users"
 usersRoutes.get(`${USERS}`, allUsers)
+
+// ───Actualizar Usuario ────────────────────────────────────────────────────────────────
+
+const USER_UPDATE = "/user/:id"
+usersRoutes.put(`${USER_UPDATE}`, updateUser)
 
 // ─── Loguear Usuario ─────────────────────────────────────────────────────────
 

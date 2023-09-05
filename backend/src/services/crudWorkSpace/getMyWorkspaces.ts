@@ -17,7 +17,7 @@ export const getMyWorkSpaces = async (req: Request, res: Response) => {
             if(!user){
                 return res.status(400).json({msg: "No token"})
             }
-            const workspaces = await WorkSpaceModel.find({members: user._id})
+            const workspaces = await WorkSpaceModel.find({$or :[{members: user._id,},{userId: user._id}]})
 
             if (!workspaces) {
             return res.status(400).json({ error: "No hay espacios de trabajo"})
