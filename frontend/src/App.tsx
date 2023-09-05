@@ -19,7 +19,7 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/recover' element={<Recovery/>}/>
-        <Route path='/reset-password/:id/:token' element={<Reset/>}/>
+        <Route path='/reset-password/:id' element={<Reset/>}/>
         <Route path='/workspaces' element={<WorkFlows/>}/>
         <Route path='/workspaces/firststep' element={<WorkspaceFirstStep/>}/>
         <Route path='/workspaces/secondstep' element={<WorkspaceSecondStep/>}/>

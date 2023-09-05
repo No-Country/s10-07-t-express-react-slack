@@ -1,4 +1,4 @@
-import { Errors, Register } from './interfaces'
+import { Errors, Register, Reset } from './interfaces'
 
 export const validationErrors = (formLogin: Register) => {
   const errors: Errors = {}
@@ -58,6 +58,35 @@ export const validationErrors = (formLogin: Register) => {
   }
 
   if (formLogin.password !== formLogin.confirmPassword) {
+    errors.confirmPassword = 'Las contraseñas no coinciden.'
+  }
+
+  return errors
+}
+
+export const validationErrorsReset = (formReset: Reset) => {
+  const errors: Errors = {}
+
+  const regexPasswordMayuscula = /(?=.*[A-Z])/
+  const regexPasswordEspecialCharacter = /(?=.*[!@#$%^&*])/
+
+  if (!formReset.password.length) {
+    errors.password = 'Por favor ingresa una contraseña.'
+  }
+
+  if (formReset.password.length < 8) {
+    errors.password = 'La contraseña debe tener al menos 8 caracteres.'
+  }
+
+  if (!regexPasswordMayuscula.test(formReset.password)) {
+    errors.password = 'La contraseña debe tener al menos una letra mayúscula.'
+  }
+
+  if (!regexPasswordEspecialCharacter.test(formReset.password)) {
+    errors.password = 'La contraseña debe tener al menos un carácter especial.'
+  }
+
+  if (formReset.password !== formReset.confirmPassword) {
     errors.confirmPassword = 'Las contraseñas no coinciden.'
   }
 
