@@ -5,7 +5,8 @@ import { hashedPassword } from "../../helper/bcrypts";
 export const resetPassword = async(req:Request, res: Response) => {
     try{
         const password = req.body.newPassword
-        const {id,token} = req.params
+        console.log("backend", password)
+        const {id} = req.params
         //const existUser = await Usermodel.findOne({email : req.body?.email});
         const existUser = await Usermodel.findById(id);
         if(!existUser){
