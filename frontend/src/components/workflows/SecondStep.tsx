@@ -1,28 +1,29 @@
 import React, { useState } from 'react'
 
-import {AiOutlineEnter} from "react-icons/ai"
-// import {AiOutlineClose, AiOutlineEnter} from "react-icons/ai"
+import {AiOutlineClose, AiOutlineEnter} from "react-icons/ai"
 import { Link } from "react-router-dom"
-// import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-// import { addMember, deleteMember } from '../../redux/slices/workspace.slice'
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import { addMember, deleteMember, joinMembers } from '../../redux/slices/workspace.slice'
 
 const SecondStepWorkspace = () => {
 
   const [member, setMember] = useState<string>("")
 
-  // const dispatch = useAppDispatch()
-  // const {members} = useAppSelector(state => state.workspace)
+  const dispatch = useAppDispatch()
+  const { members } = useAppSelector(state => state.workspace)
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMember(e.target.value)
   }
 
   const handleAddMembers = () => {
-    // dispatch(addMember(member))
+    dispatch(addMember(member))
+    setMember("")
   }
 
-  // const handleDeleteMember = (email: string)=> {
-  //   dispatch(deleteMember(email))
-  // }
+  const handleDeleteMember = (email: string)=> {
+    dispatch(deleteMember(email))
+  }
 
   return (
     <section className="h-screen w-full flex items-center justify-center bg-background">
@@ -47,8 +48,8 @@ const SecondStepWorkspace = () => {
                 <AiOutlineEnter></AiOutlineEnter>
               </button>
             </div>
-            {/* {
-              members.map((email, index) => {
+            {
+              members?.map((email, index) => {
                 return(
                   <div key={`${email}${index}`} className="relative px-2 pr-8 py-1 rounded-md border-2 text-sm text-secundary-color">
                     <button 
@@ -60,10 +61,18 @@ const SecondStepWorkspace = () => {
                   </div>
                 )
               })
-            } */}
+            }
           </div>
           <div className="flex items-center gap-x-3">
-            <button className="w-fit px-8 py-2 bg-secundary-color text-white rounded-md">Siguiente</button>
+            <button onClick={() => {
+              if(members){
+                if(members.length){
+                  dispatch(joinMembers(members))
+                }else{
+                  alert("Debe invitar al menos a un miembro, sino desea invitar a nadie, clickee en 'omitir paso'")
+                }
+              }
+            }} className="w-fit px-8 py-2 bg-secundary-color text-white rounded-md">Siguiente</button>
             <Link to={"/workspaces/thirdstep"} className="w-fit px-8 py-2 text-secundary-color bg-white rounded-md">Omitir este paso</Link>
           </div>
         </div>
