@@ -6,7 +6,9 @@ import { IChannels } from "./IChannels"
 export interface IWorkSpace {
 
   userId: SchemaDefinitionProperty<IUser>
+  fullName: string
   // channels: string
+  members: SchemaDefinitionProperty<IUser>
   nameWorkSpace: string,
   count?: Number
   channelsId: SchemaDefinitionProperty<IChannels[]>

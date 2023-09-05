@@ -7,7 +7,7 @@ import { Server as SocketServer } from "socket.io"
 
 const server = createServer(app);
 
-const io = new SocketServer(server);
+export const io = new SocketServer(server);
 
 io.on("connection", (socket) => {
   console.log("Connected with socket");

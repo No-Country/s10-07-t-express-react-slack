@@ -7,18 +7,24 @@ const messageSchema = new Schema<IMessage>(
       type: String,
       require: true,
     },
-    from: {
-      type: String,
-      require: true,
-    },
+    // from: {
+    //   type: String,
+    //   require: true,
+    // },
     // workSpaceId: {
     //   type: Schema.Types.ObjectId,
     //   ref: "WorkSpace",
     // },
-    // userId: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "User",
-    // }
+    channelsId: {
+      type: Schema.Types.Array,
+      // type: Schema.Types.ObjectId,
+      // type: Schema.Types.ObjectId,
+      ref: "Channel",
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    }
   },
   {
     timestamps: false,

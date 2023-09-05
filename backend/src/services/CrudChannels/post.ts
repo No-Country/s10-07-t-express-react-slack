@@ -23,7 +23,8 @@ export const channels = async (req: Request, res: Response) => {
     const data = new ChannelsModel({
       userId: channel.userId,
       nameWorkSpaceId: channel.nameWorkSpaceId,
-      name: channel.name,
+      // messageId: channel.,
+      name: channel.name
 
     });
 

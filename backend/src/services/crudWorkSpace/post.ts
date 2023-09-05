@@ -9,9 +9,17 @@ export const workSpace = async (req: Request, res: Response) => {
   try {
     const validations = await validateWorkSpace(workSpace);
 
+
+    const existWorkSpace = await WorkSpaceModel.findOne({ nameWorkSpace: validations.nameWorkSpace });
+
+    if (existWorkSpace) {
+      return res.status(401).json({ error: "Este espacio de trabajo ya existe" })
+    }
+
     const newWorkSpace = new WorkSpaceModel({
       userId: workSpace.userId,
       nameWorkSpace: validations.nameWorkSpace,
+      // fullName: workSpace.fullName
     });
     await newWorkSpace.save();
 
