@@ -8,7 +8,7 @@ import { addMember, deleteMember, joinMembers } from '../../redux/slices/workspa
 const SecondStepWorkspace = () => {
 
   const [member, setMember] = useState<string>("")
-
+  const workspaceId: string | any = localStorage.getItem("workspaceId")
   const dispatch = useAppDispatch()
   const { members } = useAppSelector(state => state.workspace)
 
@@ -68,12 +68,13 @@ const SecondStepWorkspace = () => {
               if(members){
                 if(members.length){
                   dispatch(joinMembers(members))
+                  window.location.href = `/workspaces/${workspaceId}`
                 }else{
-                  alert("Debe invitar al menos a un miembro, sino desea invitar a nadie, clickee en 'omitir paso'")
+                  alert("Debe invitar al menos un miembro, sino desea invitar a nadie, clickee en 'omitir este paso'")
                 }
               }
             }} className="w-fit px-8 py-2 bg-secundary-color text-white rounded-md">Siguiente</button>
-            <Link to={"/workspaces/thirdstep"} className="w-fit px-8 py-2 text-secundary-color bg-white rounded-md">Omitir este paso</Link>
+            <Link to={`/workspaces/${workspaceId}`} className="w-fit px-8 py-2 text-secundary-color bg-white rounded-md">Omitir este paso</Link>
           </div>
         </div>
       </div>
