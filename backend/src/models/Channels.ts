@@ -9,14 +9,18 @@ const channelsSchema = new Schema<IChannels>(
       require: true,
     },
     nameWorkSpaceId: {
-      // type: Schema.Types.Array,
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.Array,
       ref: "WorkSpace",
     },
     userId: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.Array,
       ref: "User",
     },
+    // messageId: {
+    //   type: Schema.Types.ObjectId,
+    //   // type: Schema.Types.Array,
+    //   ref: "Message",
+    // },
   },
   {
     timestamps: false,

@@ -27,7 +27,7 @@ const userSchema = new Schema<IUser>(
       default: ""
     },
     workSpace: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.Array,
       ref: "WorkSpace",
     },
   },
