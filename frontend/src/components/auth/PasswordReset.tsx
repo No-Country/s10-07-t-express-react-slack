@@ -50,11 +50,12 @@ const PasswordReset = () => {
   // }
   const handleResetSubmit = async (e:React.ChangeEvent<HTMLFormElement>)  => {
     e.preventDefault()
+    const newPasswordData = { newPassword: newPasswordFront.confirmPassword };
     try {
       if (!Object.entries(errors).length) {
         const response = await axios.post(
           `http://localhost:3001/reset-password/${id}`,
-          newPasswordFront
+          newPasswordData
         ) as AxiosResponse<ResponseAxios>
         setNewPassword(reset)
         dispatch(resetSuccess(response.data.msg));
