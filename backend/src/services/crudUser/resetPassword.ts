@@ -14,7 +14,7 @@ export const resetPassword = async(req:Request, res: Response) => {
         }
         const encrypted = await hashedPassword(password);
         await Usermodel.findByIdAndUpdate({_id: id},{password: encrypted})
-        return res.status(201).send({ msg : "Contraseña actualizada exitosamente ...!"})
+        return res.status(201).send({ msg : "Contraseña actualizada exitosamente!"})
     }catch(error){
         if(error instanceof Error){
             return res.status(400).json({ error: error.message });

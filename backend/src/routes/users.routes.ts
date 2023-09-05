@@ -15,7 +15,7 @@ const USER = "/user"
 const LOGIN = "/auth"
 const LOGINGOOGLE = "/authgoogle"
 const RECOVER_PASSWORD = "/recover-password"
-const RESET_PASSWORD = "/reset-password/:id/:token"
+const RESET_PASSWORD = "/reset-password/:id"
 const ME = "/me"
 const AUTH_TOKEN = "/authToken"
 usersRoutes.post(`${USER}`, createUser)
