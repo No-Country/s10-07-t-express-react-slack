@@ -6,8 +6,6 @@ import jwt_decode from 'jwt-decode'
 
 import { Decoded, Login, MyAxiosError, ResponseAxios } from './interfaces'
 import { FaLock } from 'react-icons/fa'
-import { useAppDispatch } from '../../redux/hooks'
-import { validateUser } from '../../redux/slices/user.slice'
 
 export const login = {
   email: '',
@@ -17,7 +15,6 @@ export const login = {
 const FormLogin = () => {
 
   const [loginTemplate, setLoginTemplate] = useState<Login>(login)
-  const dispatch = useAppDispatch()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginTemplate({
@@ -28,10 +25,24 @@ const FormLogin = () => {
 
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (loginTemplate.email && loginTemplate.password) {
-      dispatch(validateUser())
-      setLoginTemplate(login)
-      window.location.href = '/workspaces'
+    try {
+      if (loginTemplate.email && loginTemplate.password) {
+        const {data} = await axios.post("http://localhost:3001/auth", {
+          email: loginTemplate.email,
+          password: loginTemplate.password
+        }) as AxiosResponse<ResponseAxios>
+        
+        localStorage.setItem("userToken", data.data.token)
+        setLoginTemplate(login)
+        window.location.href = '/workspaces'
+      }
+    } catch (error) {
+      const axiosError = error as MyAxiosError;
+
+      if (axiosError.response) {
+        // Manejar el error de respuesta HTTP
+        alert(axiosError.response.data.data.error)
+      }
     }
   }
 
