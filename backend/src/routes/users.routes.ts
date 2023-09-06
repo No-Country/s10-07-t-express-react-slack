@@ -39,7 +39,7 @@ usersRoutes.post(`${LOGINGOOGLE}`, loginGoogle)
 const RECOVER_PASSWORD = "/recover-password"
 usersRoutes.post(`${RECOVER_PASSWORD}`, recoverPassword)
 
-const RESET_PASSWORD = "/reset-password/:id/:token"
+const RESET_PASSWORD = "/reset-password/:id"
 usersRoutes.post(`${RESET_PASSWORD}`, resetPassword)
 
 

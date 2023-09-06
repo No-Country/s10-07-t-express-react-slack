@@ -2,6 +2,7 @@ import FormLogin from "../components/auth/FormLogin";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import NavBar from "../components/NavBar";
 import astrogreeting from "../assets/astro greeting.png"
+import Footer from '../components/footer/Footer'
 
 const Login = () => {
   return(
@@ -17,6 +18,7 @@ const Login = () => {
         <FormLogin/>  
       </GoogleOAuthProvider>
       </div>
+      <Footer />
     </section>
   )
 }

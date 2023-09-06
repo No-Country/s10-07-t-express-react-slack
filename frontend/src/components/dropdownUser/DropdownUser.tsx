@@ -1,6 +1,8 @@
 import { FC, useState } from "react";
 // import { generateHexadecimalColor } from "./utils";
 import { Link } from "react-router-dom";
+import { FaSignOutAlt } from 'react-icons/fa'
+import { useNavigate } from "react-router-dom";
 
 interface DropdownUser {
   profileImage?: string, 
@@ -9,7 +11,7 @@ interface DropdownUser {
 }
 
 const DropdownUser: FC<DropdownUser> = ({profileImage, name, email}) => {
-
+  const navigate = useNavigate();
   const [hiddenDropdown, setHiddenDropdown] = useState(true)
   // const [bgImage, setBgImage] = useState<string>()
 
@@ -17,6 +19,12 @@ const DropdownUser: FC<DropdownUser> = ({profileImage, name, email}) => {
   //   const bgColor = generateHexadecimalColor()
   //   setBgImage(bgColor)
   // }, [])
+//console.log(localStorage);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userToken");
+    navigate("/login");
+  };
 
   return (
     <div className="relative">
@@ -49,7 +57,9 @@ const DropdownUser: FC<DropdownUser> = ({profileImage, name, email}) => {
           </li>
         </ul>
         <div className="py-2">
-          <Link to={""} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Cerrar sesion</Link>
+          <ul>
+          <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200" onClick={handleLogout}><FaSignOutAlt/> Cerrar sesion</li>
+          </ul>
         </div>
       </div>
     </div>

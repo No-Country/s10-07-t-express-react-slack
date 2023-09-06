@@ -13,6 +13,10 @@ export interface Login {
   password: string;
 }
 
+export interface Reset {
+  password: string;
+  confirmPassword: string;
+}
 
 export interface Errors {
   fullName?: string;
