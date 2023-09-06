@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { AiOutlineClose } from 'react-icons/ai'
+import DropdownUser from './dropdownUser/DropdownUser'
 
 interface NavBarProps {
   isUserLoggedIn: boolean
@@ -47,9 +48,7 @@ function NavBar({ isUserLoggedIn }: NavBarProps) {
           <li>
             {isUserLoggedIn ? (
               <div className='flex space-x-3'>
-                <button className='bg-button-orange rounded-3xl uppercase text-white px-5 h-12'>
-                  Perfil
-                </button>
+                <DropdownUser profileImage="https://flowbite.com/docs/images/people/profile-picture-5.jpg"  name="Alondra Cena" email="mddwmdwmwd"/>
               </div>
             ) : (
               <div className='md:flex md:items-center justify-between'>
