@@ -6,6 +6,7 @@ import { joinListToWorkspace } from "../services/crudWorkSpace/joinListToWorkspa
 import { getMyWorkSpaces } from "../services/crudWorkSpace/getMyWorkspaces"
 import { putWorkSpace } from "../services/crudWorkSpace/put"
 import { allWorkSpace } from "../services/crudWorkSpace/get"
+import { getOneWorkspace } from "../services/crudWorkSpace/getONeWorkspace"
 
 
 export const workSpacesRoutes = Router()
@@ -13,6 +14,7 @@ export const workSpacesRoutes = Router()
 // ─── Espacio De Trabajo ──────────────────────────────────────────────────────
 
 const WORKSPACES = "/workSpaces"
+const ONEWORKSPACE = "/oneworkspace/:id"
 const WORKSPACE = "/workSpace"
 const UP_WORKSPACE = "/workSpace/:id"
 const JOIN_WORKSPACE = "/joinWorkSpace/:idWorkspace/:idUser"
@@ -22,6 +24,7 @@ const LEAVE_WORKSPACE = "/leaveWorkSpace/:idWorkspace/:idUser"
 
 workSpacesRoutes.post(`${WORKSPACE}`, workSpace)
 workSpacesRoutes.get(`${WORKSPACES}`, allWorkSpace)
+workSpacesRoutes.get(`${ONEWORKSPACE}`, getOneWorkspace)
 workSpacesRoutes.put(`${UP_WORKSPACE}`, putWorkSpace)
 workSpacesRoutes.get(`${MY_WORKSPACES}`, getMyWorkSpaces)
 workSpacesRoutes.put(`${JOIN_WORKSPACE}`, joinToWorkspace)

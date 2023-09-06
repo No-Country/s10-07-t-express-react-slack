@@ -6,7 +6,6 @@ import { ChannelsModel } from "../../models/Channels";
 
 export const channels = async (req: Request, res: Response) => {
   const channel = req.body as IChannels;
-
   try {
     const validations = await validateChannel(channel);
 
@@ -19,10 +18,8 @@ export const channels = async (req: Request, res: Response) => {
       return res.status(400).json({ error: "El canal ya existe para el espacio de trabajo", existChannel });
     }
 
-
     const data = new ChannelsModel({
-      userId: channel.userId,
-      nameWorkSpaceId: channel.nameWorkSpaceId,
+      workSpaceId: channel.workSpaceId,
       // messageId: channel.,
       name: channel.name
 
