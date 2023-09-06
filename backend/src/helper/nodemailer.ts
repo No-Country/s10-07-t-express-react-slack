@@ -1,9 +1,9 @@
 require('dotenv').config();
 import nodemailer from "nodemailer";
 import { validationEmail } from "../validations/items/gmail";
-const { PORT,WEB_PAGE,NODEMAILER_EMAIL,NODEMAILER_PASS_CODE } = process.env;
+const { NODEMAILER_EMAIL,NODEMAILER_PASS_CODE } = process.env;
 
-export const sendMail = async (email: string, link: string): Promise<void> => {
+export const sendMail = async (email: string, link?: string, message?: string): Promise<void> => {
     const validEmail = validationEmail(email);
     
     const transporter = nodemailer.createTransport({
@@ -13,14 +13,13 @@ export const sendMail = async (email: string, link: string): Promise<void> => {
         auth: {
           user: NODEMAILER_EMAIL,
           pass: NODEMAILER_PASS_CODE,
-        },
-        logger: true
+        }
       });
     const info = await transporter.sendMail({
-        from: '"Connecta" <spimentelm1201@gmail.com>',
+        from: `"Connecta" <${NODEMAILER_EMAIL}>`,
         to: validEmail,
         subject: "Invitación para unirse a un espacio de trabajo",
-        html: `Hola, se te ha invitado a unirte a un grupo de trabajo, para hacerlo debes hacer click en el siguiente enlace o pegarlo en tu navegador para completar el proceso: 
+        html: `${message}
         <a href="${link}">${link}</a>`
       });
     

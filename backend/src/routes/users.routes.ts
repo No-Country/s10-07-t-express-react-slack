@@ -8,6 +8,7 @@ import { me } from "../services/crudUser/me"
 import { authToken } from "../middlewares/authToken"
 import { allUsers } from "../services/crudUser/get"
 import { updateUser } from "../services/crudUser/put"
+import { deleteUser } from "../services/crudUser/delete"
 
 export const usersRoutes = Router()
 
@@ -23,6 +24,11 @@ usersRoutes.get(`${USERS}`, allUsers)
 
 const USER_UPDATE = "/user/:id"
 usersRoutes.put(`${USER_UPDATE}`, updateUser)
+
+// ───Eliminar cuenta de Usuario ────────────────────────────────────────────────────────────────
+
+const USER_DELETE = "/user/:id"
+usersRoutes.delete(`${USER_DELETE}`, deleteUser)
 
 // ─── Loguear Usuario ─────────────────────────────────────────────────────────
 

@@ -7,7 +7,7 @@ export const allUsers = async (_req: Request, res: Response) => {
     if (users.length) {
       return res.json(users)
     }
-    return res.json({ message: "No hay info" })
+    return res.json({ msg: "No hay info" })
   } catch (error) {
     if (error instanceof Error) {
       return res.status(400).json({ error: error.message })
