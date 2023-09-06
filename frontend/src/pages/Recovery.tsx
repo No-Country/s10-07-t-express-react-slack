@@ -1,6 +1,7 @@
 import NavBar from "../components/NavBar";
 import PasswordRecovery from "../components/auth/PasswordRecovery.tsx";
 import astroovni from "../assets/astro ovni.png"
+import Footer from '../components/footer/Footer'
 
 const Recovery = () => {
   return(
@@ -23,6 +24,7 @@ const Recovery = () => {
             </div>
       <PasswordRecovery/>
       </div>
+      <Footer/>
     </section>
   )
 }
