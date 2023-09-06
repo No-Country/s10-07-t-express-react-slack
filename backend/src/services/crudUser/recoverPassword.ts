@@ -3,7 +3,7 @@ import { Usermodel } from "../../models/Users";
 import { validateLogin } from "../../validations/login";
 import { generateToken } from "../../helper/JwtToken";
 import nodemailer from "nodemailer";
-const { PORT, WEB_PAGE, NODEMAILER_EMAIL, NODEMAILER_PASS_CODE } = process.env;
+const { PORT, WEB_PAGE_RESET, NODEMAILER_EMAIL, NODEMAILER_PASS_CODE } = process.env;
 
 export const recoverPassword = async (req: Request, res: Response) => {
   const email = req.body.email
@@ -13,7 +13,7 @@ export const recoverPassword = async (req: Request, res: Response) => {
       return res.status(401).json({ error: "El correo no está registrado" })
     }
     const token = await generateToken(existUser.email)
-    var verificationLink = `https://${WEB_PAGE}:${PORT}/auth/new-password/${existUser._id}/${token}`;
+    var verificationLink = `${WEB_PAGE_RESET}/reset-password/${existUser._id}`;
     /*
     * Generar un enlace para la recuperación de la cuenta
     * Enviar un correo con el enlace al usuario

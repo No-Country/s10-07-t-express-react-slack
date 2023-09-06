@@ -5,7 +5,8 @@ import { hashedPassword } from "../../helper/bcrypts";
 export const resetPassword = async(req:Request, res: Response) => {
     try{
         const password = req.body.newPassword
-        const {id,token} = req.params
+        console.log("backend", password)
+        const {id} = req.params
         //const existUser = await Usermodel.findOne({email : req.body?.email});
         const existUser = await Usermodel.findById(id);
         if(!existUser){
@@ -13,7 +14,7 @@ export const resetPassword = async(req:Request, res: Response) => {
         }
         const encrypted = await hashedPassword(password);
         await Usermodel.findByIdAndUpdate({_id: id},{password: encrypted})
-        return res.status(201).send({ msg : "Contraseña actualizada exitosamente ...!"})
+        return res.status(201).send({ msg : "Contraseña actualizada exitosamente!"})
     }catch(error){
         if(error instanceof Error){
             return res.status(400).json({ error: error.message });

@@ -4,6 +4,7 @@ import { IChannel } from './interfaces';
 import { generateId } from './utils';
 import { validateUser } from '../../redux/slices/user.slice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import axios from 'axios';
 // import axios from 'axios';
 
 // Ejemplo de como implementar socket 
@@ -14,7 +15,7 @@ const socket = io('http://localhost:3001'); // Connect to the Socket.io server
 const Channel = () => {
   const dispatch = useAppDispatch()
   const {_id} = useAppSelector((state) => state.user)
-  // const idWorkspace = localStorage.getItem("workspaceId")
+  const idWorkspace = localStorage.getItem("workspaceId")
   // const idChannel = localStorage.getItem("idChannel")
 
   const [messages, setMessages] = useState<IChannel[]>([]);
@@ -22,6 +23,12 @@ const Channel = () => {
 
   useEffect(() => {
     dispatch(validateUser())
+    const getData = async () => {
+      const response = await axios(`http://localhost:3001/oneworkspace/${idWorkspace}`)
+      const responser = await axios(`http://localhost:3001/channels`)
+      console.log(response, responser)
+    }
+    getData()
   }, [])
 
   useEffect(() => {

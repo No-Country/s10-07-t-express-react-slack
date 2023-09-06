@@ -1,6 +1,7 @@
 import NavBar from "../components/NavBar";
 import PasswordReset from "../components/auth/PasswordReset.tsx";
 import astroreset from "../assets/astro reset.png"
+import Footer from '../components/footer/Footer'
 
 const Reset = () => {
   return(
@@ -13,6 +14,7 @@ const Reset = () => {
                 <img src={astroreset} alt='astro' className='' />
             </div>
       </div>
+      <Footer/>
     </section>
   )
 }
