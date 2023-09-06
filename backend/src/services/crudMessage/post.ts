@@ -1,27 +1,35 @@
 import { Request, Response } from "express";
 import { IMessage } from "../../../../interface/IMessage";
 import { MessageModel } from "../../models/Message";
+import { ChannelsModel } from "../../models/Channels";
 import { io } from "../../index";
 
 export const createMessage = async (req: Request, res: Response) => {
 
 
   // const { from, message } = req.body;
-  const message = req.body as IMessage;
+  const {message, workSpaceId, channelsId, userId} = req.body as IMessage;
 
   try {
 
 
     const data = new MessageModel({
-      nameWorkSpaceId: message.workSpaceId,
-      message: message.message,
-      userId: message.userId,
-      channelsId: message.channelsId
+      workSpaceId,
+      message,
+      userId,
+      channelsId
       // from: message.from,
 
     });
     await data.save();
     // res.status(201).json(newMessage);
+    
+    io.on("connection", (socket) => {
+      console.log("Connected with socket");
+      socket.on(`${workSpaceId}/${channelsId}`, (data: any) => {
+        socket.broadcast.emit(`${workSpaceId}/${channelsId}`, data)
+      })
+    });
 
     if (data) {
       return res.status(201).json({
@@ -29,7 +37,7 @@ export const createMessage = async (req: Request, res: Response) => {
         data: data
       })
     }
-    io.emit('newMessage', data);
+    
     // } catch (error) {
     //   res.status(500).json({ error: 'Error al guardar el mensaje' });
     // }
