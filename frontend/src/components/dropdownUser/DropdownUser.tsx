@@ -64,7 +64,7 @@ const DropdownUser: FC<DropdownUser> = ({profileImage, name, email}) => {
         </ul>
         <div className="py-2">
           <ul>
-          <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 flex" onClick={handleLogout}><FaSignOutAlt className="flex mr-1 mt-1"/> Cerrar sesión</li>
+          <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 flex" onClick={handleLogout}><FaSignOutAlt className="flex mr-1 mt-1"/> Cerrar sesión</li>
           </ul>
         </div>
       </div>
