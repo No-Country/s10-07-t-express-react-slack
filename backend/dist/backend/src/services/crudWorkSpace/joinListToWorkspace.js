@@ -18,7 +18,7 @@ const joinListToWorkspace = (req, res) => __awaiter(void 0, void 0, void 0, func
     const idWorkspace = req.params.idWorkspace;
     const emailUsers = req.body.emails;
     const data = {
-        msg: String,
+        msg: "",
         nonMembers: []
     };
     try {
@@ -27,15 +27,16 @@ const joinListToWorkspace = (req, res) => __awaiter(void 0, void 0, void 0, func
         if (!existWorkspace) {
             return res.status(404).json({ error: "El espacio de trabajo no existe." });
         }
+        const message = `${owner === null || owner === void 0 ? void 0 : owner.fullName} te ha invitado a unirte al espacio de trabajo ${existWorkspace.nameWorkSpace}`;
         emailUsers.forEach(function (emaik) {
             return __awaiter(this, void 0, void 0, function* () {
                 const idForUser = yield Users_1.Usermodel.findOne({ email: emaik });
                 if (!idForUser) {
-                    const message = `${owner === null || owner === void 0 ? void 0 : owner.fullName} te ha invitado a unirte al espacio de trabajo ${existWorkspace.nameWorkSpace}`;
+                    data.nonMembers.push(emaik);
                     yield (0, nodemailer_1.sendMail)(emaik, 'http://localhost:5173/register', message);
                 }
                 else {
-                    (0, nodemailer_1.sendMail)(emaik, `http://${WEB_PAGE}:${PORT}/joinWorkspace/${existWorkspace._id}/${idForUser === null || idForUser === void 0 ? void 0 : idForUser._id}`, `Hola, ${owner === null || owner === void 0 ? void 0 : owner.fullName} te ha invitado a unirte a un grupo de trabajo ${existWorkspace.nameWorkSpace}, para hacerlo debes hacer click en el siguiente enlace o pegarlo en tu navegador para completar el proceso: `);
+                    (0, nodemailer_1.sendMail)(emaik, `http://${WEB_PAGE}:5173/workspaceinvitation/${existWorkspace._id}`, `Hola, ${owner === null || owner === void 0 ? void 0 : owner.fullName} te ha invitado a unirte a un grupo de trabajo ${existWorkspace.nameWorkSpace}, para hacerlo debes hacer click en el siguiente enlace o pegarlo en tu navegador para completar el proceso: `);
                 }
             });
         });
