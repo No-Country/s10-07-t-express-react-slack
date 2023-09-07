@@ -1,14 +1,22 @@
 import {FC, useEffect, useState} from "react"
 import logo from '../../assets/logo.png'
 import astroRocket from '../../assets/astronauta-cohete2.png'
-import { useAppDispatch } from "../../redux/hooks"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import { validateUser } from "../../redux/slices/user.slice"
 import axios from "axios"
 
+interface Workspace {
+    _id?: string;
+    nameWorkSpace?: string;
+    channelsId?: string[]
+    members?: string[] 
+}
+
 const Invitation: FC<string | any> = ({id}) => {
     const dispatch = useAppDispatch()
-    const [workspace, setWorkspace] = useState({})
-
+    const [workspace, setWorkspace] = useState<Workspace>({})
+    const {_id} = useAppSelector((state) => state.user)
+    
     useEffect(() => {
         dispatch(validateUser())
         const getWorkspace = async ( ) => {
@@ -17,6 +25,15 @@ const Invitation: FC<string | any> = ({id}) => {
         }
         getWorkspace()
     }, [])
+
+    const handleClick = async () => {
+        try {
+            await axios(`http://localhost:3001/joinWorkSpace/${id}/${_id}`)
+            window.location.href = `/workspaces/${workspace._id}`
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return(
         <section className='h-screen mt-20 py-20 flex flex-col items-center gap-y-6'>
@@ -50,7 +67,9 @@ const Invitation: FC<string | any> = ({id}) => {
                     </div>
                     <span className="text-[#263238]">Juan y 2 personas más se han unido</span>
                 </div>
-                <button className="text-center px-10 py-3 bg-bg-navbar text-white rounded-md">Hacerme miembro</button>
+                <button 
+                onClick={handleClick}
+                className="text-center px-10 py-3 bg-bg-navbar text-white rounded-md">Hacerme miembro</button>
             </div>
         </section>
     )
