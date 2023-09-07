@@ -9,7 +9,7 @@ const CardWorkspace = () => {
                     <span className="font-thin">Tu + 15 miembros</span>
                 </div>
             </div>
-            <button className="bg-secundary-color text-white rounded-lg px-10 py-2">Iniciar conexion</button>
+            <button className="bg-secundary-color text-white rounded-lg px-10 py-2">Iniciar conexión</button>
         </div>
     )
 }

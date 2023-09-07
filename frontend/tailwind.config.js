@@ -13,7 +13,8 @@ export default {
         "bg": "#1D1A39",
         "background": "#0C1C34",
         "background-container-workspace": "#E4DCCC",
-        "text-workspace": "#263238"
+        "text-workspace": "#263238",
+        "bg-profile": "#25254D"
       },
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],

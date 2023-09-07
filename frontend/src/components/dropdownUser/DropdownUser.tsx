@@ -3,6 +3,7 @@ import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaSignOutAlt } from 'react-icons/fa'
 import { useNavigate } from "react-router-dom";
+import UserProfile from "../userProfile/UserProfile";
 
 interface DropdownUser {
   profileImage?: string, 
@@ -26,6 +27,8 @@ const DropdownUser: FC<DropdownUser> = ({profileImage, name, email}) => {
     navigate("/login");
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="relative">
       <button 
@@ -35,7 +38,10 @@ const DropdownUser: FC<DropdownUser> = ({profileImage, name, email}) => {
         {
           !profileImage || !profileImage.length ? 
           <div className={`bg-[#F39F5A] text-white text-xl flex items-center justify-center w-12 h-12 rounded-full uppercase font-semibold`}>
-            <span>{name.split(" ")[0][0]}{name.split(" ")[1][0]}</span>
+            <span>
+            {name && name.split(" ")[0] ? name.split(" ")[0][0] : ''}
+            {name && name.split(" ")[1] ? name.split(" ")[1][0] : ''}
+              </span>
           </div> :
           <img className="w-12 h-12 rounded-full" src={profileImage} alt="foto usuario" />
         }
@@ -47,7 +53,7 @@ const DropdownUser: FC<DropdownUser> = ({profileImage, name, email}) => {
         </div>
         <ul className="py-2 text-sm text-gray-700 " >
           <li>
-            <Link to={""} className="block px-4 py-2 hover:bg-gray-200 ">Editar perfil</Link>
+            <Link to={""} className="block px-4 py-2 hover:bg-gray-200 " onClick={() => setIsModalOpen(true)}>Perfil</Link>
           </li>
           <li>
             <Link to={""} className="block px-4 py-2 hover:bg-gray-200 ">Mis espacios de trabajo</Link>
@@ -58,10 +64,11 @@ const DropdownUser: FC<DropdownUser> = ({profileImage, name, email}) => {
         </ul>
         <div className="py-2">
           <ul>
-          <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200" onClick={handleLogout}><FaSignOutAlt/> Cerrar sesion</li>
+          <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 flex" onClick={handleLogout}><FaSignOutAlt className="flex mr-1 mt-1"/> Cerrar sesión</li>
           </ul>
         </div>
       </div>
+      <UserProfile isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   )
 }

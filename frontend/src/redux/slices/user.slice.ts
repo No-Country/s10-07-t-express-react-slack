@@ -9,7 +9,8 @@ interface ResponseAxios {
 const initialState: IUserAux = {
   fullName: "",
   email: "",
-  _id: ""
+  _id: "",
+  profileImage:""
 }
 
 export const validateUser = createAsyncThunk('user/validate', async () => {
