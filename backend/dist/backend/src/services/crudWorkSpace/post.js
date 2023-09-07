@@ -12,26 +12,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.workSpace = void 0;
 const WorkSpace_1 = require("../../models/WorkSpace");
 const workSpace_1 = require("../../validations/workSpace");
-// import { hashedPassword } from '../../helper/bcrypts';
-// import { validateRegister } from "../../validations/register";
+const Channels_1 = require("../../models/Channels");
 const workSpace = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const workSpace = req.body;
     try {
         const validations = yield (0, workSpace_1.validateWorkSpace)(workSpace);
-        const allSpace = yield WorkSpace_1.WorkSpaceModel.findOne({
-            emailWorkSpace: validations.emailWorkSpace
-        });
-        if (allSpace) {
-            return res.status(400).json({ error: " No hay ningun espacio de trabajo", allSpace });
+        const existWorkSpace = yield WorkSpace_1.WorkSpaceModel.findOne({ nameWorkSpace: validations.nameWorkSpace });
+        if (existWorkSpace) {
+            return res.status(401).json({ error: "Este espacio de trabajo ya existe" });
         }
-        const newWorkSpace = new WorkSpace_1.WorkSpaceModel({
+        const newWorkSpace = yield WorkSpace_1.WorkSpaceModel.create({
+            userId: workSpace.userId,
             nameWorkSpace: validations.nameWorkSpace,
-            channels: validations.channels,
-            emailWorkSpace: validations.emailWorkSpace
+            // fullName: workSpace.fullName
         });
-        yield newWorkSpace.save();
+        const defaultChannel = yield Channels_1.ChannelsModel.create({
+            workSpaceId: newWorkSpace._id
+        });
+        yield defaultChannel.save();
+        const channelPush = [];
+        channelPush.push(defaultChannel._id);
+        yield WorkSpace_1.WorkSpaceModel.updateOne({ _id: newWorkSpace._id }, { channelsId: channelPush });
         if (newWorkSpace) {
-            return res.status(201).json({ message: "Se creo con exito el espacio de trabajo" });
+            return res.status(201).json({
+                msg: "Se creo con exito el espacio de trabajo",
+                data: newWorkSpace
+            });
         }
     }
     catch (error) {

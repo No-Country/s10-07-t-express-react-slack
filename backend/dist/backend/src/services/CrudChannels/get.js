@@ -9,13 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateWorkSpace = void 0;
-const name_1 = require("./items/name");
-const validateWorkSpace = (workSpace) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!workSpace.nameWorkSpace) {
-        throw new Error("Todos los campos son requeridos");
+exports.allChannels = void 0;
+const Channels_1 = require("../../models/Channels");
+const allChannels = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const messages = yield Channels_1.ChannelsModel.find();
+        if (messages) {
+            return res.json(messages);
+        }
+        return res.json({ message: "No hay canales" });
     }
-    (0, name_1.validationName)(workSpace.nameWorkSpace);
-    return workSpace;
+    catch (error) {
+        if (error instanceof Error) {
+            return res.status(400).json({ error: error.message });
+        }
+    }
 });
-exports.validateWorkSpace = validateWorkSpace;
+exports.allChannels = allChannels;

@@ -9,13 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateWorkSpace = void 0;
-const name_1 = require("./items/name");
-const validateWorkSpace = (workSpace) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!workSpace.nameWorkSpace) {
-        throw new Error("Todos los campos son requeridos");
+exports.allWorkSpace = void 0;
+const WorkSpace_1 = require("../../models/WorkSpace");
+const allWorkSpace = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const workSpace = yield WorkSpace_1.WorkSpaceModel.find();
+        if (workSpace.length) {
+            return res.json(workSpace);
+        }
+        return res.json({ msg: "No hay espacios de trabajo" });
     }
-    (0, name_1.validationName)(workSpace.nameWorkSpace);
-    return workSpace;
+    catch (error) {
+        if (error instanceof Error) {
+            return res.status(400).json({ error: error.message });
+        }
+    }
 });
-exports.validateWorkSpace = validateWorkSpace;
+exports.allWorkSpace = allWorkSpace;

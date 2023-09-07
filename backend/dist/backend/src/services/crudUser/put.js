@@ -9,13 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateWorkSpace = void 0;
-const name_1 = require("./items/name");
-const validateWorkSpace = (workSpace) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!workSpace.nameWorkSpace) {
-        throw new Error("Todos los campos son requeridos");
+exports.updateUser = void 0;
+const Users_1 = require("../../models/Users");
+const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userData = req.body;
+    try {
+        const user = yield Users_1.Usermodel.findByIdAndUpdate(req.params.id, userData);
+        if (!user) {
+            return res.json({ error: "El usuario no existe." });
+        }
+        return res.json({ msg: "Datos actualizados con éxito." });
     }
-    (0, name_1.validationName)(workSpace.nameWorkSpace);
-    return workSpace;
+    catch (error) {
+        if (error instanceof Error) {
+            return res.status(400).json({ error: error.message });
+        }
+    }
 });
-exports.validateWorkSpace = validateWorkSpace;
+exports.updateUser = updateUser;

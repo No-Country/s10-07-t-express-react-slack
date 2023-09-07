@@ -9,13 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateWorkSpace = void 0;
+exports.validateChannel = void 0;
 const name_1 = require("./items/name");
-const validateWorkSpace = (workSpace) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!workSpace.nameWorkSpace) {
+const validateChannel = (channel) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!channel.name) {
         throw new Error("Todos los campos son requeridos");
     }
-    (0, name_1.validationName)(workSpace.nameWorkSpace);
-    return workSpace;
+    (0, name_1.validationName)(channel.name);
+    return channel;
 });
-exports.validateWorkSpace = validateWorkSpace;
+exports.validateChannel = validateChannel;

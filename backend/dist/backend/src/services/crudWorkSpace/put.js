@@ -9,13 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateWorkSpace = void 0;
-const name_1 = require("./items/name");
-const validateWorkSpace = (workSpace) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!workSpace.nameWorkSpace) {
-        throw new Error("Todos los campos son requeridos");
+exports.putWorkSpace = void 0;
+const WorkSpace_1 = require("../../models/WorkSpace");
+const workSpace_1 = require("../../validations/workSpace");
+const putWorkSpace = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const dataWorkSpace = req.body;
+    const idWorkSpace = req.params.id;
+    try {
+        const validations = yield (0, workSpace_1.validateWorkSpace)(dataWorkSpace);
+        console.log(validations);
+        yield WorkSpace_1.WorkSpaceModel.findByIdAndUpdate(idWorkSpace, validations);
+        return res.status(201).json({ msg: "Actualizado con éxito" });
     }
-    (0, name_1.validationName)(workSpace.nameWorkSpace);
-    return workSpace;
+    catch (error) {
+        if (error instanceof Error)
+            return res.status(400).json({ error: error.message });
+    }
 });
-exports.validateWorkSpace = validateWorkSpace;
+exports.putWorkSpace = putWorkSpace;

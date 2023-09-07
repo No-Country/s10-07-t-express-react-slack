@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validationWorkSpace = exports.validationFullName = void 0;
+exports.validationName = exports.validationFullName = void 0;
 const regex_1 = require("../../helper/regex");
 const validationFullName = (name) => {
     if (!name.match(regex_1.fullName)) {
@@ -9,10 +9,10 @@ const validationFullName = (name) => {
     return name;
 };
 exports.validationFullName = validationFullName;
-const validationWorkSpace = (name) => {
+const validationName = (name) => {
     if (!name.match(regex_1.NameChannel)) {
-        throw new Error("Debes ingresar un nombre para el Canal");
+        throw new Error("Debes ingresar un nombre valido");
     }
     return name;
 };
-exports.validationWorkSpace = validationWorkSpace;
+exports.validationName = validationName;

@@ -16,7 +16,7 @@ exports.recoverPassword = void 0;
 const Users_1 = require("../../models/Users");
 const JwtToken_1 = require("../../helper/JwtToken");
 const nodemailer_1 = __importDefault(require("nodemailer"));
-const { PORT, WEB_PAGE, NODEMAILER_EMAIL, NODEMAILER_PASS_CODE } = process.env;
+const { PORT, WEB_PAGE_RESET, NODEMAILER_EMAIL, NODEMAILER_PASS_CODE } = process.env;
 const recoverPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const email = req.body.email;
     try {
@@ -25,7 +25,7 @@ const recoverPassword = (req, res) => __awaiter(void 0, void 0, void 0, function
             return res.status(401).json({ error: "El correo no está registrado" });
         }
         const token = yield (0, JwtToken_1.generateToken)(existUser.email);
-        var verificationLink = `https://${WEB_PAGE}:${PORT}/auth/new-password/${existUser._id}/${token}`;
+        var verificationLink = `${WEB_PAGE_RESET}/reset-password/${existUser._id}`;
         /*
         * Generar un enlace para la recuperación de la cuenta
         * Enviar un correo con el enlace al usuario

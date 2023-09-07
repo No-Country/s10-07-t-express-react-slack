@@ -9,13 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateWorkSpace = void 0;
-const name_1 = require("./items/name");
-const validateWorkSpace = (workSpace) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!workSpace.nameWorkSpace) {
-        throw new Error("Todos los campos son requeridos");
+exports.allMessages = void 0;
+const Message_1 = require("../../models/Message");
+// import { IMessage } from "../../../../interface/IMessage";
+const allMessages = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const messages = yield Message_1.MessageModel.find();
+        if (messages) {
+            return res.json(messages);
+        }
+        return res.json({ message: "No hay mensaje" });
     }
-    (0, name_1.validationName)(workSpace.nameWorkSpace);
-    return workSpace;
+    catch (error) {
+        if (error instanceof Error) {
+            return res.status(400).json({ error: error.message });
+        }
+    }
 });
-exports.validateWorkSpace = validateWorkSpace;
+exports.allMessages = allMessages;

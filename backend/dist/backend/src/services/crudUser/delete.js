@@ -9,13 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateWorkSpace = void 0;
-const name_1 = require("./items/name");
-const validateWorkSpace = (workSpace) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!workSpace.nameWorkSpace) {
-        throw new Error("Todos los campos son requeridos");
+exports.deleteUser = void 0;
+const Users_1 = require("../../models/Users");
+const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.params.id;
+    try {
+        const user = yield Users_1.Usermodel.findByIdAndDelete(userId);
+        if (!user) {
+            return res.json({ error: "El usuario no existe." });
+        }
+        return res.status(204).json({ msg: "Usuario eliminado." });
     }
-    (0, name_1.validationName)(workSpace.nameWorkSpace);
-    return workSpace;
+    catch (error) {
+        if (error instanceof Error) {
+            return res.status(400).json({ error: error.message });
+        }
+    }
 });
-exports.validateWorkSpace = validateWorkSpace;
+exports.deleteUser = deleteUser;

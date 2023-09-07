@@ -9,31 +9,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUser = void 0;
-const Users_1 = require("../../models/Users");
-const bcrypts_1 = require("../../helper/bcrypts");
-const register_1 = require("../../validations/register");
-const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = req.body;
+exports.channels = void 0;
+const channel_1 = require("../../validations/channel");
+const Channels_1 = require("../../models/Channels");
+const channels = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const channel = req.body;
     try {
-        const validations = (0, register_1.validateRegister)(user);
-        const existUser = yield Users_1.Usermodel.findOne({
-            email: validations.email,
+        const validations = yield (0, channel_1.validateChannel)(channel);
+        const existChannel = yield Channels_1.ChannelsModel.findOne({
+            name: validations.name,
         });
-        if (existUser) {
-            return res.status(400).json({ error: "El usuario ya existe", existUser });
+        if (existChannel) {
+            return res.status(400).json({ error: "El canal ya existe para el espacio de trabajo", existChannel });
         }
-        const encrypted = yield (0, bcrypts_1.hashedPassword)(validations.password);
-        const newUser = new Users_1.Usermodel({
-            fullName: validations.fullName,
-            email: validations.email,
-            password: encrypted,
+        const data = new Channels_1.ChannelsModel({
+            workSpaceId: channel.workSpaceId,
+            // messageId: channel.,
+            name: channel.name
         });
-        yield newUser.save();
-        if (newUser) {
+        yield data.save();
+        if (data) {
             return res.status(201).json({
-                message: "Usuario creado con exito",
-                newUser
+                message: "Se creo con exito el Canal",
+                data: data
             });
         }
     }
@@ -42,4 +40,4 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             return res.status(400).json({ error: error.message });
     }
 });
-exports.createUser = createUser;
+exports.channels = channels;
