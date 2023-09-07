@@ -3,12 +3,15 @@ import { WorkSpaceModel } from "../../models/WorkSpace";
 import { sendMail } from "../../helper/nodemailer";
 import { Usermodel } from "../../models/Users";
 const { PORT,WEB_PAGE,NODEMAILER_EMAIL,NODEMAILER_PASS_CODE } = process.env;
-
+interface Data {
+    msg: string;
+    nonMembers: string[]
+}
 export const joinListToWorkspace = async (req: Request, res: Response) => {
     const idWorkspace = req.params.idWorkspace;
     const emailUsers: Array<string> = req.body.emails;
-    const data:any = {
-        msg: String,
+    const data: Data = {
+        msg: "",
         nonMembers: []
     }
     try{
@@ -17,13 +20,14 @@ export const joinListToWorkspace = async (req: Request, res: Response) => {
         if(!existWorkspace){
             return res.status(404).json({error: "El espacio de trabajo no existe."})
         }
+        const message= `${owner?.fullName} te ha invitado a unirte al espacio de trabajo ${existWorkspace.nameWorkSpace}`
         emailUsers.forEach(async function (emaik) {
             const idForUser = await Usermodel.findOne({email: emaik})
             if(!idForUser){
-                const message= `${owner?.fullName} te ha invitado a unirte al espacio de trabajo ${existWorkspace.nameWorkSpace}`
+                data.nonMembers.push(emaik)
                 await sendMail(emaik,'http://localhost:5173/register',message)
             }else{
-                sendMail(emaik,`http://${WEB_PAGE}:${PORT}/joinWorkspace/${existWorkspace._id}/${idForUser?._id}`, `Hola, ${owner?.fullName} te ha invitado a unirte a un grupo de trabajo ${existWorkspace.nameWorkSpace}, para hacerlo debes hacer click en el siguiente enlace o pegarlo en tu navegador para completar el proceso: ` )
+                sendMail(emaik,`http://${WEB_PAGE}:5173/workspaceinvitation/${existWorkspace._id}`, `Hola, ${owner?.fullName} te ha invitado a unirte a un grupo de trabajo ${existWorkspace.nameWorkSpace}, para hacerlo debes hacer click en el siguiente enlace o pegarlo en tu navegador para completar el proceso: ` )
             }
             
         })
