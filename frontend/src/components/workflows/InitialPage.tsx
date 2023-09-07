@@ -1,18 +1,31 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import chicoWorkspace from "../../assets/chico-workspace.png"
 import chicaWorkspace from "../../assets/chica-workspace.png"
 import { Link } from "react-router-dom";
 import { validateUser } from "../../redux/slices/user.slice";
 import CardWorkspace from "./CardWorkspace";
+import axios, { AxiosResponse } from "axios";
 
 const InitialPage = () => {
 
   const dispatch = useAppDispatch()
   const {email} = useAppSelector((state) => state.user)
+  const [myWorkspaces, setMyWorkspaces] = useState<WorkspaceUser[]>([])
 
   useEffect(() => {
     dispatch(validateUser())
+    const getMyWorkspaces = async () => {
+      const token = localStorage.getItem("userToken")
+      const {data} = await axios("http://localhost:3001/myWorkSpaces", {
+        headers: {
+          Authorization: token
+        }
+      }) as AxiosResponse<ResponseWorkspaceUser>
+
+      setMyWorkspaces(data.workspaces)
+    }
+    getMyWorkspaces()
   }, [])
 
   return (
@@ -32,14 +45,23 @@ const InitialPage = () => {
         <img src={chicaWorkspace} className="absolute -bottom-[4.3rem] -right-10"/>
       </div>
       {
+        myWorkspaces.length ?
         <div className="bg-background-container-workspace w-[55em] flex flex-col items-center p-0 rounded-lg">
           <span className="w-full bg-button-orange text-xl rounded-t-lg px-12 py-6 text-white">
             Espacios de trabajo de <span className="font-semibold">{email}</span>
           </span>
           <div className="w-full">
-            <CardWorkspace/>
+            {
+              
+              myWorkspaces.map((workspace) => {
+                return(
+                  <CardWorkspace nameWorkSpace={workspace.nameWorkSpace} _id={workspace._id} members = {workspace.members} profileImage={workspace.profileImage}/>
+                )
+              }) 
+            }
           </div>
-        </div>
+        </div> :
+        ''
       }
     </section>
   )
