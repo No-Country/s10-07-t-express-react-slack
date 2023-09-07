@@ -17,7 +17,7 @@ const InitialPage = () => {
 
   return (
     <section className="w-full py-24 flex flex-col items-center gap-y-6 bg-background">
-      <h2 className="text-3xl text-white font-semibold mr-[16em]">¡Bienvenido a la conexion!</h2>
+      <h2 className="text-3xl text-white font-semibold mr-[16em]">¡Bienvenido a la conexión!</h2>
       <div className="relative w-[55em] flex items-center justify-center px-20 py-12 bg-background-container-workspace text-text-workspace rounded-2xl">
         <div className="flex flex-col gap-y-6 w-96">
           <h3 className="text-2xl font-semibold">Crea un nuevo espacio de trabajo</h3>

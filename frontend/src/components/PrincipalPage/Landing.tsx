@@ -92,7 +92,7 @@ const Landing = () => {
         <h2 className='text-2xl text-white font-semibold text-center'>
           TESTIMONIOS DE NUESTROS USUARIOS
         </h2>
-        <div className='flex flex-col gap-2 lg:flex lg:flex-row lg:gap-4'>
+        <div className='flex flex-col gap-2 lg:flex lg:flex-row lg:gap-4 mb-12'>
           <TestimonialCard
             picture={testimonialPicture1}
             testimonial='“La conexión entre los equipos con Connecta es fantastica”'

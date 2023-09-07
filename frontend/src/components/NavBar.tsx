@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { AiOutlineClose } from 'react-icons/ai'
 import DropdownUser from './dropdownUser/DropdownUser'
+import { useSelector } from 'react-redux';
 
 interface NavBarProps {
   isUserLoggedIn: boolean
@@ -17,6 +18,12 @@ function NavBar({ isUserLoggedIn }: NavBarProps) {
   ]
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
   const navigate = useNavigate()
+
+  const name = useSelector((state) =>  state.user.fullName);
+  const email = useSelector((state) =>  state.user.email);
+  const profileImage = useSelector((state) =>  state.user.profileImage);
+  
+
   return (
     <nav className='bg-bg-navbar w-full h-20 md:flex items-center justify-between fixed top-0 left-0 py-4 md:px-4 px-7 z-10'>
       <div
@@ -48,7 +55,7 @@ function NavBar({ isUserLoggedIn }: NavBarProps) {
           <li>
             {isUserLoggedIn ? (
               <div className='flex space-x-3'>
-                <DropdownUser profileImage="https://flowbite.com/docs/images/people/profile-picture-5.jpg"  name="Alondra Cena" email="mddwmdwmwd"/>
+                <DropdownUser profileImage={profileImage}  name={name} email={email}/>
               </div>
             ) : (
               <div className='md:flex md:items-center justify-between'>

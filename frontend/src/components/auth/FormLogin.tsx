@@ -4,7 +4,7 @@ import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
 import axios, { AxiosResponse } from 'axios'
 import jwt_decode from 'jwt-decode'
 
-import { Decoded, Login, MyAxiosError, ResponseAxios } from './interfaces'
+import { Decoded, Login, MyAxiosError, ResponseAxios, Errors } from './interfaces'
 import { FaLock } from 'react-icons/fa'
 
 export const login = {
@@ -15,6 +15,7 @@ export const login = {
 const FormLogin = () => {
 
   const [loginTemplate, setLoginTemplate] = useState<Login>(login)
+  const [error, setError] = useState("")
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginTemplate({
@@ -41,7 +42,8 @@ const FormLogin = () => {
 
       if (axiosError.response) {
         // Manejar el error de respuesta HTTP
-        alert(axiosError.response.data.data.error)
+       const errorMessage = axiosError.response.data.error;
+       if(errorMessage){setError(errorMessage)}
       }
     }
   }
@@ -80,6 +82,7 @@ const FormLogin = () => {
           </div>
           <button type='submit' className="bg-button-orange rounded-xl text-white font-semibold px-4 w-full py-1.5 mt-2">Iniciar sesión</button>
         </form>
+        {error && <p className='text-red-600 font-semibold'>Error: {error}</p>}
         <div className="flex items-center gap-x-2">
           <Link to={"/recover"} className='text-button-orange underline'>¿Olvidaste tu constraseña?</Link>
         </div>

@@ -8,5 +8,6 @@ export interface IUser {
 export interface IUserAux {
     fullName: string,
     email: string,
-    _id: string
+    _id: string,
+    profileImage: string
 }
