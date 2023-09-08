@@ -5,6 +5,8 @@ import EditChannels from '../editWorkspace/editChannelsSection/EditChannels';
 import {AiOutlineMessage} from 'react-icons/ai'
 import {FaHashtag} from 'react-icons/fa'
 import rightArrow from '../../assets/rightArrow.svg'
+import bottomArrow from '../../assets/bottomArrow.svg'
+
 
 const SideBar = () => {
 
@@ -13,6 +15,7 @@ const SideBar = () => {
         editUsers: true,
         editChannels: true
     })
+    const [dropdownChannels, setDropdownChannels] = useState<boolean>(false)
 
     return(
         <nav className='h-screen mt-20 bg-[#292956] text-button-orange flex flex-col gap-y-8 px-4 py-8 w-1/3'>
@@ -30,13 +33,23 @@ const SideBar = () => {
                         <img src={rightArrow}/>
                     </div>
                 </div>
-                <div className='flex items-center gap-x-4'>
+                <button 
+                onClick={() => {setDropdownChannels(!dropdownChannels)}}
+                className='flex items-center gap-x-4'>
                     <div className='text-xl'>
                         <FaHashtag/>
                     </div>
                     <div className='flex items-center gap-x-2'>
                         <span className='py-2 border-b border-b-white'>Canales</span>
-                        <img src={rightArrow}/>
+                        <img src={dropdownChannels ? bottomArrow : rightArrow}/>
+                    </div>
+                </button>
+                <div className={`${dropdownChannels ? 'flex' : 'hidden'} flex-col ml-8 w-full gap-y-4`}>
+                    <div className={`px-2 py-1 rounded-l-full hover:bg-white hover:cursor-pointer w-full`}>
+                        <span className='font-semibold'># General</span>
+                    </div>
+                    <div className={`px-2 py-1 rounded-l-full hover:bg-white hover:cursor-pointer w-full`}>
+                        <span className='font-semibold'># Listas</span>
                     </div>
                 </div>
             </div>

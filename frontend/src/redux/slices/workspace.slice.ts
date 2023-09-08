@@ -51,6 +51,11 @@ export const joinMembers = createAsyncThunk('workspace/members', async (body: st
   return response.data
 })
 
+export const getOneWorkspace = createAsyncThunk('workspace/getone', async (id: string | any) => {
+  const {data} = await axios(`http://localhost:3001/oneworkspace/${id}`) as AxiosResponse<ResponseAxios>
+  return data.data
+})
+
 export const workspaceSlice = createSlice({
   name: 'workspace',
   initialState,
@@ -82,6 +87,13 @@ export const workspaceSlice = createSlice({
         state.loading = "success"
         state.msg = action.payload.msg
         return action.payload;
+      })
+      .addCase(getOneWorkspace.fulfilled, (state, action) => {
+        state.loading = "success"
+        state._id = action.payload._id
+        state.nameWorkSpace = action.payload.nameWorkSpace
+        state.members = action.payload.members
+        state.channelsId = action.payload.channelsId
       })
   }
 })
