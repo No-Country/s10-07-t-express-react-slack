@@ -5,6 +5,8 @@ export const getOneWorkspace = async (req: Request, res: Response) => {
     const id = req.params.id
   try {
     const workSpace = await WorkSpaceModel.findById({_id: id})
+    .populate("members", ["profileImage", "fullName", "_id", "email"])
+    .populate("channelsId", ["name", "_id"])
     if (workSpace) {
       return res.json({data: workSpace})
     }

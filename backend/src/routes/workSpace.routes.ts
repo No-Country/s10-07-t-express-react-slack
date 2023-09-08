@@ -7,7 +7,7 @@ import { getMyWorkSpaces } from "../services/crudWorkSpace/getMyWorkspaces"
 import { putWorkSpace } from "../services/crudWorkSpace/put"
 import { allWorkSpace } from "../services/crudWorkSpace/get"
 import { deleteWorkSpace } from "../services/crudWorkSpace/delete"
-import { getOneWorkspace } from "../services/crudWorkSpace/getOneWorkspace"
+import { getOneWorkspace } from "../services/crudWorkSpace/getONeWorkspace"
 
 
 export const workSpacesRoutes = Router()
