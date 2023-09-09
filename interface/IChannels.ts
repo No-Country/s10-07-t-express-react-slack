@@ -8,7 +8,8 @@ export interface IChannels {
   userId: SchemaDefinitionProperty<IUser>,
   workSpaceId: SchemaDefinitionProperty<IWorkSpace>,
   name: string
-  messages: SchemaDefinitionProperty<IChannels[]>
+  messages: SchemaDefinitionProperty<IChannels[]>,
+  description: string
   // nameWorkSpace: string,
   // count?: Number
 

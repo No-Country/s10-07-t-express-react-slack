@@ -10,7 +10,7 @@ export interface IWorkSpace {
   members: SchemaDefinitionProperty<IUser>
   nameWorkSpace: string
   count?: Number
-  channelsId: SchemaDefinitionProperty<IChannels[]>
+  channelsId: SchemaDefinitionProperty<IChannels>[]
 
   // channels: SchemaDefinitionProperty<IMessages[]>
 }
