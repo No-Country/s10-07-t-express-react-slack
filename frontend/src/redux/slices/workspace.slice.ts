@@ -2,6 +2,17 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import axios, { AxiosResponse } from 'axios';
 
+export interface ChannelProps {
+  name: string;
+  _id: string;
+}
+
+interface UserProps {
+  profileImage: string;
+  _id: string;
+  fullName: string;
+  email: string;
+}
 
 interface BodyJoinMembers {
   members: string[]
@@ -11,9 +22,9 @@ interface Workspace {
   nameWorkSpace: string;
   userId: string;
   _id: string;
-  members?: string[];
+  members?: string[] | UserProps[];
   loading?: string;
-  channelsId: string[];
+  channelsId: ChannelProps[] | string[];
   msg?: string
 }
 
@@ -60,12 +71,15 @@ export const workspaceSlice = createSlice({
   name: 'workspace',
   initialState,
   reducers: {
-    addMember: (state, action: PayloadAction<string>) => {
+    addMember: (state, action: PayloadAction<any>) => {
       if(state.members) state.members.push(action.payload)
     },
-    deleteMember: (state, action: PayloadAction<string>) => {
+    deleteMember: (state, action: PayloadAction<any>) => {
       if(state.members){
-        state.members = state.members.filter(member => member !== action.payload)
+        const index = state.members.indexOf(action.payload)
+        if(index !== -1){
+          state.members.splice(index)
+        }
       }
     },
     setName: (state, action: PayloadAction<string>) => {
