@@ -9,7 +9,7 @@ export const channelsRoutes = Router()
 
 // ─── Canales ─────────────────────────────────────────────────────────────────
 
-const CHANNEL = "/channel";
+const CHANNEL = "/channel/:idWorkspace";
 channelsRoutes.post(`${CHANNEL}`, channels)
 
 const CHANNELS = "/channels";
