@@ -13,6 +13,10 @@ const channelsSchema = new Schema<IChannels>(
       type: Schema.Types.ObjectId,
       ref: "WorkSpace",
     },
+    description: {
+      type: String,
+      require: false,
+    },
     messages: {
       // type: Schema.Types.ObjectId,
       type: Schema.Types.Array,

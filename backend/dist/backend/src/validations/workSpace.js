@@ -10,14 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateWorkSpace = void 0;
-const gmail_1 = require("./items/gmail");
 const name_1 = require("./items/name");
 const validateWorkSpace = (workSpace) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!workSpace.channels && !workSpace.nameWorkSpace) {
+    if (!workSpace.nameWorkSpace) {
         throw new Error("Todos los campos son requeridos");
     }
-    (0, name_1.validationWorkSpace)(workSpace.nameWorkSpace);
-    (0, gmail_1.validationEmail)(workSpace.emailWorkSpace);
+    (0, name_1.validationName)(workSpace.nameWorkSpace);
     return workSpace;
 });
 exports.validateWorkSpace = validateWorkSpace;

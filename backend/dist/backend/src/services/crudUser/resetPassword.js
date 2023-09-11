@@ -15,6 +15,7 @@ const bcrypts_1 = require("../../helper/bcrypts");
 const resetPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const password = req.body.newPassword;
+        console.log("backend", password);
         const { id } = req.params;
         //const existUser = await Usermodel.findOne({email : req.body?.email});
         const existUser = yield Users_1.Usermodel.findById(id);
@@ -23,7 +24,7 @@ const resetPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         }
         const encrypted = yield (0, bcrypts_1.hashedPassword)(password);
         yield Users_1.Usermodel.findByIdAndUpdate({ _id: id }, { password: encrypted });
-        return res.status(201).send({ msg: "Contraseña actualizada exitosamente ...!" });
+        return res.status(201).send({ msg: "Contraseña actualizada exitosamente!" });
     }
     catch (error) {
         if (error instanceof Error) {

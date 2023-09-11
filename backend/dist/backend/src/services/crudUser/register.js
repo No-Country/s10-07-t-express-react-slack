@@ -18,7 +18,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const validations = (0, register_1.validateRegister)(user);
         const existUser = yield Users_1.Usermodel.findOne({
-            email: validations.email
+            email: validations.email,
         });
         if (existUser) {
             return res.status(400).json({ error: "El usuario ya existe", existUser });
@@ -27,11 +27,14 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const newUser = new Users_1.Usermodel({
             fullName: validations.fullName,
             email: validations.email,
-            password: encrypted
+            password: encrypted,
         });
         yield newUser.save();
         if (newUser) {
-            return res.status(201).json({ message: "Usuario creado con exito" });
+            return res.status(201).json({
+                message: "Usuario creado con exito",
+                newUser
+            });
         }
     }
     catch (error) {

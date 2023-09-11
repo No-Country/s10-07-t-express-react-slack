@@ -20,14 +20,12 @@ const me = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (req.headers['authorization']) {
         try {
             const token = req.headers['authorization'];
+            console.log(token);
             const payload = jsonwebtoken_1.default.verify(token, TOKEN);
             const userData = yield Users_1.Usermodel.findOne({
                 email: payload.id
             }).select('-password');
-            const data = {
-                userData
-            };
-            return res.status(200).json({ data });
+            return res.status(200).json({ data: userData });
         }
         catch (error) {
             return res.status(400).json({ msg: "Token inválido" });

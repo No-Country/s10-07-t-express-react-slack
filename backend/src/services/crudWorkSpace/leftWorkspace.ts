@@ -17,7 +17,7 @@ export const leaveFromWorkspace = async (req: Request, res: Response) => {
             return res.status(404).json({error: "El email no está registrado."})
         }
         await WorkSpaceModel.updateOne({_id: idWorkspace},{$pull: {members: userId._id}})
-        return res.status(200).json("Usuario retirado del espacio de trabajo.")
+        return res.status(200).json({msg: "Usuario retirado del espacio de trabajo."})
     } catch (error){
         if (error instanceof Error)
             return res.status(400).json({ error: error.message })
