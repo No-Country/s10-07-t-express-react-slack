@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { userSlice, workspaceSlice, recoverySlice, resetSlice } from './index'
+import { userSlice, channelSlice, workspaceSlice, recoverySlice, resetSlice } from './index'
 import { messagesSlice } from './slices/message.slice'
 
 export const store = configureStore({
@@ -8,7 +8,8 @@ export const store = configureStore({
     workspace: workspaceSlice.reducer,
     passwordRecovery: recoverySlice.reducer,
     passwordReset: resetSlice.reducer,
-    messages: messagesSlice.reducer
+    messages: messagesSlice.reducer,
+    channel: channelSlice.reducer,
   }
 })
 
