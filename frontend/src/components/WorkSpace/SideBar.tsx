@@ -1,36 +1,41 @@
-import { useState, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useState, useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 
-import DropdownEditWorkspace, { OptionsEdit } from '../editWorkspace/DropdownEditWorkspace';
-import EditWorkspace from '../editWorkspace/editWorkspaceSection/EditWorkspace';
-import EditChannels from '../editWorkspace/editChannelsSection/EditChannels';
-import CreateChannel from '../channels/CreateChannels';
+import DropdownEditWorkspace, {
+  OptionsEdit,
+} from '../editWorkspace/DropdownEditWorkspace'
+import EditWorkspace from '../editWorkspace/editWorkspaceSection/EditWorkspace'
+import EditChannels from '../editWorkspace/editChannelsSection/EditChannels'
+import CreateChannel from '../channels/CreateChannels'
 
 import { AiOutlineMessage, AiOutlinePlus } from 'react-icons/ai'
 import { FaHashtag } from 'react-icons/fa'
 import rightArrow from '../../assets/rightArrow.svg'
 import bottomArrow from '../../assets/bottomArrow.svg'
-import { getChannel } from '../../redux/slices/channel.slice';
+import { getChannel } from '../../redux/slices/channel.slice'
 
 const SideBar = () => {
-
   const [editOptions, setEditOptions] = useState<OptionsEdit>({
     editWorkspace: true,
     editUsers: true,
-    editChannels: true
+    editChannels: true,
   })
   const [dropdownChannels, setDropdownChannels] = useState<boolean>(false)
   const [hiddenAlertChannel, setHiddenAlertChannel] = useState<boolean>(true)
   const [channelClicked, setChannelClicked] = useState<any>({})
-  
+
   const dispatch = useAppDispatch()
-  const { channelsId, nameWorkSpace, _id } = useAppSelector(state => state.workspace)
-  const stateChannel = useAppSelector(state => state.channel)
+  const { channelsId, nameWorkSpace, _id } = useAppSelector(
+    (state) => state.workspace,
+  )
+  const stateChannel = useAppSelector((state) => state.channel)
 
   useEffect(() => {
-    setChannelClicked(channelsId[0])
-    dispatch(getChannel(channelsId[0]))
-  }, [])
+    if (channelsId.length) {
+      setChannelClicked(channelsId[0])
+      dispatch(getChannel(channelsId[0]))
+    }
+  }, [channelsId])
 
   return (
     <nav className='h-screen mt-20 bg-[#292956] text-button-orange flex flex-col gap-y-8 px-8 py-12 w-1/3'>
@@ -44,13 +49,17 @@ const SideBar = () => {
             <AiOutlineMessage />
           </div>
           <div className='flex items-center gap-x-2'>
-            <span className='py-2 border-b border-b-white'>Hilos de conversaciones</span>
+            <span className='py-2 border-b border-b-white'>
+              Hilos de conversaciones
+            </span>
             <img src={rightArrow} />
           </div>
         </div>
         <div className='flex items-center justify-between'>
           <button
-            onClick={() => { setDropdownChannels(!dropdownChannels) }}
+            onClick={() => {
+              setDropdownChannels(!dropdownChannels)
+            }}
             className='flex items-center gap-x-4'>
             <div className='text-xl'>
               <FaHashtag />
@@ -66,27 +75,37 @@ const SideBar = () => {
             <AiOutlinePlus />
           </button>
         </div>
-        <div className={`${dropdownChannels ? 'flex' : 'hidden'} flex-col ml-8 w-full gap-y-4`}>
-          {
-            channelsId.map((channel: any) => {
-              return (
-                <button 
+        <div
+          className={`${
+            dropdownChannels ? 'flex' : 'hidden'
+          } flex-col ml-8 w-full gap-y-4`}>
+          {channelsId.map((channel: any) => {
+            return (
+              <button
+                key={channel._id}
                 onClick={() => {
                   setChannelClicked(channel)
                   dispatch(getChannel(channel))
                 }}
-                className={`${channel._id === stateChannel._id ? 'bg-white' : 'bg-transparent'} px-2 py-1 rounded-l-full hover:bg-white hover:cursor-pointer w-full`}>
-                  <span className='font-semibold'># {channel?.name}</span>
-                </button>
-              )
-            })
-          }
+                className={`${
+                  channel._id === stateChannel._id
+                    ? 'bg-white'
+                    : 'bg-transparent'
+                } px-2 py-1 rounded-l-full hover:bg-white hover:cursor-pointer w-full`}>
+                <span className='font-semibold'># {channel?.name}</span>
+              </button>
+            )
+          })}
         </div>
       </div>
       <EditWorkspace state={editOptions} setState={setEditOptions} />
       <EditChannels state={editOptions} setState={setEditOptions} />
-      <CreateChannel hiddenAlertChannel={hiddenAlertChannel} setHiddenAlertChannel={setHiddenAlertChannel} idWorkspace={_id} />
+      <CreateChannel
+        hiddenAlertChannel={hiddenAlertChannel}
+        setHiddenAlertChannel={setHiddenAlertChannel}
+        idWorkspace={_id}
+      />
     </nav>
   )
 }
-export default SideBar;
+export default SideBar

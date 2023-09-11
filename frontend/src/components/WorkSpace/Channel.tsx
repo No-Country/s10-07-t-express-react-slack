@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import io from 'socket.io-client'
 import { IChannel } from './interfaces'
 import { generateId } from './utils'
-import { validateUser } from '../../redux/slices/user.slice'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 
 import rightArrow from '../../assets/rightArrow.svg'
@@ -16,8 +15,8 @@ import { useQuill } from 'react-quilljs'
 const socket = io('http://localhost:3001') // Connect to the Socket.io server
 
 const Channel = () => {
-  const dispatch = useAppDispatch()
   const { _id, fullName } = useAppSelector((state) => state.user)
+  const channel = useAppSelector((state) => state.channel)
   const workspace = useAppSelector((state) => state.workspace)
   const [messages, setMessages] = useState<IChannel[]>([])
   const [richText, setRichText] = useState<string>('')
@@ -27,33 +26,32 @@ const Channel = () => {
   })
 
   useEffect(() => {
-    dispatch(validateUser())
-  }, [])
-
-  useEffect(() => {
     quill?.setContents(richText)
-    //socket.emit('message', richText)
-    // channelData = {
-    //   ...channelData,
-    //   message: richText,
-    // }
-    //setChannelData({ ...channelData, message: richText })
     if (richText.length) {
-      setMessages((prev) => [
-        ...prev,
-        {
-          nameWorkSpaceId: workspace._id,
-          userId: _id,
-          message: richText,
-        },
-      ])
+      const newMessage = {
+        nameWorkSpaceId: workspace._id,
+        userId: _id,
+        message: richText,
+        channelsId: channel._id,
+      }
+      socket.emit('message', newMessage)
+      reciveMessage(newMessage)
     }
   }, [richText])
 
   useEffect(() => {
-    console.log(messages)
-    socket.emit('message')
-  }, [messages])
+    socket.on('message', (message) => {
+      reciveMessage(message)
+      console.log(message)
+    })
+    return () => {
+      socket.off('message', reciveMessage)
+    }
+  }, [])
+
+  const reciveMessage = (message: any) => {
+    setMessages((prev) => [...prev, message])
+  }
 
   return (
     <section className='mt-20 py-8 px-12 w-2/3 h-screen flex flex-col items-center justify-between'>
@@ -62,7 +60,7 @@ const Channel = () => {
           <div className='flex items-center font-semibold gap-x-3 text-2xl'>
             <span className='text-button-orange text-3xl'>Canales</span>
             <img src={rightArrow} className='w-3' />
-            <span className='text-[#828282]'>#Nombre Canal</span>
+            <span className='text-[#828282]'>#{channel.name}</span>
           </div>
           <button className='text-black flex items-center gap-x-2'>
             <div className=''>
@@ -92,11 +90,11 @@ const Channel = () => {
             />
             <div className='flex flex-col gap-y-4'>
               <span className='font-semibold text-xl text-[#555454]/80'>
-                {fullName}
+                {data.userId === _id ? fullName : data.userId}
               </span>
               <div
                 dangerouslySetInnerHTML={{ __html: data.message || '' }}
-                className='car-body'></div>
+                className=''></div>
             </div>
           </div>
         ))}
@@ -104,15 +102,6 @@ const Channel = () => {
       <div>
         <ChatField setRichText={setRichText} />
       </div>
-      {/* <div>
-        <input
-          type="text"
-          value={inputMessage}
-          onChange={(e) => setInputMessage(e.target.value)}
-          className='border border-black'
-        />
-        <button onClick={handleSendMessage}>Send</button>
-      </div> */}
     </section>
   )
 }
