@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import { IMessage } from "../../../interface/IMessage"
+import { Schema, model } from 'mongoose'
+import { IMessage } from '../../../interface/IMessage'
 
 const messageSchema = new Schema<IMessage>(
   {
@@ -19,17 +19,17 @@ const messageSchema = new Schema<IMessage>(
       type: Schema.Types.Array,
       // type: Schema.Types.ObjectId,
       // type: Schema.Types.ObjectId,
-      ref: "Channel",
+      ref: 'Channel',
     },
     userId: {
       type: Schema.Types.ObjectId,
-      ref: "User",
-    }
+      ref: 'User',
+    },
   },
   {
     timestamps: true,
     versionKey: false,
   }
-);
+)
 
-export const MessageModel = model<IMessage>("Message", messageSchema);
+export const MessageModel = model<IMessage>('Message', messageSchema)
