@@ -63,7 +63,7 @@ const DropdownEditWorkspace: FC<Props> = ({ setState }) => {
             <button onClick={( ) => handleClick(Options.editChannels)}>Administrar canales</button>
           </li>
           <li>
-            <button>Administrar miembros</button>
+            <button onClick={( ) => handleClick(Options.editUsers)}>Administrar miembros</button>
           </li>
         </ul>
       </div>
