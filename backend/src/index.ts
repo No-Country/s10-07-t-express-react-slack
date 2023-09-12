@@ -14,11 +14,15 @@ export const io = new SocketServer(server, {
 })
 
 io.on('connection', (socket) => {
-  console.log('Connected with socket')
+  console.log('Connected with Socket')
+  socket.on('joinChannel', (channel, fullName) => {
+    socket.join(channel)
+    console.log(`el usuario ${fullName} se unio a la sala ${channel}`)
+  })
   socket.on('message', (data: any) => {
     console.log(data)
     //socket.broadcast.emit('message', data)
-    socket.broadcast.emit('message', data)
+    socket.broadcast.to(data.channelsId).emit('message', data)
   })
 })
 
