@@ -19,6 +19,9 @@ const workSpaceSchema = new Schema<IWorkSpace>(
     members: {
       type: Schema.Types.Array,
       ref: "User"
+    },
+    image: {
+      type :String
     }
   },
   {
