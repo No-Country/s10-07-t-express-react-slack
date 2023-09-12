@@ -3,6 +3,7 @@ import { IMessage } from '../../../../interface/IMessage'
 import { MessageModel } from '../../models/Message'
 import { ChannelsModel } from '../../models/Channels'
 import { io } from '../../index'
+import { WorkSpaceModel } from '../../models/WorkSpace'
 
 export const createMessage = async (req: Request, res: Response) => {
   // const { from, message } = req.body;
@@ -17,6 +18,17 @@ export const createMessage = async (req: Request, res: Response) => {
       // from: message.from,
     })
     await data.save()
+    console.log(data)
+
+    const channel = await ChannelsModel.findById({ _id: channelsId })
+    if (channel?.messages) {
+      console.log([...channel.messages, data._id])
+
+      await ChannelsModel.updateOne(
+        { _id: channelsId },
+        { messages: [...channel.messages, data._id] }
+      )
+    }
     // res.status(201).json(newMessage);
 
     // io.on("connection", (socket) => {

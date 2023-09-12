@@ -14,6 +14,8 @@ export const io = new SocketServer(server, {
 })
 
 io.on('connection', (socket) => {
+  console.log('pasa 1 vez')
+
   console.log('Connected with Socket')
   socket.on('joinChannel', (channel, fullName) => {
     socket.join(channel)
