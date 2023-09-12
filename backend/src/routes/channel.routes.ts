@@ -4,6 +4,7 @@ import { channels } from "../services/CrudChannels/post";
 import { leaveChannel } from "../services/CrudChannels/leaveChannel";
 import { deleteChannel } from "../services/CrudChannels/delete";
 import { getOneChannel } from "../services/CrudChannels/getOne";
+import { updateChannel } from "../services/CrudChannels/put";
 
 
 export const channelsRoutes = Router()
@@ -25,3 +26,6 @@ channelsRoutes.delete(`${DELETE_CHANNEL}`, deleteChannel)
 
 const ONE_CHANNEL = "/channels/:idChannel";
 channelsRoutes.get(`${ONE_CHANNEL}`, getOneChannel)
+
+const UPDATE_CHANNEL = "/channels/:idChannel";
+channelsRoutes.put(`${UPDATE_CHANNEL}`, updateChannel)
