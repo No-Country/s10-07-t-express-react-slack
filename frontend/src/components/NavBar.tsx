@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { AiOutlineClose } from 'react-icons/ai'
 import DropdownUser from './dropdownUser/DropdownUser'
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../redux/hooks';
 
 interface NavBarProps {
   isUserLoggedIn: boolean
@@ -19,9 +19,9 @@ function NavBar({ isUserLoggedIn }: NavBarProps) {
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
   const navigate = useNavigate()
 
-  const name = useSelector((state) =>  state.user.fullName);
-  const email = useSelector((state) =>  state.user.email);
-  const profileImage = useSelector((state) =>  state.user.profileImage);
+  const name = useAppSelector((state) =>  state.user.fullName);
+  const email = useAppSelector((state) =>  state.user.email);
+  const profileImage = useAppSelector((state) =>  state.user.profileImage);
   
 
   return (
