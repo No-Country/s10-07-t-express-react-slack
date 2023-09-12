@@ -26,6 +26,22 @@ const Channel = () => {
   })
 
   useEffect(() => {
+    socket.emit('joinChannel', channel._id, fullName)
+    socket.on('message', (message) => {
+      if (message.channelsId === channel._id) {
+        console.log(message)
+        reciveMessage(message)
+      }
+    })
+    setMessages([
+      { nameWorkSpaceId: '', userId: '', message: '', channelsId: '' },
+    ])
+    return () => {
+      socket.off('message', reciveMessage)
+    }
+  }, [channel._id])
+
+  useEffect(() => {
     quill?.setContents(richText)
     if (richText.length) {
       const newMessage = {
@@ -39,15 +55,20 @@ const Channel = () => {
     }
   }, [richText])
 
-  useEffect(() => {
-    socket.on('message', (message) => {
-      reciveMessage(message)
-      console.log(message)
-    })
-    return () => {
-      socket.off('message', reciveMessage)
-    }
-  }, [])
+  // useEffect(() => {
+  //   socket.on('message', (message) => {
+  //     console.log(message.channelsId)
+  //     console.log(channel._id)
+
+  //     if (message.channelsId === channel._id) {
+  //       console.log(message)
+  //       reciveMessage(message)
+  //     }
+  //   })
+  //   return () => {
+  //     socket.off('message', reciveMessage)
+  //   }
+  // }, [])
 
   const reciveMessage = (message: any) => {
     setMessages((prev) => [...prev, message])
@@ -81,23 +102,26 @@ const Channel = () => {
         </div>
       </div>
       <div className='w-full'>
-        {messages?.map((data) => (
-          <div key={generateId()} className='flex gap-x-4'>
-            <img
-              src='https://flowbite.com/docs/images/people/profile-picture-5.jpg'
-              className='w-16 h-16'
-              alt=''
-            />
-            <div className='flex flex-col gap-y-4'>
-              <span className='font-semibold text-xl text-[#555454]/80'>
-                {data.userId === _id ? fullName : data.userId}
-              </span>
-              <div
-                dangerouslySetInnerHTML={{ __html: data.message || '' }}
-                className=''></div>
-            </div>
-          </div>
-        ))}
+        {messages?.map(
+          (data) =>
+            data.message && (
+              <div key={generateId()} className='flex gap-x-4'>
+                <img
+                  src='https://flowbite.com/docs/images/people/profile-picture-5.jpg'
+                  className='w-16 h-16'
+                  alt=''
+                />
+                <div className='flex flex-col gap-y-4'>
+                  <span className='font-semibold text-xl text-[#555454]/80'>
+                    {data.userId === _id ? fullName : data.userId}
+                  </span>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: data.message || '' }}
+                    className=''></div>
+                </div>
+              </div>
+            ),
+        )}
       </div>
       <div>
         <ChatField setRichText={setRichText} />
