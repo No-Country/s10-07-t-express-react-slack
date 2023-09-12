@@ -13,7 +13,7 @@ import TestimonialCard from '../testimonalCard/TestimonialCard'
 import testimonialPicture1 from '../../assets/testiminal picture 1.png'
 import testimonialPicture2 from '../../assets/testiminal picture 2.png'
 import testimonialPicture3 from '../../assets/testiminal picture 3.png'
-
+import promovideo from "../../assets/video connecta.mp4"
 const Landing = () => {
   const underMd = useIsMd()
 
@@ -55,7 +55,7 @@ const Landing = () => {
         )}
       </section>
       <section className='md:flex md:flex-row md:justify-between flex flex-col items-center md:w-4/5 pt-40 gap-4'>
-        <div>
+        <div className='md:mr-24 mx-10 mb-8'>
           <p className='text-3xl text-button-orange leading-10 font-semibold'>
             CREA UN NUEVO ESPACIO <br />
             DE TRABAJO
@@ -70,8 +70,8 @@ const Landing = () => {
             buttonText='Registrate'
           />
         </div>
-        <div className=''>
-          <img src={fondoGris} alt='diseño de pagina' />
+        <div className='flex'>
+        <video src={promovideo} autoPlay loop controls muted className='h-80 md:h-full'/>
         </div>
       </section>
       <section className='md:flex md:flex-row md:justify-between flex flex-col items-center md:w-4/5 pt-40 gap-4 px-8'>
