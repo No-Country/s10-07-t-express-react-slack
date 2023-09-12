@@ -5,7 +5,7 @@ import { AiOutlineClose, AiOutlinePaperClip } from 'react-icons/ai';
 import { BsPersonWorkspace } from 'react-icons/bs';
 import axios, { AxiosResponse } from 'axios';
 import { useAppSelector } from '../../../redux/hooks';
-
+import {CLOUDINARY_API_KEY, CLOUDINARY_URL} from '../../../../env'
 const EditWorkspace: FC<Props> = ({ state, setState }) => {
 
   const [selectedFile, setSelectedFile] = useState<File>();
@@ -16,7 +16,7 @@ const EditWorkspace: FC<Props> = ({ state, setState }) => {
   useEffect(() => {
     setInputName(workspace.nameWorkSpace)
     // setPreviewURL(workspace.image)
-  }, [])
+  }, [workspace.nameWorkSpace])
 
   // Previsualizar imagen
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,14 +63,11 @@ const EditWorkspace: FC<Props> = ({ state, setState }) => {
             
       formData.append('file', selectedFile);
       formData.append("upload_preset", "connecta");
-      formData.append('api_key', '179368589966648');
+      formData.append('api_key', CLOUDINARY_API_KEY);
+      const {data} = await axios.post(CLOUDINARY_URL, formData) as AxiosResponse
 
-      const {data} = await axios.post("https://api.cloudinary.com/v1_1/dzkehbdcj/image/upload", formData) as AxiosResponse
-      
-      // const response = await axios.put("http://localhost:3001/", {nameWorkSpace: inputName, image: data.url}) as AxiosResponse
-
-    }else{
-      showModal()
+      await axios.put(`http://localhost:3001/workSpace/${workspace._id}`, {nameWorkSpace: inputName, image: data.url}) as AxiosResponse
+      alert("se edito correctamente el espacio de trabajo")
     }
   }
 
