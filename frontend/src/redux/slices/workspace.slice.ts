@@ -54,7 +54,7 @@ export const createWorkspace = createAsyncThunk('workspace/create', async (body:
   return {...response.data.data, msg: response.data.msg}
 })
 
-export const joinMembers = createAsyncThunk('workspace/members', async (body: string[]) => {
+export const joinMembers = createAsyncThunk('workspace/members', async (body: any) => {
   const workspaceId = localStorage.getItem("workspaceId")
   console.log(workspaceId, body)
   const response = await axios.post<BodyJoinMembers>(`http://localhost:3001/joinWorkSpace/${workspaceId}`, {emails: body}) as AxiosResponse<Workspace>

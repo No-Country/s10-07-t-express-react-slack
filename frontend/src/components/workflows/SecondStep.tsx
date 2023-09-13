@@ -17,6 +17,32 @@ const SecondStepWorkspace = () => {
   }
 
   const handleAddMembers = () => {
+    const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    const dominiosPermitidos = [
+      'gmail.com',
+      'hotmail.com',
+      'yahoo.com',
+      'yahoo.es',
+      'outlook.com',
+      'outlook.es',
+    ]
+    const dominiosPermitidosRegex = new RegExp(
+      `^[a-zA-Z0-9._%+-]+@(${dominiosPermitidos.join('|')})$`,
+      'i',
+    )
+    
+    if(!member.length){
+      alert("ingrese un email valido")
+    }
+
+    if (!regexEmail.test(member)) {
+      alert('Por favor ingresa un email válido.')
+    }
+
+    if (!dominiosPermitidosRegex.test(member)) {
+      alert('Por favor ingresa un dominio de email válido.')
+    }
+
     dispatch(addMember(member))
     setMember("")
   }
@@ -49,7 +75,7 @@ const SecondStepWorkspace = () => {
               </button>
             </div>
             {
-              members?.map((email, index) => {
+              members?.map((email: any, index) => {
                 return(
                   <div key={`${email}${index}`} className="relative px-2 pr-8 py-1 rounded-md border-2 text-sm text-secundary-color">
                     <button 

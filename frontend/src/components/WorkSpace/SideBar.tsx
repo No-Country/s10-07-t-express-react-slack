@@ -13,6 +13,7 @@ import { FaHashtag } from 'react-icons/fa'
 import rightArrow from '../../assets/rightArrow.svg'
 import bottomArrow from '../../assets/bottomArrow.svg'
 import { getChannel } from '../../redux/slices/channel.slice'
+import EditMembers from '../editWorkspace/editMembersSection/EditMembers'
 
 const SideBar = () => {
   const [editOptions, setEditOptions] = useState<OptionsEdit>({
@@ -22,7 +23,6 @@ const SideBar = () => {
   })
   const [dropdownChannels, setDropdownChannels] = useState<boolean>(false)
   const [hiddenAlertChannel, setHiddenAlertChannel] = useState<boolean>(true)
-  const [channelClicked, setChannelClicked] = useState<any>({})
 
   const dispatch = useAppDispatch()
   const { channelsId, nameWorkSpace, _id } = useAppSelector(
@@ -32,7 +32,6 @@ const SideBar = () => {
 
   useEffect(() => {
     if (channelsId.length) {
-      setChannelClicked(channelsId[0])
       dispatch(getChannel(channelsId[0]))
     }
   }, [channelsId])
@@ -84,14 +83,13 @@ const SideBar = () => {
               <button
                 key={channel._id}
                 onClick={() => {
-                  setChannelClicked(channel)
                   dispatch(getChannel(channel))
                 }}
                 className={`${
                   channel._id === stateChannel._id
                     ? 'bg-white'
                     : 'bg-transparent'
-                } px-2 py-1 rounded-l-full hover:bg-white hover:cursor-pointer w-full`}>
+                } px-4 py-1 rounded-l-full hover:bg-white hover:cursor-pointer w-full flex flex-col`}>
                 <span className='font-semibold'># {channel?.name}</span>
               </button>
             )
@@ -100,6 +98,7 @@ const SideBar = () => {
       </div>
       <EditWorkspace state={editOptions} setState={setEditOptions} />
       <EditChannels state={editOptions} setState={setEditOptions} />
+      <EditMembers state={editOptions} setState={setEditOptions}/>
       <CreateChannel
         hiddenAlertChannel={hiddenAlertChannel}
         setHiddenAlertChannel={setHiddenAlertChannel}
