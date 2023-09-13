@@ -28,6 +28,8 @@ const DropdownUser: FC<DropdownUser> = ({profileImage, name, email}) => {
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isSmallScreen = window.innerWidth < 640;
+  const menuDirectionClass = isSmallScreen ? 'left-6' : 'right-6';
 
   return (
     <div className="relative">
@@ -46,7 +48,7 @@ const DropdownUser: FC<DropdownUser> = ({profileImage, name, email}) => {
           <img className="w-12 h-12 rounded-full" src={profileImage} alt="foto usuario" />
         }
       </button>
-      <div className={`${hiddenDropdown ? 'hidden' : 'absolute'} lg:right-6 sm:left-6 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-56 `}>
+      <div className={`${hiddenDropdown ? 'hidden' : 'absolute'} ${menuDirectionClass} z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-56 `}>
         <div className="px-4 py-3 lg:text-sm sm:text-lg text-gray-900 ">
           <div>{name}</div>
           <div className="font-medium truncate">{email}</div>
