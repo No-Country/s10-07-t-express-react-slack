@@ -12,7 +12,7 @@ const Login = () => {
             <div className="h-auto">
                 <h1 className="text-white text-4xl md:text-5xl lg:text-7xl font-semibold lg:pb-20 md:w-full ml-8 mb-4">¡Hola,<br />
                 de nuevo!</h1>  
-                <img src={astrogreeting} alt='astro' className='mx-auto w-1/2 md:w-full md:pt-6 mb-6' />
+                <img src={astrogreeting} alt='astro' className='mx-auto w-1/2 md:w-full md:pt-6 mb-6 md:mb-12 ' />
             </div>
       <GoogleOAuthProvider clientId="1003915463020-v12qk1fvdg1smd9skp2i9vrv5j99tra6.apps.googleusercontent.com">
         <FormLogin/>  
