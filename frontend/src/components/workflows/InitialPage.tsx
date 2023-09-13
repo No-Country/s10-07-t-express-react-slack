@@ -42,7 +42,7 @@ const InitialPage = () => {
           <Link to={"./firststep"} className="text-center px-4 py-2 bg-bg-navbar text-white rounded-md">Crear espacio de trabajo</Link>
         </div>
         <img src={chicoWorkspace} className="absolute -left-7 top-0"/>
-        <img src={chicaWorkspace} className="absolute -bottom-[4.3rem] -right-10"/>
+        <img src={chicaWorkspace} className="absolute -bottom-[4.3rem] -right-4"/>
       </div>
       {
         myWorkspaces.length ?
