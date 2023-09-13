@@ -5,13 +5,13 @@ import Footer from '../components/footer/Footer'
 
 const Reset = () => {
   return(
-      <section className="w-full relative ">
+      <section className="flex flex-col items-center w-full max-w-full relative">
       <NavBar isUserLoggedIn={false}/>
         
-        <div className="bg-background w-auto flex justify-between h-screen bg-bg-register px-24 relative pt-32">
+        <div className="bg-background w-full flex flex-col md:flex-row justify-between h-auto bg-bg-register md:px-12 lg:px-24 pt-32">
       <PasswordReset/>
-            <div className="w-100 gap-6 justify-between">
-                <img src={astroreset} alt='astro' className='' />
+            <div className="w-100 gap-6 mx-auto md:mx-auto lg:mx-0 mb-12">
+                <img src={astroreset} alt='astro' className='w-80 lg:w-full' />
             </div>
       </div>
       <Footer/>

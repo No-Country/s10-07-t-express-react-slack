@@ -23,9 +23,8 @@ const PasswordRecovery = () => {
 
   return(
     <section className='pt-12 lg:pt-48 pb-12 mx-auto lg:mx-0'>
-     
-    <div className='bg-forms sm:w-[450px] w-[320px] flex flex-col items-center gap-y-8 border border-stone-500 py-6 px-6 rounded-lg relative'>
-    <h3  className='font-semibold text-2xl text-button-orange '>Recuperar contraseña</h3>
+    <div className='bg-forms sm:w-[450px] w-[352px] flex flex-col items-center gap-y-8 border border-stone-500 py-6 px-6 rounded-lg relative'>
+    <h3  className='font-semibold text-2xl text-button-orange'>Recuperar contraseña</h3>
     <form className='w-full flex flex-col gap-y-1' onSubmit={handleRecoverySubmit}>
       <div className="relative">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
