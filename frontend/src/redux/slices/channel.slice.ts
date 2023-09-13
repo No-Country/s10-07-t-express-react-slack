@@ -13,7 +13,7 @@ export const getChannel = createAsyncThunk(
   'channel/getChannels',
   async (body: any) => {
     const response = (await axios(
-      `http://localhost:3001/channels/${body._id}`,
+      `https://slack-clone-93lk.onrender.com/channels/${body._id}`,
     )) as AxiosResponse<ChannelState>
 
     return response.data

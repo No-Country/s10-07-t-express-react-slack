@@ -1,12 +1,13 @@
 import {FaLock} from 'react-icons/fa'
 import axios, { AxiosResponse } from 'axios'
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { resetFailure, resetSuccess } from '../../redux/slices/reset.slice';
 import { Errors, MyAxiosError, ResponseAxios } from './interfaces'
 import { useParams } from 'react-router-dom';
 import {Reset} from './interfaces'
 import { validationErrorsReset } from './utils'
+import { useAppSelector } from '../../redux/hooks';
 
 export const reset = {
   password: '',
@@ -19,12 +20,10 @@ const PasswordReset = () => {
 
   const [newPasswordFront, setNewPassword] = useState<Reset>(reset)
   const [errors, setErrors] = useState<Errors>({})
-  console.log(newPasswordFront, errors)
   const dispatch = useDispatch();
 
-  const resetError = useSelector((state) => state.passwordReset.error);
-  const resetSuccessMessage = useSelector((state) => state.passwordReset.successMessage);
-  console.log(resetError, resetSuccessMessage)
+  const resetError = useAppSelector((state) => state.passwordReset.error);
+  const resetSuccessMessage = useAppSelector((state) => state.passwordReset.successMessage);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPassword({
@@ -41,7 +40,7 @@ const PasswordReset = () => {
   // const handleResetSubmit = async (e:React.ChangeEvent<HTMLFormElement>) => {
   //   e.preventDefault();
   //   try {
-  //     const response = await axios.post(`http://localhost:3001/reset-password/${id}`, { newPassword }) as AxiosResponse<ResponseAxios>;
+  //     const response = await axios.post(`https://slack-clone-93lk.onrender.com/reset-password/${id}`, { newPassword }) as AxiosResponse<ResponseAxios>;
   //     dispatch(resetSuccess(response.data.msg));
   //     console.log(response.data.msg)
   //   } catch (error) {
@@ -54,21 +53,24 @@ const PasswordReset = () => {
     try {
       if (!Object.entries(errors).length) {
         const response = await axios.post(
-          `http://localhost:3001/reset-password/${id}`,
+          `https://slack-clone-93lk.onrender.com/reset-password/${id}`,
           newPasswordData
         ) as AxiosResponse<ResponseAxios>
         setNewPassword(reset)
         dispatch(resetSuccess(response.data.msg));
        // window.location.href = '/workspaces'
       } else {
-        dispatch(resetFailure(error.response.data.error));
+        dispatch(resetFailure(errors.email));
       }
     } catch (error) {
       const axiosError = error as MyAxiosError;
 
       if (axiosError.response) {
         // Manejar el error de respuesta HTTP
-        //alert(axiosError.response.data.data.error)
+       const errorMessage = axiosError.response.data.data.error;
+       if(errorMessage?.length){
+         dispatch(resetFailure(errorMessage));
+       }
       }
     }
   };

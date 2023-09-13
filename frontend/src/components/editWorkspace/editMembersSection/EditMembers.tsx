@@ -69,7 +69,7 @@ const EditMembers: FC<Props> = ({ state, setState }) => {
 
   const deleteMemberr = async (id: any) => {
     try {
-      await axios.delete(`http://localhost:3001/leaveWorkSpace/${_id}/${id}`)
+      await axios.delete(`https://slack-clone-93lk.onrender.com/leaveWorkSpace/${_id}/${id}`)
       alert("se borro el usuario exitosamente")
     } catch (error) {
       alert("No se puede eliminar el usuario")

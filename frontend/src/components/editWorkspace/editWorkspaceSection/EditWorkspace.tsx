@@ -66,14 +66,14 @@ const EditWorkspace: FC<Props> = ({ state, setState }) => {
       formData.append('api_key', CLOUDINARY_API_KEY);
       const {data} = await axios.post(CLOUDINARY_URL, formData) as AxiosResponse
 
-      await axios.put(`http://localhost:3001/workSpace/${workspace._id}`, {nameWorkSpace: inputName, image: data.url}) as AxiosResponse
+      await axios.put(`https://slack-clone-93lk.onrender.com/workSpace/${workspace._id}`, {nameWorkSpace: inputName, image: data.url}) as AxiosResponse
       alert("se edito correctamente el espacio de trabajo")
     }
   }
 
   const deleteWorkspace = async () => {
     try {
-      await axios.delete(`http://localhost:3001/workSpace/${workspace._id}`)
+      await axios.delete(`https://slack-clone-93lk.onrender.com/workSpace/${workspace._id}`)
       window.location.href = "/workspaces"
     } catch (error) {
       console.log(error)

@@ -1,23 +1,32 @@
 import axios, { AxiosResponse } from 'axios'
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { recoveryFailure, recoverySuccess } from '../../redux/slices/recovery.slice';
-import { ResponseAxios } from './interfaces'
+import { MyAxiosError, ResponseAxios } from './interfaces'
+import { useAppSelector } from '../../redux/hooks';
 
 const PasswordRecovery = () => {
   const [email, setEmail] = useState('');
   const dispatch = useDispatch();
   
-  const recoveryError = useSelector((state) => state.passwordRecovery.error);
-  const recoverySuccessMessage = useSelector((state) => state.passwordRecovery.successMessage);
+  const recoveryError = useAppSelector((state) => state.passwordRecovery.error);
+  const recoverySuccessMessage = useAppSelector((state) => state.passwordRecovery.successMessage);
 
   const handleRecoverySubmit = async (e:React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/recover-password', { email }) as AxiosResponse<ResponseAxios>;
+      const response = await axios.post('https://slack-clone-93lk.onrender.com/recover-password', { email }) as AxiosResponse<ResponseAxios>;
       dispatch(recoverySuccess(response.data.msg));
     } catch (error) {
-      dispatch(recoveryFailure(error.response.data.error));
+      const axiosError = error as MyAxiosError;
+
+      if (axiosError.response) {
+        // Manejar el error de respuesta HTTP
+       const errorMessage = axiosError.response.data.data.error;
+       if(errorMessage?.length){
+         dispatch(recoveryFailure(errorMessage));
+       }
+      }
     };
   }
 

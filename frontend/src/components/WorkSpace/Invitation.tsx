@@ -20,7 +20,7 @@ const Invitation: FC<string | any> = ({id}) => {
     useEffect(() => {
         dispatch(validateUser())
         const getWorkspace = async ( ) => {
-            const {data} = await axios.get(`http://localhost:3001/oneworkspace/${id}`)
+            const {data} = await axios.get(`https://slack-clone-93lk.onrender.com/oneworkspace/${id}`)
             setWorkspace(data.data)
         }
         getWorkspace()
@@ -28,7 +28,7 @@ const Invitation: FC<string | any> = ({id}) => {
 
     const handleClick = async () => {
         try {
-            await axios(`http://localhost:3001/joinWorkSpace/${id}/${_id}`)
+            await axios(`https://slack-clone-93lk.onrender.com/joinWorkSpace/${id}/${_id}`)
             window.location.href = `/workspaces/${workspace._id}`
         } catch (error) {
             console.log(error)

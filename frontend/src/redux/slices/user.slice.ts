@@ -15,7 +15,7 @@ const initialState: IUserAux = {
 
 export const validateUser = createAsyncThunk('user/validate', async () => {
   const token = localStorage.getItem("userToken")
-  const response = await axios("http://localhost:3001/me", {
+  const response = await axios("https://slack-clone-93lk.onrender.com/me", {
     headers: {
       Authorization: token
     }
@@ -33,7 +33,10 @@ export const userSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(validateUser.fulfilled, (state, action) => {
-        state = action.payload
+        state._id = action.payload._id
+        state.fullName = action.payload.fullName
+        state.email = action.payload.email
+        state.profileImage = action.payload.profileImage
         return action.payload;
       })
   }

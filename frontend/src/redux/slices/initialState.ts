@@ -1,8 +1,7 @@
-import { IMessages } from "../../../../interface/IMessage";
 // import { IUser } from "../../../../interface/IUser";
 // import { IWorkSpace } from "../../../../interface/IWorkSpace";
 
-export const initialState: IMessages = {
+export const initialState: any = {
   workSpaceId: "",
   message: "",
   userId: "",

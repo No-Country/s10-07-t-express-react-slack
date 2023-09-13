@@ -28,7 +28,7 @@ const EditChannels: FC<Props> = ({ state, setState }) => {
 
   const deleteChannel = async (id: any) => {
     try {
-      await axios.delete(`http://localhost:3001/channel/${id}`)
+      await axios.delete(`https://slack-clone-93lk.onrender.com/channel/${id}`)
       alert("se borro el canal exitosamente")
     } catch (error) {
       alert("no se puede eliminar el canal")
