@@ -7,6 +7,7 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import ChatField from './ChatField'
 import { useQuill } from 'react-quilljs'
 import axios from 'axios'
+import './channel.css'
 
 const socket = io('http://localhost:3001')
 
@@ -17,7 +18,8 @@ const Channel = () => {
   const [messages, setMessages] = useState<any[]>([])
   const [richText, setRichText] = useState<string>('')
   const [storedMessages, setStoredMessages] = useState<any>([])
-  const { quill, quillRef } = useQuill({
+
+  const { quill } = useQuill({
     readOnly: true,
     modules: { toolbar: false },
   })
@@ -75,14 +77,11 @@ const Channel = () => {
   }
 
   const getFecha = (fechaProp: any) => {
-    // Obtener el día, el mes, el año y la hora de la fechaProp
     let dia = fechaProp.getDate()
     let mes = fechaProp.getMonth() + 1
     let año = fechaProp.getFullYear()
     let hora = fechaProp.getHours() + ':' + fechaProp.getMinutes()
-    // Formatear la fecha con el separador /
     let fecha = `${dia}/${mes}/${año} - ${hora}`
-    // Retornar el elemento React que muestra la fecha
     return fecha
   }
 
@@ -114,10 +113,66 @@ const Channel = () => {
         </div>
       </div>
       <div className='overflow-y-auto w-full'>
+        {storedMessages?.map(
+          (storedMessage: any) =>
+            storedMessage.message && (
+              <div
+                key={generateId()}
+                className={`flex mb-4 border-b-2 justify-start ${
+                  storedMessage.userId._id === _id ? '' : 'flex-row-reverse'
+                }`}>
+                {storedMessage.userId.profileImage.length ? (
+                  <div className='flex'>
+                    <img
+                      src={storedMessage.userId.profileImage}
+                      className='w-16 h-16 me'
+                      alt=''
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className={`bg-[#F39F5A] text-white text-xl flex items-center justify-center w-16 h-16 uppercase font-semibold`}>
+                    <span>
+                      {storedMessage.userId.fullName &&
+                      storedMessage.userId.fullName.split(' ')[0]
+                        ? storedMessage.userId.fullName.split(' ')[0][0]
+                        : ''}
+                      {storedMessage.userId.fullName &&
+                      storedMessage.userId.fullName.split(' ')[1]
+                        ? storedMessage.userId.fullName.split(' ')[1][0]
+                        : ''}
+                    </span>
+                  </div>
+                )}
+                <div className='flex flex-col gap-y-2 mx-1'>
+                  <div className='flex flex-col gap-x-10 content-start'>
+                    <div className='flex font-semibold text-xl text-[#555454]/80'>
+                      {storedMessage.userId._id === _id
+                        ? fullName
+                        : storedMessage.userId.fullName}
+                    </div>
+
+                    <div className='flex text-sm'>
+                      {getFecha(new Date(storedMessage.createdAt))}
+                    </div>
+                  </div>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: storedMessage.message || '',
+                    }}
+                    className='container-richText'></div>
+                </div>
+              </div>
+            ),
+        )}
         {messages?.map(
           (data) =>
             data.message && (
-              <div key={generateId()} className='flex gap-x-4'>
+              <div
+                key={generateId()}
+                className={`flex mb-4 border-b-2 justify-start ${
+                  data.userId._id === _id ? '' : 'flex-row-reverse'
+                }`}>
                 {data.userId.profileImage?.length ? (
                   <img
                     src={data.userId.profileImage}
@@ -140,67 +195,23 @@ const Channel = () => {
                   </div>
                 )}
 
-                <div className='flex flex-col gap-y-4'>
-                  <span className='font-semibold text-xl text-[#555454]/80'>
-                    {data.userId._id === _id ? fullName : data.userId.fullName}
-                  </span>
-                  <span>{getFecha(new Date())}</span>
+                <div className='flex flex-col gap-y-2 mx-1'>
+                  <div className='flex flex-col gap-x-10 content-start'>
+                    <div className='font-semibold text-xl text-[#555454]/80'>
+                      {data.userId._id === _id
+                        ? fullName
+                        : data.userId.fullName}
+                    </div>
+                    <div className='text-sm pt-1'>{getFecha(new Date())}</div>
+                  </div>
                   <div
                     dangerouslySetInnerHTML={{ __html: data.message || '' }}
-                    className=''></div>
-                </div>
-              </div>
-            ),
-        )}
-
-        {storedMessages?.map(
-          (storedMessage: any) =>
-            storedMessage.message && (
-              <div key={generateId()} className='flex gap-x-4'>
-                {storedMessage.userId.profileImage.length ? (
-                  <img
-                    src={storedMessage.userId.profileImage}
-                    className='w-16 h-16'
-                    alt=''
-                  />
-                ) : (
-                  <div
-                    className={`bg-[#F39F5A] text-white text-xl flex items-center justify-center w-16 h-16 uppercase font-semibold`}>
-                    <span>
-                      {storedMessage.userId.fullName &&
-                      storedMessage.userId.fullName.split(' ')[0]
-                        ? storedMessage.userId.fullName.split(' ')[0][0]
-                        : ''}
-                      {storedMessage.userId.fullName &&
-                      storedMessage.userId.fullName.split(' ')[1]
-                        ? storedMessage.userId.fullName.split(' ')[1][0]
-                        : ''}
-                    </span>
-                  </div>
-                )}
-                <div className='flex flex-col gap-y-4'>
-                  <span className='font-semibold text-xl text-[#555454]/80'>
-                    {storedMessage.userId._id === _id
-                      ? fullName
-                      : storedMessage.userId.fullName}
-                  </span>
-                  {/* <div>{getFecha(storedMessage.createdAt)}</div> */}
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: storedMessage.message || '',
-                    }}
-                    className=''></div>
+                    className='container-richText'></div>
                 </div>
               </div>
             ),
         )}
       </div>
-      {/* 
-      <div>
-        {storedMessages.map((storedMessage: any) => (
-          <div>{storedMessage.message}</div>
-        ))}
-      </div> */}
       <div>
         <ChatField setRichText={setRichText} />
       </div>
