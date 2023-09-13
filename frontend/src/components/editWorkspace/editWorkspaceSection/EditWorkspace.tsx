@@ -63,8 +63,8 @@ const EditWorkspace: FC<Props> = ({ state, setState }) => {
             
       formData.append('file', selectedFile);
       formData.append("upload_preset", "connecta");
-      formData.append('api_key', CLOUDINARY_API_KEY);
-      const {data} = await axios.post(CLOUDINARY_URL, formData) as AxiosResponse
+      formData.append('api_key', import.meta.env.CLOUDINARY_API_KEY);
+      const {data} = await axios.post(import.meta.env.CLOUDINARY_URL, formData) as AxiosResponse
 
       await axios.put(`https://slack-clone-93lk.onrender.com/workSpace/${workspace._id}`, {nameWorkSpace: inputName, image: data.url}) as AxiosResponse
       alert("se edito correctamente el espacio de trabajo")
