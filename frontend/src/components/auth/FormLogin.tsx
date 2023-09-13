@@ -4,7 +4,7 @@ import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
 import axios, { AxiosResponse } from 'axios'
 import jwt_decode from 'jwt-decode'
 
-import { Decoded, Login, MyAxiosError, ResponseAxios, Errors } from './interfaces'
+import { Decoded, Login, MyAxiosError, ResponseAxios } from './interfaces'
 import { FaLock } from 'react-icons/fa'
 
 export const login = {
