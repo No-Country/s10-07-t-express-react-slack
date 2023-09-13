@@ -49,8 +49,8 @@ const FormLogin = () => {
   }
 
   return(
-    <section className=''>
-      <div className='bg-forms w-[450px] flex flex-col items-center gap-y-8 border border-stone-500 py-6 px-6 rounded-lg relative'>
+    <section className='pb-12 mx-auto'>
+      <div className='bg-forms sm:w-[450px] w-[320px] flex flex-col items-center gap-y-8 border border-stone-500 py-6 px-6 rounded-lg relative'>
         <h3 className='font-semibold text-2xl text-button-orange'>Inicio de sesión</h3>
         <form onSubmit={handleSubmit} className='w-full flex flex-col gap-y-1' >
           <div className="relative">
@@ -111,7 +111,7 @@ const FormLogin = () => {
           onError={() => {
             console.log('Login Failed')
           }}
-          width={400}
+          width={200}
           logo_alignment='center'
           shape='pill'
           text='signup_with'
