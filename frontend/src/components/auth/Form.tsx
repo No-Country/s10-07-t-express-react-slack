@@ -7,7 +7,7 @@ import jwt_decode from 'jwt-decode'
 
 import { Register, Errors, MyAxiosError, ResponseAxios, Decoded } from './interfaces'
 import { validationErrors } from './utils'
-import astronauta from "../../assets/astronauta-cohete2.png"
+
 import {FaUserCircle, FaLock} from 'react-icons/fa'
 
 export const register = {
@@ -70,8 +70,8 @@ const Form: React.FC = () => {
   }
 
   return (
-    <section className='w-full flex items-center justify-between h-screen bg-bg-register px-24'>
-      <div className='bg-forms w-[450px] flex flex-col items-center gap-y-8 border border-stone-500 py-6 px-6 rounded-lg '>
+    <section className='pb-12 mx-auto lg:mx-0'>
+      <div className='bg-forms sm:w-[450px] w-[352px] flex flex-col items-center gap-y-8 border border-stone-500 py-6 px-6 rounded-lg relative'>
         <h3 className='font-semibold text-2xl text-button-orange'>Registro de usuario</h3>
         <form onSubmit={handleSubmit} className='w-full flex flex-col gap-y-1'>
           <div className="relative">
@@ -181,7 +181,7 @@ const Form: React.FC = () => {
           onError={() => {
             console.log('Login Failed')
           }}
-          width={400}
+          width={200}
           logo_alignment='center'
           shape='pill'
           text='signup_with'
@@ -199,7 +199,6 @@ const Form: React.FC = () => {
         }}
       /> */}
       </div>
-      <img src={astronauta}/>
     </section>
   )
 }
