@@ -20,7 +20,6 @@ export const validateUser = createAsyncThunk('user/validate', async () => {
       Authorization: token
     }
   }) as AxiosResponse<ResponseAxios>
-
   return response.data.data
 })
 
@@ -37,7 +36,7 @@ export const userSlice = createSlice({
         state.fullName = action.payload.fullName
         state.email = action.payload.email
         state.profileImage = action.payload.profileImage
-        return action.payload;
+        // return action.payload;
       })
   }
 })
