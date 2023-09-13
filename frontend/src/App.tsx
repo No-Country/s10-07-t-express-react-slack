@@ -8,7 +8,6 @@ import WorkspaceFirstStep from './pages/WorkspaceFirstStep.tsx'
 import WorkspaceSecondStep from './pages/WorkspaceSecondStep.tsx'
 import Recovery from './pages/Recovery.tsx'
 import Reset from "./pages/Reset.tsx"
-import { WorkspaceThridStep } from './pages/WorkspaceThirdStep.tsx'
 import WorkSpace from './pages/WorkSpace.tsx'
 import InvitationWorkspace from './pages/InvitationWorkspace.tsx'
 
@@ -24,8 +23,7 @@ function App() {
         <Route path='/reset-password/:id' element={<Reset/>}/>
         <Route path='/workspaces' element={<WorkFlows/>}/>
         <Route path='/workspaces/firststep' element={<WorkspaceFirstStep/>}/>
-        <Route path='/workspaces/secondstep' element={<WorkspaceSecondStep/>}/>
-        <Route path='/workspaces/thirdstep' element={<WorkspaceThridStep/>}/>
+        <Route path='/workspaces/secondstep/:workspaceId' element={<WorkspaceSecondStep/>}/>
         <Route path='/workspaces/:id' element={<WorkSpace/>}/>
         <Route path='/workspaceinvitation/:id' element={<InvitationWorkspace
         />}/>
