@@ -74,8 +74,8 @@ const PasswordReset = () => {
   };
 
     return(
-      <section className='pt-32'>
-      <div className='bg-forms w-[450px] flex flex-col items-center gap-y-8 border border-stone-500 py-6 px-6 rounded-lg relative'>
+      <section className='lg:pt-32 sm:pt-12 pb-12 mx-auto lg:mx-0'>
+      <div className='bg-forms sm:w-[450px] w-[352px] flex flex-col items-center gap-y-8 border border-stone-500 py-6 px-6 rounded-lg relative'>
       <h3 className='font-semibold text-2xl text-button-orange'>Crear nueva contraseña</h3>
       <form onSubmit={handleResetSubmit} className='w-full flex flex-col gap-y-1'  >
         <div className="relative">

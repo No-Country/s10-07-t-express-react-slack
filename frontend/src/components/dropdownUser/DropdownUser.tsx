@@ -46,12 +46,12 @@ const DropdownUser: FC<DropdownUser> = ({profileImage, name, email}) => {
           <img className="w-12 h-12 rounded-full" src={profileImage} alt="foto usuario" />
         }
       </button>
-      <div className={`${hiddenDropdown ? 'hidden' : 'absolute'} right-6 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-48 `}>
-        <div className="px-4 py-3 text-sm text-gray-900 ">
+      <div className={`${hiddenDropdown ? 'hidden' : 'absolute'} lg:right-6 sm:left-6 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-56 `}>
+        <div className="px-4 py-3 lg:text-sm sm:text-lg text-gray-900 ">
           <div>{name}</div>
           <div className="font-medium truncate">{email}</div>
         </div>
-        <ul className="py-2 text-sm text-gray-700 " >
+        <ul className="py-2 lg:text-sm sm:text-lg text-gray-700 " >
           <li>
             <Link to={""} className="block px-4 py-2 hover:bg-gray-200 " onClick={() => setIsModalOpen(true)}>Perfil</Link>
           </li>
@@ -64,7 +64,7 @@ const DropdownUser: FC<DropdownUser> = ({profileImage, name, email}) => {
         </ul>
         <div className="py-2">
           <ul>
-          <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 flex" onClick={handleLogout}><FaSignOutAlt className="flex mr-1 mt-1"/> Cerrar sesión</li>
+          <li className="px-4 py-2 lg:text-sm sm:text-lg text-gray-700 hover:bg-gray-200 flex" onClick={handleLogout}><FaSignOutAlt className="flex mr-1 mt-1"/> Cerrar sesión</li>
           </ul>
         </div>
       </div>
