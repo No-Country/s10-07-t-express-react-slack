@@ -1,29 +1,34 @@
 import { useState, useEffect } from 'react'
 import io from 'socket.io-client'
-import { IChannel } from './interfaces'
 import { generateId } from './utils'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-
+import { useAppSelector } from '../../redux/hooks'
 import rightArrow from '../../assets/rightArrow.svg'
 import { AiOutlinePlus } from 'react-icons/ai'
 import ChatField from './ChatField'
 import { useQuill } from 'react-quilljs'
+import axios from 'axios'
+import './channel.css'
 
-// Ejemplo de como implementar socket
-// https://github.com/CodenautaJorge/React-socketio-chat/blob/main/client/src/App.js
-
-const socket = io('http://localhost:3001') // Connect to the Socket.io server
+const socket = io('http://localhost:3001')
 
 const Channel = () => {
-  const { _id, fullName } = useAppSelector((state) => state.user)
+  const { _id, fullName, profileImage } = useAppSelector((state) => state.user)
   const channel = useAppSelector((state) => state.channel)
   const workspace = useAppSelector((state) => state.workspace)
-  const [messages, setMessages] = useState<IChannel[]>([])
+  const [messages, setMessages] = useState<any[]>([])
   const [richText, setRichText] = useState<string>('')
-  const { quill, quillRef } = useQuill({
+  const [storedMessages, setStoredMessages] = useState<any>([])
+
+  const { quill } = useQuill({
     readOnly: true,
     modules: { toolbar: false },
   })
+
+  useEffect(() => {
+    console.log(channel)
+
+    setStoredMessages(channel.messages)
+  }, [channel.messages])
 
   useEffect(() => {
     socket.emit('joinChannel', channel._id, fullName)
@@ -46,32 +51,38 @@ const Channel = () => {
     if (richText.length) {
       const newMessage = {
         nameWorkSpaceId: workspace._id,
-        userId: _id,
+        userId: { _id, fullName, profileImage },
         message: richText,
         channelsId: channel._id,
       }
       socket.emit('message', newMessage)
       reciveMessage(newMessage)
+      postMessages(newMessage)
     }
   }, [richText])
-
-  // useEffect(() => {
-  //   socket.on('message', (message) => {
-  //     console.log(message.channelsId)
-  //     console.log(channel._id)
-
-  //     if (message.channelsId === channel._id) {
-  //       console.log(message)
-  //       reciveMessage(message)
-  //     }
-  //   })
-  //   return () => {
-  //     socket.off('message', reciveMessage)
-  //   }
-  // }, [])
+  const postMessages = async (data: any) => {
+    try {
+      const allMessages = await axios.post(
+        'http://localhost:3001/message',
+        data,
+      )
+      console.log(allMessages.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const reciveMessage = (message: any) => {
     setMessages((prev) => [...prev, message])
+  }
+
+  const getFecha = (fechaProp: any) => {
+    let dia = fechaProp.getDate()
+    let mes = fechaProp.getMonth() + 1
+    let año = fechaProp.getFullYear()
+    let hora = fechaProp.getHours() + ':' + fechaProp.getMinutes()
+    let fecha = `${dia}/${mes}/${año} - ${hora}`
+    return fecha
   }
 
   return (
@@ -101,23 +112,101 @@ const Channel = () => {
           <div className='h-[1px] bg-[#656464]/40 w-full'></div>
         </div>
       </div>
-      <div className='w-full'>
+      <div className='overflow-y-auto w-full'>
+        {storedMessages?.map(
+          (storedMessage: any) =>
+            storedMessage.message && (
+              <div
+                key={generateId()}
+                className={`flex mb-4 border-b-2 justify-start ${
+                  storedMessage.userId._id === _id ? '' : 'flex-row-reverse'
+                }`}>
+                {storedMessage.userId.profileImage.length ? (
+                  <div className='flex'>
+                    <img
+                      src={storedMessage.userId.profileImage}
+                      className='w-16 h-16 me'
+                      alt=''
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className={`bg-[#F39F5A] text-white text-xl flex items-center justify-center w-16 h-16 uppercase font-semibold`}>
+                    <span>
+                      {storedMessage.userId.fullName &&
+                      storedMessage.userId.fullName.split(' ')[0]
+                        ? storedMessage.userId.fullName.split(' ')[0][0]
+                        : ''}
+                      {storedMessage.userId.fullName &&
+                      storedMessage.userId.fullName.split(' ')[1]
+                        ? storedMessage.userId.fullName.split(' ')[1][0]
+                        : ''}
+                    </span>
+                  </div>
+                )}
+                <div className='flex flex-col gap-y-2 mx-1'>
+                  <div className='flex flex-col gap-x-10 content-start'>
+                    <div className='flex font-semibold text-xl text-[#555454]/80'>
+                      {storedMessage.userId._id === _id
+                        ? fullName
+                        : storedMessage.userId.fullName}
+                    </div>
+
+                    <div className='flex text-sm'>
+                      {getFecha(new Date(storedMessage.createdAt))}
+                    </div>
+                  </div>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: storedMessage.message || '',
+                    }}
+                    className='container-richText'></div>
+                </div>
+              </div>
+            ),
+        )}
         {messages?.map(
           (data) =>
             data.message && (
-              <div key={generateId()} className='flex gap-x-4'>
-                <img
-                  src='https://flowbite.com/docs/images/people/profile-picture-5.jpg'
-                  className='w-16 h-16'
-                  alt=''
-                />
-                <div className='flex flex-col gap-y-4'>
-                  <span className='font-semibold text-xl text-[#555454]/80'>
-                    {data.userId === _id ? fullName : data.userId}
-                  </span>
+              <div
+                key={generateId()}
+                className={`flex mb-4 border-b-2 justify-start ${
+                  data.userId._id === _id ? '' : 'flex-row-reverse'
+                }`}>
+                {data.userId.profileImage?.length ? (
+                  <img
+                    src={data.userId.profileImage}
+                    className='w-16 h-16'
+                    alt=''
+                  />
+                ) : (
+                  <div
+                    className={`bg-[#F39F5A] text-white text-xl flex items-center justify-center w-16 h-16 uppercase font-semibold`}>
+                    <span>
+                      {data.userId.fullName &&
+                      data.userId.fullName.split(' ')[0]
+                        ? data.userId.fullName.split(' ')[0][0]
+                        : ''}
+                      {data.userId.fullName &&
+                      data.userId.fullName.split(' ')[1]
+                        ? data.userId.fullName.split(' ')[1][0]
+                        : ''}
+                    </span>
+                  </div>
+                )}
+
+                <div className='flex flex-col gap-y-2 mx-1'>
+                  <div className='flex flex-col gap-x-10 content-start'>
+                    <div className='font-semibold text-xl text-[#555454]/80'>
+                      {data.userId._id === _id
+                        ? fullName
+                        : data.userId.fullName}
+                    </div>
+                    <div className='text-sm pt-1'>{getFecha(new Date())}</div>
+                  </div>
                   <div
                     dangerouslySetInnerHTML={{ __html: data.message || '' }}
-                    className=''></div>
+                    className='container-richText'></div>
                 </div>
               </div>
             ),

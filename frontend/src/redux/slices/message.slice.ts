@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { IMessages } from "../../../../interface/IMessage"
+import { IMessages } from '../../../../interface/IMessage'
 import axios, { AxiosResponse } from 'axios'
 import { initialState } from './initialState'
 
@@ -11,13 +11,19 @@ import { initialState } from './initialState'
 // }
 
 export enum BACK {
-  message = "/message"
+  message = '/message',
 }
 
-export const createMessage = createAsyncThunk('message/create', async (body: IMessages) => {
-  const response = await axios.post(`http://localhost:3001${BACK.message}`, body) as AxiosResponse<IMessages>
-  return response.data
-})
+export const createMessage = createAsyncThunk(
+  'message/create',
+  async (body: IMessages) => {
+    const response = (await axios.post(
+      `http://localhost:3001${BACK.message}`,
+      body,
+    )) as AxiosResponse<IMessages>
+    return response.data
+  },
+)
 
 export const messagesSlice = createSlice({
   name: 'message',

@@ -11,10 +11,18 @@ interface DataT {
 
 export const getOneChannel = async (req: Request, res: Response) => {
   try {
+    // const channel = await ChannelsModel.findById(req.params.idChannel).populate(
+    //   'messages',
+    //   ['message', 'nameWorkSpaceId', 'userId', 'channelsId']
+    // )
+
     const channel = await ChannelsModel.findById(req.params.idChannel).populate(
-      'messages',
-      ['message', 'nameWorkSpaceId', 'userId', 'channelsId']
+      {
+        path: 'messages',
+        populate: { path: 'userId' }, // Esto carga la información completa del usuario
+      }
     )
+
     const messages = await MessageModel.find({
       channelsId: req.params.idChannel,
     }).sort({ createdAt: -1 })
