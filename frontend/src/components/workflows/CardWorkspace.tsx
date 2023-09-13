@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const CardWorkspace: FC<WorkspaceUser> = ({nameWorkSpace, _id, members, profileImage}) => {
     return(
-        <div className="px-12 py-6 w-full border-b border-b-black/10 flex items-center justify-between">
-            <div className="flex items-center gap-x-3">
+        <div className="px-12 py-6 w-full border-b border-b-black/10 flex flex-col lg:flex-row items-center lg:justify-between">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-x-3">
                 {
                     !profileImage || !profileImage.length ? 
                     <div className={`bg-[#F39F5A] text-white text-xl flex items-center justify-center w-16 h-16 rounded-full uppercase font-semibold`}>
@@ -15,9 +15,9 @@ const CardWorkspace: FC<WorkspaceUser> = ({nameWorkSpace, _id, members, profileI
                     </div> :
                     <img className="w-12 h-12 rounded-full" src={profileImage} alt="foto usuario" />
                 }
-                <div className="text-secundary-color">
+                <div className="text-secundary-color flex flex-col items-center lg:items-start">
                     <h3 className="font-semibold">{nameWorkSpace}</h3>
-                    <span className="font-thin">{!members.length  ? "Aun no existen miembros en el espacio de trabajo" : <span>{members.length} persona están en este espacio de trabajo</span>}</span>
+                    <span className="font-thin text-center lg:text-start">{!members.length  ? "Aun no existen miembros en el espacio de trabajo" : <span>{members.length} persona están en este espacio de trabajo</span>}</span>
                 </div>
             </div>
             <Link to={`./${_id}`} className="bg-secundary-color text-white rounded-lg px-10 py-2">Iniciar conexión</Link>
