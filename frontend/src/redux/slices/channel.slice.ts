@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios, { AxiosResponse } from 'axios'
-import { IMessage } from '../../../../interface/IMessage'
+// import { IMessage } from '../../../../interface/IMessage'
+interface IMessage {
+  message: string
+  userId: string
+  channelsId: string
+  workSpaceId: string
+}
 
 export interface ChannelState {
   name: string

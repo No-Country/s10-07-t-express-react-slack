@@ -5,7 +5,6 @@ import { AiOutlineClose, AiOutlinePaperClip } from 'react-icons/ai';
 import { BsPersonWorkspace } from 'react-icons/bs';
 import axios, { AxiosResponse } from 'axios';
 import { useAppSelector } from '../../../redux/hooks';
-import {CLOUDINARY_API_KEY, CLOUDINARY_URL} from '../../../../env'
 const EditWorkspace: FC<Props> = ({ state, setState }) => {
 
   const [selectedFile, setSelectedFile] = useState<File>();
