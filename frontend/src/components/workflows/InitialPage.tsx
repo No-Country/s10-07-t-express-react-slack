@@ -17,7 +17,7 @@ const InitialPage = () => {
     dispatch(validateUser())
     const getMyWorkspaces = async () => {
       const token = localStorage.getItem("userToken")
-      const {data} = await axios("http://localhost:3001/myWorkSpaces", {
+      const {data} = await axios("https://slack-clone-93lk.onrender.com/myWorkSpaces", {
         headers: {
           Authorization: token
         }

@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import ReactDOM from "react-dom";
 import { FaTimes, FaCamera, FaRegEdit } from "react-icons/fa";
 import { useAppSelector } from '../../redux/hooks';
 import Axios from "axios";
 
-const UserProfile = ({ isOpen, onClose }) => {
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const UserProfile: FC<Props> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
   const [errorUpdateMessage, setErrorUpdateMessage] = useState("")
   const [successUpdateMessage, setSuccessUpdateMessage] = useState("")
@@ -61,7 +66,7 @@ const UserProfile = ({ isOpen, onClose }) => {
       if (editedName) {userData.fullName = editedName;}
       if (imageUrl) {userData.profileImage = imageUrl;}
   
-      const response = await Axios.put(`http://localhost:3001/user/${id}`, userData);
+      const response = await Axios.put(`https://slack-clone-93lk.onrender.com/user/${id}`, userData);
 
       if (response.status === 200) {
         setSuccessUpdateMessage(response.data.msg);
@@ -73,6 +78,8 @@ const UserProfile = ({ isOpen, onClose }) => {
       if(error){setErrorUpdateMessage("Error al actualizar el usuario")}
     }
   };
+
+  const elemento: any = document.getElementById("modal-root")
 
   return ReactDOM.createPortal(
     <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -132,7 +139,7 @@ const UserProfile = ({ isOpen, onClose }) => {
       {successUpdateMessage && <p className='text-green-600 font-semibold mt-4'>{successUpdateMessage}</p>} 
       </div>
     </div>,
-    document.getElementById("modal-root")
+    elemento
   );
 };
 

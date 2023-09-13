@@ -28,7 +28,7 @@ const FormLogin = () => {
     e.preventDefault()
     try {
       if (loginTemplate.email && loginTemplate.password) {
-        const {data} = await axios.post("http://localhost:3001/auth", {
+        const {data} = await axios.post("https://slack-clone-93lk.onrender.com/auth", {
           email: loginTemplate.email,
           password: loginTemplate.password
         }) as AxiosResponse<ResponseAxios>
@@ -42,7 +42,7 @@ const FormLogin = () => {
 
       if (axiosError.response) {
         // Manejar el error de respuesta HTTP
-       const errorMessage = axiosError.response.data.error;
+       const errorMessage = axiosError.response.data.data.error;
        if(errorMessage){setError(errorMessage)}
       }
     }
@@ -96,7 +96,7 @@ const FormLogin = () => {
             if (credentialResponse.credential) {
               const decoded = jwt_decode(credentialResponse.credential) as Decoded
               const response = await axios.post(
-                'http://localhost:3001/authgoogle',
+                'https://slack-clone-93lk.onrender.com/authgoogle',
                 {
                   email: decoded.email,
                   fullName: decoded.email,

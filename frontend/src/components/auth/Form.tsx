@@ -50,7 +50,7 @@ const Form: React.FC = () => {
     try {
       if (!Object.entries(errors).length) {
         const response = await axios.post(
-          'http://localhost:3001/user',
+          'https://slack-clone-93lk.onrender.com/user',
           registerTemplate
         ) as AxiosResponse<ResponseAxios>
         setRegisterTemplate(register)
@@ -165,7 +165,7 @@ const Form: React.FC = () => {
               const decoded = jwt_decode(credentialResponse.credential) as Decoded
               // console.log(decoded)
               const response = await axios.post(
-                'http://localhost:3001/authgoogle',
+                'https://slack-clone-93lk.onrender.com/authgoogle',
                 {
                   email: decoded.email,
                   fullName: decoded.email,

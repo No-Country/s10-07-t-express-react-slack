@@ -9,7 +9,7 @@ import { useQuill } from 'react-quilljs'
 import axios from 'axios'
 import './channel.css'
 
-const socket = io('http://localhost:3001')
+const socket = io('https://slack-clone-93lk.onrender.com')
 
 const Channel = () => {
   const { _id, fullName, profileImage } = useAppSelector((state) => state.user)
@@ -63,7 +63,7 @@ const Channel = () => {
   const postMessages = async (data: any) => {
     try {
       const allMessages = await axios.post(
-        'http://localhost:3001/message',
+        'https://slack-clone-93lk.onrender.com/message',
         data,
       )
       console.log(allMessages.data)

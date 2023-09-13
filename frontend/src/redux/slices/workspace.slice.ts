@@ -49,7 +49,7 @@ const initialState: Workspace = {
 }
 
 export const createWorkspace = createAsyncThunk('workspace/create', async (body: CreateWorkspace) => {
-  const response = await axios.post("http://localhost:3001/workSpace", body) as AxiosResponse<ResponseAxios>
+  const response = await axios.post("https://slack-clone-93lk.onrender.com/workSpace", body) as AxiosResponse<ResponseAxios>
   
   return {...response.data.data, msg: response.data.msg}
 })
@@ -57,13 +57,13 @@ export const createWorkspace = createAsyncThunk('workspace/create', async (body:
 export const joinMembers = createAsyncThunk('workspace/members', async (body: any) => {
   const workspaceId = localStorage.getItem("workspaceId")
   console.log(workspaceId, body)
-  const response = await axios.post<BodyJoinMembers>(`http://localhost:3001/joinWorkSpace/${workspaceId}`, {emails: body}) as AxiosResponse<Workspace>
+  const response = await axios.post<BodyJoinMembers>(`https://slack-clone-93lk.onrender.com/joinWorkSpace/${workspaceId}`, {emails: body}) as AxiosResponse<Workspace>
 
   return response.data
 })
 
 export const getOneWorkspace = createAsyncThunk('workspace/getone', async (id: string | any) => {
-  const {data} = await axios(`http://localhost:3001/oneworkspace/${id}`) as AxiosResponse<ResponseAxios>
+  const {data} = await axios(`https://slack-clone-93lk.onrender.com/oneworkspace/${id}`) as AxiosResponse<ResponseAxios>
   return data.data
 })
 

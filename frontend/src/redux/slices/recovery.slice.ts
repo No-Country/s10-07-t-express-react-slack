@@ -1,25 +1,32 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+interface PasswordRecovery {
+  loading: boolean,
+  error: string,
+  successMessage: string,
+}
+
+const initialState: PasswordRecovery = {
+  loading: false,
+  error: "",
+  successMessage: "",
+}
 
 export const recoverySlice = createSlice({
     name: 'passwordRecovery',
-    initialState: {
-      loading: false,
-      error: null,
-      successMessage: null,
-    },
+    initialState,
     reducers: {
       recoveryRequest: (state) => {
         state.loading = true;
-        state.error = null;
-        state.successMessage = null;
+        state.error = "";
+        state.successMessage = "";
       },
       recoverySuccess: (state, action) => {
         state.loading = false;
         state.successMessage = action.payload;
       },
-      recoveryFailure: (state, action) => {
+      recoveryFailure: (state, action: PayloadAction<string>) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action?.payload;
       },
     },
   });
