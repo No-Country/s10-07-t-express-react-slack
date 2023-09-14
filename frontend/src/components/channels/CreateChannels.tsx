@@ -22,8 +22,8 @@ const CreateChannel: FC<Props> = ({hiddenAlertChannel, setHiddenAlertChannel, id
 
     const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const {data} = await axios.post(`https://slack-clone-93lk.onrender.com/channel/${idWorkspace}`, template) as AxiosResponse
-        console.log(data)
+        await axios.post(`https://slack-clone-93lk.onrender.com/channel/${idWorkspace}`, template) as AxiosResponse
+        window.location.href = `./${idWorkspace}`
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

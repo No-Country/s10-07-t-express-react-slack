@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import io from 'socket.io-client'
-import { generateId } from './utils'
+import { generateId, toolbarOptions } from './utils'
 import { useAppSelector } from '../../redux/hooks'
 import rightArrow from '../../assets/rightArrow.svg'
 import axios from 'axios'
 import './channel.css'
 import ReactQuill from 'react-quill'
 import '../../../node_modules/react-quill/dist/quill.snow.css'
+import { AiOutlineSend } from 'react-icons/ai'
 const socket = io('https://slack-clone-93lk.onrender.com')
 
 const Channel = () => {
@@ -87,11 +88,11 @@ const Channel = () => {
   const hanleRichText = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setRichText(aux)
-    console.log(aux)
+    setAux('')
   }
 
   return (
-    <section className='mt-20 py-8 px-2 w-full h-screen flex flex-col justify-start max-w-screen-md'>
+    <section className='mt-20 py-8 px-2 w-full h-screen flex flex-col justify-between lg:w-3/4'>
       <div className='w-full flex flex-col gap-y-4'>
         <div className='w-full flex items-center justify-between'>
           <div className='flex items-center font-semibold gap-x-3 text-2xl flex-shrink'>
@@ -99,12 +100,6 @@ const Channel = () => {
             <img src={rightArrow} className='w-3' />
             <span className='text-[#828282]'>#{channel.name}</span>
           </div>
-          {/* <button className='text-black flex items-center gap-x-2'>
-            <div className=''>
-              <AiOutlinePlus />
-            </div>
-            <span>Añadir descripcion</span>
-          </button> */}
         </div>
         <div className='w-full flex flex-col gap-y-4'>
           <div className='h-[1px] bg-[#656464]/40 w-full'></div>
@@ -117,7 +112,7 @@ const Channel = () => {
             storedMessage.message && (
               <div
                 key={generateId()}
-                className={`flex mb-4 border-b-2 justify-start overflow-x-auto ${
+                className={`flex mb-4 border-b-2 justify-start  ${
                   storedMessage.userId._id === _id ? '' : 'flex-row-reverse'
                 }`}>
                 {storedMessage.userId?.profileImage?.length ? (
@@ -159,7 +154,8 @@ const Channel = () => {
                     dangerouslySetInnerHTML={{
                       __html: storedMessage.message || '',
                     }}
-                    className='container-richText'></div>
+                    className=' container-richText flex-col w-full overflow-x-auto px-4'
+                    style={{ listStyleType: 'decimal' }}></div>
                 </div>
               </div>
             ),
@@ -216,8 +212,13 @@ const Channel = () => {
         <ChatField setRichText={setRichText} />
       </div> */}
       <form onSubmit={hanleRichText}>
-        <ReactQuill value={aux} onChange={setAux} />
-        <button type='submit'>Enviar</button>
+        <ReactQuill value={aux} onChange={setAux} modules={toolbarOptions} />
+        <button
+          className='
+           bg-button-orange text-white hover:cursor-pointer rounded-md p-1.5 text-2xl mt-2'
+          type='submit'>
+          <AiOutlineSend />
+        </button>
       </form>
     </section>
   )

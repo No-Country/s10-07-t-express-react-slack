@@ -102,7 +102,7 @@ const SideBar = () => {
                     channel._id === stateChannel._id
                       ? 'bg-white'
                       : 'bg-transparent'
-                  } px-4 py-1 rounded-l-full hover:bg-white hover:cursor-pointer w-full flex flex-col`}>
+                  } px-4 py-1 rounded-l-full hover:bg-white hover:cursor-pointer w-3/4 flex flex-col`}>
                   <span className='font-semibold'># {channel?.name}</span>
                 </button>
               )
