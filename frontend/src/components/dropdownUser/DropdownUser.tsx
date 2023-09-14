@@ -55,18 +55,18 @@ const DropdownUser: FC<DropdownUser> = ({profileImage, name, email}) => {
         </div>
         <ul className="py-2 lg:text-sm sm:text-lg text-gray-700 " >
           <li>
-            <Link to={""} className="block px-4 py-2 hover:bg-gray-200 " onClick={() => setIsModalOpen(true)}>Perfil</Link>
+            <button className="block px-4 py-2 hover:bg-gray-200 w-full text-start" onClick={() => setIsModalOpen(true)}>Perfil</button>
           </li>
           <li>
-            <Link to={""} className="block px-4 py-2 hover:bg-gray-200 ">Mis espacios de trabajo</Link>
+            <Link to={"/workspaces"} className="block px-4 py-2 hover:bg-gray-200 ">Mis espacios de trabajo</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to={""} className="block px-4 py-2 hover:bg-gray-200 ">Editar espacio de trabajo (opcional)</Link>
-          </li>
+          </li> */}
         </ul>
         <div className="py-2">
           <ul>
-          <li className="px-4 py-2 lg:text-sm sm:text-lg text-gray-700 hover:bg-gray-200 flex" onClick={handleLogout}><FaSignOutAlt className="flex mr-1 mt-1"/> Cerrar sesión</li>
+          <li className="hover:cursor-pointer px-4 py-2 lg:text-sm sm:text-lg text-gray-700 hover:bg-gray-200 flex" onClick={handleLogout}><FaSignOutAlt className="flex mr-1 mt-1"/> Cerrar sesión</li>
           </ul>
         </div>
       </div>
