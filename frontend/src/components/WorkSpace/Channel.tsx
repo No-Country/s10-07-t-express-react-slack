@@ -86,39 +86,33 @@ const Channel = () => {
   }
 
   return (
-    <section className='mt-20 py-8 px-12 w-2/3 h-screen flex flex-col items-center justify-between'>
+    <section className='mt-20 py-8 px-2 w-full h-screen flex flex-col justify-start max-w-fit'>
       <div className='w-full flex flex-col gap-y-4'>
         <div className='w-full flex items-center justify-between'>
-          <div className='flex items-center font-semibold gap-x-3 text-2xl'>
+          <div className='flex items-center font-semibold gap-x-3 text-2xl flex-shrink'>
             <span className='text-button-orange text-3xl'>Canales</span>
             <img src={rightArrow} className='w-3' />
             <span className='text-[#828282]'>#{channel.name}</span>
           </div>
-          <button className='text-black flex items-center gap-x-2'>
+          {/* <button className='text-black flex items-center gap-x-2'>
             <div className=''>
               <AiOutlinePlus />
             </div>
             <span>Añadir descripcion</span>
-          </button>
+          </button> */}
         </div>
         <div className='w-full flex flex-col gap-y-4'>
           <div className='h-[1px] bg-[#656464]/40 w-full'></div>
-          <button className='text-black flex items-center gap-x-2'>
-            <div className=''>
-              <AiOutlinePlus />
-            </div>
-            <span>Añadir enlaces</span>
-          </button>
-          <div className='h-[1px] bg-[#656464]/40 w-full'></div>
+          <button className='text-black flex items-center gap-x-2'></button>
         </div>
       </div>
-      <div className='overflow-y-auto w-full'>
+      <div className='overflow-y-auto w-full flex-col flex-grow max-w-fit'>
         {storedMessages?.map(
           (storedMessage: any) =>
             storedMessage.message && (
               <div
                 key={generateId()}
-                className={`flex mb-4 border-b-2 justify-start ${
+                className={`flex-row mb-4 border-b-2 justify-start overflow-x-auto max-w-fit ${
                   storedMessage.userId._id === _id ? '' : 'flex-row-reverse'
                 }`}>
                 {storedMessage.userId.profileImage.length ? (
@@ -170,7 +164,7 @@ const Channel = () => {
             data.message && (
               <div
                 key={generateId()}
-                className={`flex mb-4 border-b-2 justify-start ${
+                className={`flex mb-4 border-b-2 justify-start  ${
                   data.userId._id === _id ? '' : 'flex-row-reverse'
                 }`}>
                 {data.userId.profileImage?.length ? (
@@ -206,13 +200,13 @@ const Channel = () => {
                   </div>
                   <div
                     dangerouslySetInnerHTML={{ __html: data.message || '' }}
-                    className='container-richText'></div>
+                    className='container-richText flex-col w-full overflow-x-auto max-w-fit'></div>
                 </div>
               </div>
             ),
         )}
       </div>
-      <div>
+      <div className='flex'>
         <ChatField setRichText={setRichText} />
       </div>
     </section>
