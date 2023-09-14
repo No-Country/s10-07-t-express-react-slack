@@ -119,9 +119,9 @@ const Channel = () => {
               <div
                 key={generateId()}
                 className={`flex mb-4 border-b-2 justify-start ${
-                  storedMessage.userId._id === _id ? '' : 'flex-row-reverse'
+                  storedMessage.userId._id === _id ? '' : 'flex-row'
                 }`}>
-                {storedMessage.userId.profileImage.length ? (
+                {storedMessage.userId?.profileImage?.length ? (
                   <div className='flex'>
                     <img
                       src={storedMessage.userId.profileImage}

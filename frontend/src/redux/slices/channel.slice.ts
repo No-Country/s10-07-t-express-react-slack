@@ -1,9 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios, { AxiosResponse } from 'axios'
 // import { IMessage } from '../../../../interface/IMessage'
+
+interface User {
+  _id: string;
+  fullName: string
+}
+
 interface IMessage {
   message: string
-  userId: string
+  userId: string | User
   channelsId: string
   workSpaceId: string
 }
@@ -15,14 +21,26 @@ export interface ChannelState {
   description: string
 }
 
+interface Messages {
+  _id: string,
+  message: string,
+  userId: User
+}
+
+interface ResponseAxios {
+  channel : ChannelState
+  messages: Messages
+}
+
 export const getChannel = createAsyncThunk(
   'channel/getChannels',
   async (body: any) => {
     const response = (await axios(
       `https://slack-clone-93lk.onrender.com/channels/${body._id}`,
-    )) as AxiosResponse<ChannelState>
-
-    return response.data
+    )) as AxiosResponse<ResponseAxios>
+    const messages: any = response.data.messages
+    const data: ChannelState = {...response.data.channel, messages}
+    return data
   },
 )
 
