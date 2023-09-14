@@ -14,7 +14,6 @@ import rightArrow from '../../assets/rightArrow.svg'
 import bottomArrow from '../../assets/bottomArrow.svg'
 import { getChannel } from '../../redux/slices/channel.slice'
 import EditMembers from '../editWorkspace/editMembersSection/EditMembers'
-import { BsFillArrowLeftSquareFill } from 'react-icons/bs'
 import useIsSm from '../../hooks/useIsSm'
 
 const SideBar = () => {
