@@ -4,7 +4,7 @@ import { generateId } from './utils'
 import { useAppSelector } from '../../redux/hooks'
 import rightArrow from '../../assets/rightArrow.svg'
 import ChatField from './ChatField'
-import { useQuill } from 'react-quilljs'
+//import { useQuill } from 'react-quilljs'
 import axios from 'axios'
 import './channel.css'
 
@@ -18,10 +18,10 @@ const Channel = () => {
   const [richText, setRichText] = useState<string>('')
   const [storedMessages, setStoredMessages] = useState<any>([])
 
-  const { quill } = useQuill({
-    readOnly: true,
-    modules: { toolbar: false },
-  })
+  // const { quill } = useQuill({
+  //   readOnly: true,
+  //   modules: { toolbar: false },
+  // })
 
   useEffect(() => {
     console.log(channel)
@@ -46,7 +46,7 @@ const Channel = () => {
   }, [channel._id])
 
   useEffect(() => {
-    quill?.setContents(richText)
+    //quill?.setContents(richText)
     if (richText.length) {
       const newMessage = {
         nameWorkSpaceId: workspace._id,
