@@ -27,25 +27,26 @@ const SecondStepWorkspace = () => {
 
   useEffect(() => {
     if(loading === "success"){
-     setOptionsAlert({
-       status: Status.success,
-       text: `Las invitaciones a tu espacio de trabajo se enviaron con éxito. ¡Disfruta con tu equipo!`,
-       title: `¡Felicitaciones ${fullName}!`
-     })
-     setHiddenAlert(false)
-     setTimeout(() => {
-       window.location.href = `/workspaces/${workspaceId}`
-     }, 5000);
-   }
-   if(loading === "error"){
-     setOptionsAlert({
-       status: Status.error,
-       title: `¡Lo sentimos ${fullName}!`,
-       text: "No se enviaron las invitaciones. Por favor, intenta nuevamente."
-     })
-     setHiddenAlert(false)
-   }
- }, [loading])
+      setOptionsAlert({
+        status: Status.success,
+        text: `Las invitaciones a tu espacio de trabajo se enviaron con éxito. ¡Disfruta con tu equipo!`,
+        title: `¡Felicitaciones ${fullName}!`
+      })
+      setHiddenAlert(false)
+      setTimeout(() => {
+        window.location.href = `/workspaces/${workspaceId}`
+      }, 5000);
+    } else{
+      if(loading === "error" || loading === "rejected"){
+        setOptionsAlert({
+          status: Status.error,
+          title: `¡Lo sentimos ${fullName}!`,
+          text: "No se enviaron las invitaciones. Por favor, intenta nuevamente."
+        })
+        setHiddenAlert(false)
+      }
+    }   
+  }, [loading])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMember(e.target.value)
@@ -129,7 +130,7 @@ const SecondStepWorkspace = () => {
             onClick={() => {
               if(members){
                 if(members.length){
-                  dispatch(joinMembers(members))
+                  dispatch(joinMembers({members, workspaceId}))
                   // window.location.href = `/workspaces/${workspaceId}`
                 }else{
                   setOptionsAlert({

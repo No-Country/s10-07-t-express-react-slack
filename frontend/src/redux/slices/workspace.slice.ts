@@ -55,10 +55,10 @@ export const createWorkspace = createAsyncThunk('workspace/create', async (body:
 })
 
 export const joinMembers = createAsyncThunk('workspace/members', async (body: any) => {
-  const workspaceId = localStorage.getItem("workspaceId")
-  console.log(workspaceId, body)
-  const response = await axios.post<BodyJoinMembers>(`https://slack-clone-93lk.onrender.com/joinWorkSpace/${workspaceId}`, {emails: body}) as AxiosResponse<Workspace>
-
+  // const workspaceId = localStorage.getItem("workspaceId")
+  // console.log(workspaceId, body)
+  const response = await axios.post<BodyJoinMembers>(`https://slack-clone-93lk.onrender.com/joinWorkSpace/${body.workspaceId}`, {emails: body.members}) as AxiosResponse<Workspace>
+console.log(response.data)
   return response.data
 })
 
@@ -100,7 +100,11 @@ export const workspaceSlice = createSlice({
       .addCase(joinMembers.fulfilled, (state, action) => {
         state.loading = "success"
         state.msg = action.payload.msg
-        return action.payload;
+        // return action.payload;
+      })
+      .addCase(joinMembers.rejected, (state) => {
+        state.loading = "error"
+        // state.msg = action.payload
       })
       .addCase(getOneWorkspace.fulfilled, (state, action) => {
         state.loading = "success"
