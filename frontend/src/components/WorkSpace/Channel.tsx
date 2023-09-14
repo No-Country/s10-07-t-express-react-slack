@@ -27,7 +27,7 @@ const Channel = () => {
   useEffect(() => {
     console.log(channel)
 
-    setStoredMessages(channel.messages)
+    setStoredMessages([...channel.messages].reverse())
   }, [channel.messages])
 
   useEffect(() => {
@@ -86,7 +86,7 @@ const Channel = () => {
   }
 
   return (
-    <section className='mt-20 py-8 px-2 w-full h-screen flex flex-col justify-start max-w-fit'>
+    <section className='mt-20 py-8 px-2 w-full h-screen flex flex-col justify-start max-w-screen-md'>
       <div className='w-full flex flex-col gap-y-4'>
         <div className='w-full flex items-center justify-between'>
           <div className='flex items-center font-semibold gap-x-3 text-2xl flex-shrink'>
@@ -106,13 +106,13 @@ const Channel = () => {
           <button className='text-black flex items-center gap-x-2'></button>
         </div>
       </div>
-      <div className='overflow-y-auto w-full flex-col flex-grow max-w-fit'>
+      <div className='overflow-y-auto w-full flex-col flex-grow '>
         {storedMessages?.map(
           (storedMessage: any) =>
             storedMessage.message && (
               <div
                 key={generateId()}
-                className={`flex-row mb-4 border-b-2 justify-start overflow-x-auto max-w-fit ${
+                className={`flex mb-4 border-b-2 justify-start overflow-x-auto ${
                   storedMessage.userId._id === _id ? '' : 'flex-row-reverse'
                 }`}>
                 {storedMessage.userId?.profileImage?.length ? (
@@ -200,7 +200,7 @@ const Channel = () => {
                   </div>
                   <div
                     dangerouslySetInnerHTML={{ __html: data.message || '' }}
-                    className='container-richText flex-col w-full overflow-x-auto max-w-fit'></div>
+                    className='container-richText flex-col w-full overflow-x-auto'></div>
                 </div>
               </div>
             ),

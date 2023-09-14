@@ -15,8 +15,6 @@ const ChatField: FC<IChatField> = ({ setRichText }) => {
     let contenido = quill.root.innerHTML
     setRichText(contenido)
     quill.setContents('')
-    //handleEmit(richText)
-    //console.log(contenido)
   }
 
   return (
