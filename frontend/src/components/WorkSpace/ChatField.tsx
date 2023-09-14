@@ -14,6 +14,7 @@ const ChatField: FC<IChatField> = ({ setRichText }) => {
     e.preventDefault()
     //let contenido = quill.root.innerHTML
     setRichText(texto)
+    setTexto('')
     //quill.setContents('')
   }
 
