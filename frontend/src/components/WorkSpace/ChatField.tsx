@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 //import { useQuill } from 'react-quilljs'
 import 'quill/dist/quill.snow.css'
-import toolbar from '../../utils/toolbar'
+//import toolbar from '../../utils/toolbar'
 
 interface IChatField {
   setRichText: (contenido: string) => void
