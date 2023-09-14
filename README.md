@@ -81,7 +81,7 @@ $ cd ux-ui
 
 ## Equipo
 
-* <img src="https://img.shields.io/badge/BACKEND-FA897B"> **Jerli Gonzalez** - [LinkedIn]() <img src="https://res.cloudinary.com/yeniferramirez11/image/upload/v1692222051/no-country/argentina_r7o20w.png" style="width: 20px;">
+* <img src="https://img.shields.io/badge/BACKEND-FA897B"> **Jerlib Gonzalez** - [LinkedIn]() <img src="https://res.cloudinary.com/yeniferramirez11/image/upload/v1692222051/no-country/argentina_r7o20w.png" style="width: 20px;">
 
 * <img src="https://img.shields.io/badge/BACKEND-FA897B"> **Carlos Martinez** -  [LinkedIn]() <img src="https://res.cloudinary.com/yeniferramirez11/image/upload/v1692222549/no-country/colombia_ud3lkg.png" style="width: 20px;">
 
