@@ -29,19 +29,19 @@ const SecondStepWorkspace = () => {
     if(loading === "success"){
      setOptionsAlert({
        status: Status.success,
-       text: `El espacio de trabajo se creó con éxito. ¡Disfruta con tu equipo!`,
+       text: `Las invitaciones a tu espacio de trabajo se enviaron con éxito. ¡Disfruta con tu equipo!`,
        title: `¡Felicitaciones ${fullName}!`
      })
      setHiddenAlert(false)
      setTimeout(() => {
-       window.location.href = `/workspaces/secondstep/${workspaceId}`
+       window.location.href = `/workspaces/${workspaceId}`
      }, 5000);
    }
    if(loading === "error"){
      setOptionsAlert({
        status: Status.error,
        title: `¡Lo sentimos ${fullName}!`,
-       text: "No se pudo crear el espacio de trabajo. Por favor, intenta nuevamente."
+       text: "No se enviaron las invitaciones. Por favor, intenta nuevamente."
      })
      setHiddenAlert(false)
    }
@@ -130,11 +130,11 @@ const SecondStepWorkspace = () => {
               if(members){
                 if(members.length){
                   dispatch(joinMembers(members))
-                  window.location.href = `/workspaces/${workspaceId}`
+                  // window.location.href = `/workspaces/${workspaceId}`
                 }else{
                   setOptionsAlert({
                     status: Status.warning,
-                    text: "El nombre del espacio de trabajo debe contener entre 3 y 40 caracteres.",
+                    text: "Debes agregar al menos una invitación para poder continuar en caso de no querer invitar a nadie, oprima 'omitir paso'",
                     title: "Ten cuidado"
                   })
                   setHiddenAlert(false)
