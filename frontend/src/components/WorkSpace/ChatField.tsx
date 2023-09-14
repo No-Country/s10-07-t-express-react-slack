@@ -15,8 +15,6 @@ const ChatField: FC<IChatField> = ({ setRichText }) => {
     let contenido = quill.root.innerHTML
     setRichText(contenido)
     quill.setContents('')
-    //handleEmit(richText)
-    //console.log(contenido)
   }
 
   return (
@@ -24,7 +22,9 @@ const ChatField: FC<IChatField> = ({ setRichText }) => {
       <h2>Nuevo mensaje</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div ref={quillRef}></div>
-        <button className='btn btn-primary' type='submit'>
+        <button
+          className='uppercase bg-button-orange rounded-xl text-white font-semibold px-2 py-2 mt-1'
+          type='submit'>
           Enviar
         </button>
       </form>
