@@ -85,7 +85,7 @@ const Channel = () => {
   }
 
   return (
-    <section className='mt-20 py-8 px-2 w-full h-screen flex flex-col justify-start max-w-screen-md'>
+    <section className='mt-20 py-8 px-2 w-full h-screen flex flex-col justify-between lg:w-3/4'>
       <div className='w-full flex flex-col gap-y-4'>
         <div className='w-full flex items-center justify-between'>
           <div className='flex items-center font-semibold gap-x-3 text-2xl flex-shrink'>

@@ -89,7 +89,7 @@ const EditMembers: FC<Props> = ({ state, setState }) => {
   const sendInvitations = () => {
     if(membersEmails){
       if(membersEmails.length){
-        dispatch(joinMembers(membersEmails))
+        dispatch(joinMembers({members: membersEmails, workspaceId: _id}))
         alert("Se enviaron las invitaciones")
       }else{
         alert("Debe invitar al menos un miembro, sino desea invitar a nadie, clickee en 'cancelar'")

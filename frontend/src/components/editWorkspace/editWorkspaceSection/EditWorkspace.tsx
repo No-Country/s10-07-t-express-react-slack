@@ -5,15 +5,34 @@ import { AiOutlineClose, AiOutlinePaperClip } from 'react-icons/ai';
 import { BsPersonWorkspace } from 'react-icons/bs';
 import axios, { AxiosResponse } from 'axios';
 import { useAppSelector } from '../../../redux/hooks';
+
+enum OptionsMessageAlert {
+  success = "success",
+  loading = "loading",
+  rejected = "rejected"
+}
+
+interface MessageAlert {
+  status: OptionsMessageAlert,
+  text: string,
+  hidden: boolean
+}
+
 const EditWorkspace: FC<Props> = ({ state, setState }) => {
 
   const [selectedFile, setSelectedFile] = useState<File>();
   const [previewURL, setPreviewURL] = useState<string>('');
   const [inputName, setInputName] = useState<string>("")
+  const [messageAlert, setMessageAlert] = useState<MessageAlert>({
+    status: OptionsMessageAlert.loading,
+    text: "",
+    hidden: true
+  })
   const workspace = useAppSelector(state => state.workspace)
 
   useEffect(() => {
     setInputName(workspace.nameWorkSpace)
+    // if(workspace.)
     // setPreviewURL(workspace.image)
   }, [workspace.nameWorkSpace])
 
@@ -66,7 +85,12 @@ const EditWorkspace: FC<Props> = ({ state, setState }) => {
       const {data} = await axios.post(import.meta.env.CLOUDINARY_URL, formData) as AxiosResponse
 
       await axios.put(`https://slack-clone-93lk.onrender.com/workSpace/${workspace._id}`, {nameWorkSpace: inputName, image: data.url}) as AxiosResponse
-      alert("se edito correctamente el espacio de trabajo")
+
+      setMessageAlert({
+        status: OptionsMessageAlert.success,
+        hidden: false,
+        text: "Se editó correctamente el espacio de trabajo"
+      })
     }
   }
 
@@ -166,6 +190,9 @@ const EditWorkspace: FC<Props> = ({ state, setState }) => {
           onClick={handleSubmit}
           className='px-4 py-2 border font-semibold border-button-orange bg-button-orange rounded-md hover:bg-button-orange/80'>Guardar cambios</button>
         </div>
+        <span className={`${messageAlert.hidden ? 'hidden' : 'block'} ${messageAlert.status === OptionsMessageAlert.rejected ? 'text-red-500' : 'text-green-500'} font-semibold`}>
+          {messageAlert.text}
+        </span>
       </div>
     </div>
   )
