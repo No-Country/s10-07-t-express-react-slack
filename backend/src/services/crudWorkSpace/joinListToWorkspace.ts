@@ -25,9 +25,9 @@ export const joinListToWorkspace = async (req: Request, res: Response) => {
             const idForUser = await Usermodel.findOne({email: emaik})
             if(!idForUser){
                 data.nonMembers.push(emaik)
-                await sendMail(emaik,'http://localhost:5173/register',message)
+                await sendMail(emaik,'https://connecta-v1.vercel.app/register',message)
             }else{
-                sendMail(emaik,`http://${WEB_PAGE}:5173/workspaceinvitation/${existWorkspace._id}`, `Hola, ${owner?.fullName} te ha invitado a unirte a un grupo de trabajo ${existWorkspace.nameWorkSpace}, para hacerlo debes hacer click en el siguiente enlace o pegarlo en tu navegador para completar el proceso: ` )
+                sendMail(emaik,`https://connecta-v1.vercel.app/workspaceinvitation/${existWorkspace._id}`, `Hola, ${owner?.fullName} te ha invitado a unirte a un grupo de trabajo ${existWorkspace.nameWorkSpace}, para hacerlo debes hacer click en el siguiente enlace o pegarlo en tu navegador para completar el proceso: ` )
             }
             
         })
