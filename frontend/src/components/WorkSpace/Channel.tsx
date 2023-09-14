@@ -3,11 +3,11 @@ import io from 'socket.io-client'
 import { generateId } from './utils'
 import { useAppSelector } from '../../redux/hooks'
 import rightArrow from '../../assets/rightArrow.svg'
-import ChatField from './ChatField'
 //import { useQuill } from 'react-quilljs'
 import axios from 'axios'
 import './channel.css'
-
+import ReactQuill from 'react-quill'
+import '../../../node_modules/react-quill/dist/quill.snow.css'
 const socket = io('https://slack-clone-93lk.onrender.com')
 
 const Channel = () => {
@@ -17,6 +17,7 @@ const Channel = () => {
   const [messages, setMessages] = useState<any[]>([])
   const [richText, setRichText] = useState<string>('')
   const [storedMessages, setStoredMessages] = useState<any>([])
+  const [aux, setAux] = useState('')
 
   // const { quill } = useQuill({
   //   readOnly: true,
@@ -82,6 +83,12 @@ const Channel = () => {
     let hora = fechaProp.getHours() + ':' + fechaProp.getMinutes()
     let fecha = `${dia}/${mes}/${año} - ${hora}`
     return fecha
+  }
+
+  const hanleRichText = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setRichText(aux)
+    console.log(aux)
   }
 
   return (
@@ -199,15 +206,20 @@ const Channel = () => {
                   </div>
                   <div
                     dangerouslySetInnerHTML={{ __html: data.message || '' }}
-                    className='container-richText flex-col w-full overflow-x-auto'></div>
+                    className=' container-richText flex-col w-full overflow-x-auto px-4'
+                    style={{ listStyleType: 'decimal' }}></div>
                 </div>
               </div>
             ),
         )}
       </div>
-      <div className='flex'>
+      {/* <div className='flex'>
         <ChatField setRichText={setRichText} />
-      </div>
+      </div> */}
+      <form onSubmit={hanleRichText}>
+        <ReactQuill value={aux} onChange={setAux} />
+        <button type='submit'>Enviar</button>
+      </form>
     </section>
   )
 }
