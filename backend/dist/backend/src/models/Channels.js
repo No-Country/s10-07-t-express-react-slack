@@ -12,6 +12,10 @@ const channelsSchema = new mongoose_1.Schema({
         type: mongoose_1.Schema.Types.ObjectId,
         ref: "WorkSpace",
     },
+    description: {
+        type: String,
+        require: false,
+    },
     messages: {
         // type: Schema.Types.ObjectId,
         type: mongoose_1.Schema.Types.Array,

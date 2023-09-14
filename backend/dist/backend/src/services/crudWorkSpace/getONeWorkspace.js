@@ -9,20 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.putWorkSpace = void 0;
+exports.getOneWorkspace = void 0;
 const WorkSpace_1 = require("../../models/WorkSpace");
-const workSpace_1 = require("../../validations/workSpace");
-const putWorkSpace = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const dataWorkSpace = req.body;
-    const idWorkSpace = req.params.id;
+const getOneWorkspace = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
     try {
-        const validations = yield (0, workSpace_1.validateWorkSpace)(dataWorkSpace);
-        yield WorkSpace_1.WorkSpaceModel.findByIdAndUpdate(idWorkSpace, validations);
-        return res.status(201).json({ msg: "Actualizado con éxito" });
+        const workSpace = yield WorkSpace_1.WorkSpaceModel.findById({ _id: id })
+            .populate("members", ["profileImage", "fullName", "_id", "email"])
+            .populate("channelsId", ["name", "_id"]);
+        if (workSpace) {
+            return res.json({ data: workSpace });
+        }
+        return res.json({ msg: "No existe el espacio de trabajo" });
     }
     catch (error) {
-        if (error instanceof Error)
+        if (error instanceof Error) {
             return res.status(400).json({ error: error.message });
+        }
     }
 });
-exports.putWorkSpace = putWorkSpace;
+exports.getOneWorkspace = getOneWorkspace;

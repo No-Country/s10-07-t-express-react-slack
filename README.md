@@ -89,7 +89,7 @@ $ cd ux-ui
 
 * <img src="https://img.shields.io/badge/BACKEND-FA897B"> **Alan Sanchez** -  [LinkedIn]() <img src="https://res.cloudinary.com/yeniferramirez11/image/upload/v1692222051/no-country/argentina_r7o20w.png" style="width: 20px;">
 
-* <img src="https://img.shields.io/badge/FRONTEND-FBD59B"> **Fabian Carabajal** -  [LinkedIn]() <img src="https://res.cloudinary.com/yeniferramirez11/image/upload/v1692222051/no-country/argentina_r7o20w.png" style="width: 20px;">
+* <img src="https://img.shields.io/badge/FRONTEND-FBD59B"> **Fabian Carabajal** -  [LinkedIn](https://www.linkedin.com/in/fabian1501/) <img src="https://res.cloudinary.com/yeniferramirez11/image/upload/v1692222051/no-country/argentina_r7o20w.png" style="width: 20px;">
 
 * <img src="https://img.shields.io/badge/FRONTEND-FBD59B"> **Adrián Figueroa** -  [LinkedIn]() <img src="https://res.cloudinary.com/yeniferramirez11/image/upload/v1692222051/no-country/argentina_r7o20w.png" style="width: 20px;">
 

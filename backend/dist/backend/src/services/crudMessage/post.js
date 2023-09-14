@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createMessage = void 0;
 const Message_1 = require("../../models/Message");
-const index_1 = require("../../index");
+const Channels_1 = require("../../models/Channels");
 const createMessage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // const { from, message } = req.body;
     const { message, workSpaceId, channelsId, userId } = req.body;
@@ -20,21 +20,27 @@ const createMessage = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             workSpaceId,
             message,
             userId,
-            channelsId
+            channelsId,
             // from: message.from,
         });
         yield data.save();
+        console.log(data);
+        const channel = yield Channels_1.ChannelsModel.findById({ _id: channelsId });
+        if (channel === null || channel === void 0 ? void 0 : channel.messages) {
+            console.log([...channel.messages, data._id]);
+            yield Channels_1.ChannelsModel.updateOne({ _id: channelsId }, { messages: [...channel.messages, data._id] });
+        }
         // res.status(201).json(newMessage);
-        index_1.io.on("connection", (socket) => {
-            console.log("Connected with socket");
-            socket.on(`${workSpaceId}/${channelsId}`, (data) => {
-                socket.broadcast.emit(`${workSpaceId}/${channelsId}`, data);
-            });
-        });
+        // io.on("connection", (socket) => {
+        //   console.log("Connected with socket");
+        //   socket.on(`${workSpaceId}/${channelsId}`, (data: any) => {
+        //     socket.broadcast.emit(`${workSpaceId}/${channelsId}`, data)
+        //   })
+        // });
         if (data) {
             return res.status(201).json({
-                message: "Se Creo con exito el mensaje",
-                data: data
+                message: 'Se Creo con exito el mensaje',
+                data: data,
             });
         }
         // } catch (error) {

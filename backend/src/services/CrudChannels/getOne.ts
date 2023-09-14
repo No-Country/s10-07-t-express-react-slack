@@ -6,32 +6,24 @@ import { IChannels } from '../../../../interface/IChannels'
 
 interface DataT {
   channel?: IChannels
-  //messages: Array<IMessage>
+  messages: Array<IMessage>
 }
 
 export const getOneChannel = async (req: Request, res: Response) => {
   try {
-    // const channel = await ChannelsModel.findById(req.params.idChannel).populate(
-    //   'messages',
-    //   ['message', 'nameWorkSpaceId', 'userId', 'channelsId']
-    // )
-
     const channel = await ChannelsModel.findById(req.params.idChannel).populate(
-      {
-        path: 'messages',
-        populate: { path: 'userId' }, // Esto carga la información completa del usuario
-      }
-    )
-
+       'messages',
+       ['message', 'nameWorkSpaceId', 'userId', 'channelsId']
+     )
     const messages = await MessageModel.find({
       channelsId: req.params.idChannel,
-    }).sort({ createdAt: -1 })
+    }).populate('userId',['fullName']).sort({ createdAt: -1 })
     if (channel) {
       const data: DataT = {
         channel: channel,
-        //messages: messages
+        messages: messages
       }
-      return res.status(200).json(channel)
+      return res.status(200).json(data)
     }
     return res.status(404).json({ msg: 'El canal no existe' })
   } catch (error) {

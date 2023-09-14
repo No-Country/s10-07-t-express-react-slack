@@ -19,6 +19,9 @@ const workSpaceSchema = new mongoose_1.Schema({
     members: {
         type: mongoose_1.Schema.Types.Array,
         ref: "User"
+    },
+    image: {
+        type: String
     }
 }, {
     timestamps: false,
