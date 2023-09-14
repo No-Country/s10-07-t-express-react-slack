@@ -9,16 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOneWorkspace = void 0;
+exports.deleteChannel = void 0;
+const Channels_1 = require("../../models/Channels");
 const WorkSpace_1 = require("../../models/WorkSpace");
-const getOneWorkspace = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.params.id;
+const deleteChannel = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const channel = req.params.idChannel;
     try {
-        const workSpace = yield WorkSpace_1.WorkSpaceModel.findById({ _id: id });
-        if (workSpace) {
-            return res.json({ data: workSpace });
+        const channel1 = yield Channels_1.ChannelsModel.findById(channel);
+        // const workspace = await WorkSpaceModel.find({ channelsId: { $eq: channel } } )
+        if (channel1) {
+            yield WorkSpace_1.WorkSpaceModel.updateOne({ _id: channel1.workSpaceId }, { $pull: { channelsId: channel1._id } });
+            yield Channels_1.ChannelsModel.findByIdAndDelete(channel);
+            //await WorkSpaceModel.updateOne({_id: workspace._id},{$pull: {channelsId: channel}})
+            return res.status(201).json({ msg: "Canal eliminado." });
         }
-        return res.json({ msg: "No existe el espacio de trabajo" });
+        return res.status(400).json({ error: "El canal no existe." });
     }
     catch (error) {
         if (error instanceof Error) {
@@ -26,4 +31,4 @@ const getOneWorkspace = (req, res) => __awaiter(void 0, void 0, void 0, function
         }
     }
 });
-exports.getOneWorkspace = getOneWorkspace;
+exports.deleteChannel = deleteChannel;

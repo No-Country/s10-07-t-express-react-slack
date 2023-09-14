@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/socket.io": {
-        target: "http://localhost:3001",
+        target: "https://slack-clone-93lk.onrender.com/",
         ws: true
       }
     }

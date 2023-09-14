@@ -9,20 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.putWorkSpace = void 0;
-const WorkSpace_1 = require("../../models/WorkSpace");
-const workSpace_1 = require("../../validations/workSpace");
-const putWorkSpace = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const dataWorkSpace = req.body;
-    const idWorkSpace = req.params.id;
+exports.updateChannel = void 0;
+const Channels_1 = require("../../models/Channels");
+const updateChannel = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const channel_update = req.body;
     try {
-        const validations = yield (0, workSpace_1.validateWorkSpace)(dataWorkSpace);
-        yield WorkSpace_1.WorkSpaceModel.findByIdAndUpdate(idWorkSpace, validations);
-        return res.status(201).json({ msg: "Actualizado con éxito" });
+        const channel = yield Channels_1.ChannelsModel.findByIdAndUpdate(req.params.idChannel, channel_update, { new: true });
+        if (!channel) {
+            return res.status(404).json({ error: "El canal no existe." });
+        }
+        return res.status(200).json({ msg: "Datos actualizados con éxito.", channel });
     }
     catch (error) {
-        if (error instanceof Error)
+        if (error instanceof Error) {
             return res.status(400).json({ error: error.message });
+        }
     }
 });
-exports.putWorkSpace = putWorkSpace;
+exports.updateChannel = updateChannel;

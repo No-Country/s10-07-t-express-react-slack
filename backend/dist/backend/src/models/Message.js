@@ -19,14 +19,14 @@ const messageSchema = new mongoose_1.Schema({
         type: mongoose_1.Schema.Types.Array,
         // type: Schema.Types.ObjectId,
         // type: Schema.Types.ObjectId,
-        ref: "Channel",
+        ref: 'Channel',
     },
     userId: {
         type: mongoose_1.Schema.Types.ObjectId,
-        ref: "User",
-    }
+        ref: 'User',
+    },
 }, {
-    timestamps: false,
+    timestamps: true,
     versionKey: false,
 });
-exports.MessageModel = (0, mongoose_1.model)("Message", messageSchema);
+exports.MessageModel = (0, mongoose_1.model)('Message', messageSchema);

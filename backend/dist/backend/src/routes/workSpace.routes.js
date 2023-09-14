@@ -10,7 +10,7 @@ const getMyWorkspaces_1 = require("../services/crudWorkSpace/getMyWorkspaces");
 const put_1 = require("../services/crudWorkSpace/put");
 const get_1 = require("../services/crudWorkSpace/get");
 const delete_1 = require("../services/crudWorkSpace/delete");
-const getOneWorkspace_1 = require("../services/crudWorkSpace/getOneWorkspace");
+const getONeWorkspace_1 = require("../services/crudWorkSpace/getONeWorkspace");
 exports.workSpacesRoutes = (0, express_1.Router)();
 // ─── Espacio De Trabajo ──────────────────────────────────────────────────────
 const WORKSPACES = "/workSpaces";
@@ -25,7 +25,7 @@ const LEAVE_WORKSPACE = "/leaveWorkSpace/:idWorkspace/:idUser";
 const MY_WORKSPACES = "/myWorkSpaces";
 exports.workSpacesRoutes.post(`${WORKSPACE}`, post_1.workSpace);
 exports.workSpacesRoutes.get(`${WORKSPACES}`, get_1.allWorkSpace);
-exports.workSpacesRoutes.get(`${ONE_WORKSPACE}`, getOneWorkspace_1.getOneWorkspace);
+exports.workSpacesRoutes.get(`${ONE_WORKSPACE}`, getONeWorkspace_1.getOneWorkspace);
 exports.workSpacesRoutes.put(`${UP_WORKSPACE}`, put_1.putWorkSpace);
 exports.workSpacesRoutes.delete(`${DELETE_WORKSPACE}`, delete_1.deleteWorkSpace);
 exports.workSpacesRoutes.get(`${MY_WORKSPACES}`, getMyWorkspaces_1.getMyWorkSpaces);
