@@ -111,7 +111,7 @@ const Channel = () => {
             storedMessage.message && (
               <div
                 key={generateId()}
-                className={`flex mb-4 border-b-2 justify-start overflow-x-auto ${
+                className={`flex mb-4 border-b-2 justify-start overflow-x-auto w-fit h-fit ${
                   storedMessage.userId._id === _id ? '' : 'flex-row-reverse'
                 }`}>
                 {storedMessage.userId?.profileImage?.length ? (
@@ -137,7 +137,7 @@ const Channel = () => {
                     </span>
                   </div>
                 )}
-                <div className='flex flex-col gap-y-2 mx-1'>
+                <div className='flex flex-col gap-y-2 mx-1 w-full'>
                   <div className='flex flex-col gap-x-10 content-start'>
                     <div className='flex font-semibold text-xl text-[#555454]/80'>
                       {storedMessage.userId._id === _id
@@ -150,10 +150,8 @@ const Channel = () => {
                     </div>
                   </div>
                   <div
-                    dangerouslySetInnerHTML={{
-                      __html: storedMessage.message || '',
-                    }}
-                    className='container-richText'></div>
+                   
+                    className='w-fit h-fit'>{storedMessage.message }</div>
                 </div>
               </div>
             ),
@@ -163,7 +161,7 @@ const Channel = () => {
             data.message && (
               <div
                 key={generateId()}
-                className={`flex mb-4 border-b-2 justify-start  ${
+                className={`flex mb-4 border-b-2 justify-start w-fit h-fit ${
                   data.userId._id === _id ? '' : 'flex-row-reverse'
                 }`}>
                 {data.userId.profileImage?.length ? (
@@ -188,7 +186,7 @@ const Channel = () => {
                   </div>
                 )}
 
-                <div className='flex flex-col gap-y-2 mx-1'>
+                <div className='flex flex-col gap-y-2 mx-1 w-full'>
                   <div className='flex flex-col gap-x-10 content-start'>
                     <div className='font-semibold text-xl text-[#555454]/80'>
                       {data.userId._id === _id
@@ -198,8 +196,8 @@ const Channel = () => {
                     <div className='text-sm pt-1'>{getFecha(new Date())}</div>
                   </div>
                   <div
-                    dangerouslySetInnerHTML={{ __html: data.message || '' }}
-                    className='container-richText flex-col w-full overflow-x-auto'></div>
+                   
+                    className='w-fit h-fit'>{data.message }</div>
                 </div>
               </div>
             ),
