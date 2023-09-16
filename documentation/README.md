@@ -1,8 +1,8 @@
 <div align="center">
 <h1>
-<a href="" target="_blank" rel="noopener noreferrer" style="color: #86E3CE">Plataforma de comunicación y colaboración en línea</a>
+<a href="https://trello.com/invite/b/RTA4k0x1/ATTIb3bc830ae6946312c784cb7a95232f65382B24A5/s10-07-express-react" target="_blank" rel="noopener noreferrer" style="color: #86E3CE">Plataforma de comunicación y colaboración en línea</a>
 </h1>
-<img src="">
+<img src="https://res.cloudinary.com/yeniferramirez11/image/upload/v1694884989/no-country/Screenshot_from_2023-09-16_13.21.10_rnozkn.png">
 <p>
 <p>Nuestro tablero de organización</p>
 <a href="https://trello.com/b/RTA4k0x1/s10-07-express-react" target="_blank" rel="noopener noreferrer">
@@ -12,9 +12,9 @@
 
 ## Documentación
 _En esta carpeta encontrarás los documentos utilizados para la planificación y el flujo del proyecto:_
-* **[Reuniones:](https://github.com/No-Country/s9-01-t-php-react/tree/dev/documentation/reuniones)** resumenes y agendas de las reuniones.
-* **[Ingenieria de Requisitos:]()** historias de usuarios y traducciones.
-* **[Modelo ER:]()** modelo de datos.
+* **[Reuniones:](https://github.com/No-Country/s10-07-t-express-react-slack/tree/develop/documentation/reuniones)** resumenes y agendas de las reuniones.
+* **[Ingenieria de Requisitos:](https://github.com/No-Country/s10-07-t-express-react-slack/blob/develop/documentation/plataforma-comunicacion.pdf)** historias de usuarios y traducciones.
+* **[Team:](https://github.com/No-Country/s10-07-t-express-react-slack/blob/develop/documentation/Team.pdf)** información del equipo.
 
 ### Tecnologías usadas para la planificación y comunicación  
 
