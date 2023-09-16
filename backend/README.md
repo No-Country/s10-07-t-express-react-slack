@@ -27,21 +27,36 @@ Antes de comenzar, asegúrate de tener instalado ...
    cd backend
    ```
 
-3. 
+3. Instala las dependencias neceserias:
+   ```bash
+   npm install
+   ```
+4. Y corre el proyecto:
+   ```bash
+   npm run dev
+   ```
 
 ### ¿Qué incluye?
 El proyecto incluye las siguientes funcionalidades:
-- ...
+- Sistemas de autenticación.
+- Chat en tiempo real.
+- Creacion de espacios de trabajos y canales.
+- Invitaciones por correo electrónico.
 
 ### Endpoints
 
 - Autenticación
-- ...
+- Espacio de Trabjo
+- Canales
+- Chat
 
-Accede a toda la _documentación_ y detalles desde [aquí]().
 
 
 <hr>
 
-### 🤝 Desarrolladores
+### Desarrolladores
+
+* **Jerlib Gonzalez** - [LinkedIn](https://www.linkedin.com/in/jerlibgnzlz/) <img src="https://res.cloudinary.com/yeniferramirez11/image/upload/v1692222051/no-country/argentina_r7o20w.png" style="width: 20px;">
+
+* **Sonny Pimentel** -  [LinkedIn](https://www.linkedin.com/in/sonny-pimentel/) <img src="https://res.cloudinary.com/yeniferramirez11/image/upload/v1692222051/no-country/peru_wtowjo.png" style="width: 20px;">
 
